@@ -1,1 +1,1 @@
-# Sistema-de-Gesti-n-de-Horarios-y-Notificaciones
+# Sistema-de-Gestion-de-Horarios-y-Notificaciones
