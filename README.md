@@ -7,7 +7,6 @@ Una aplicación web para la planificación eficiente del tiempo de trabajo en or
 [2. Instrucciones de Inicio](#2-instrucciones-de-inicio)  
 &nbsp;&nbsp;&nbsp;&nbsp;[2.1. Versiones de las Herramientas](#21-versiones-de-las-herramientas)  
 &nbsp;&nbsp;&nbsp;&nbsp;[2.2. Creación del Proyecto](#22-creación-del-proyecto)  
-&nbsp;&nbsp;&nbsp;&nbsp;[2.3. Jerarquía de Paquetes](#23-jerarquía-de-paquetes)  
 [3. Uso de GitHub](#3-uso-de-github)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.1. Criterios de Evaluación de los Merge Requests](#31-criterios-de-evaluación-de-los-merge-requests)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.2. Convención para los Commits](#32-convención-para-los-commits)  
@@ -16,14 +15,14 @@ Una aplicación web para la planificación eficiente del tiempo de trabajo en or
 
 A continuación, se muestran las historias de usuario asignadas a cada uno de los grupos de trabajo. 
 
-| **Grupo de Trabajo** | **Historia de Usuario**                                                                                                                                                                                      | **Estimación (Story Points)** |
-|:--------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------:|
-|       Grupo 1        | **HU5:** Como administrador del personal medico deseo gestionar los horarios de personal para organizar la atención a pacientes y determinar tiempos críticos.                                               |               8               |
-|       Grupo 2        | **HU1:** Como voluntario inscrito en el programa de voluntariado quiero que tomen en cuenta mis habilidades y mi disponibilidad para ganar experiencia y adquirir conocimientos prácticos en el área médica. |               3               |
-|       Grupo 3        | **HU4:** Como administrador del personal médico, quiero indicar las actividades que deben hacer los voluntarios y el personal para atender una emergencia.                                                   |               5               |
-|       Grupo 4        | **HU2:** Como voluntario quiero confirmar mi asistencia a una emergencia médica para ayudar rápidamente cuando se me necesite.                                                                               |               3               |
-|       Grupo 5        | **HU6:** Como administrador del personal médico deseo solicitar servicios a los voluntarios, para atender las emergencias médicas.                                                                           |               3               |
-|       Grupo 6        | **HU3:** Como administrador quiero priorizar los voluntarios que han confirmado su asistencia para que no se exceda el personal requerido.                                                                   |               5               |
+| **Grupo de Trabajo** | **Historia de Usuario**                                                                                                                                                                             | **Estimación (Story Points)** |
+|:--------------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------:|
+|       Grupo 1        | Como administrador del personal medico deseo gestionar los horarios de personal para organizar la atención a pacientes y determinar tiempos críticos.                                               |               8               |
+|       Grupo 2        | Como voluntario inscrito en el programa de voluntariado quiero que tomen en cuenta mis habilidades y mi disponibilidad para ganar experiencia y adquirir conocimientos prácticos en el área médica. |               3               |
+|       Grupo 3        | Como administrador del personal médico, quiero indicar las actividades que deben hacer los voluntarios y el personal para atender una emergencia.                                                   |               5               |
+|       Grupo 4        | Como voluntario quiero confirmar mi asistencia a una emergencia médica para ayudar rápidamente cuando se me necesite.                                                                               |               3               |
+|       Grupo 5        | Como administrador del personal médico deseo solicitar servicios a los voluntarios, para atender las emergencias médicas.                                                                           |               3               |
+|       Grupo 6        | Como administrador quiero priorizar los voluntarios que han confirmado su asistencia para que no se exceda el personal requerido.                                                                   |               5               |
 
 ## 2. Instrucciones de Inicio
 
@@ -35,7 +34,6 @@ Para asegurar el correcto funcionamiento del proyecto asegúrate de contar con l
 * Django 4.1.7
 * Cucumber 11.4.0
 * Behave 1.2.6
-* Faker 17.3.0
 * SQLite 3.40.1
 * PyCharm 2022.3.2
 
@@ -90,20 +88,6 @@ Es recomendable crear un ambiente virtual de Python que se utilizará únicament
 **11. Ejecuta el proyecto y comprueba su funcionamiento:** Ejecuta el proyecto, dirige al navegador e introduce la URL respectiva para comprobar el funcionamiento del proyecto.
 
 ![Comprobación del funcionamiento del proyecto](https://i.ibb.co/3sHdDmp/12.png)
-
-### 2.3. Jerarquía de Paquetes
-
-Considerando la [estructura de archivos propuesta en clase](https://coggle.it/diagram/YKwIGLwdFm3ufpye/t/bdd/bbc003c7d1c0544999001d47e8effe4a9987a3226e473307526633410016956a) para el desarrollo de software mediante BDD con Gherkin y Behave se utilizará un directorio ```test``` en cada aplicación del proyecto. El directorio ```test``` tendrá un directorio ```features``` para los archivos de Gherkin y un directorio ```steps``` para los archivos de Behave:
-
-La estructura mencionada para el uso de Gherkin y Behave se muestra a continuación:
-
-![Estructura de archivos para BDD con Gherkin y Behave](https://i.ibb.co/LzP5bRV/BDD.png)
-
-Por otro lado, para la arquitectura MVC en cada aplicación del proyecto se utilizarán los paquetes MVC ```controller```, ```model``` y ```view```. Esto con el objetivo de crear un archivo para cada controlador, modelo o vista respectivamente. Además, se usará un directorio ```common``` que contendrá los paquetes MVC de uso común.
-
-La estructura mencionada para el uso de MVC como arquitectura se muestra a continuación:
-
-![Estructura de paquetes para MVC](https://i.ibb.co/Y8KdxFj/MVC.png)
 
 ## 3. Uso de GitHub
 
