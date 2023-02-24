@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">1 ms</div>
+                <div class="time" xmlns="">8 ms</div>
                 <h1>
-                    confirmacion_asistencia.feature:Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">5 total, </span><span class="passed">5 passed</span></strong>
+                    confirmacion_asistencia.feature:Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">20 total, </span><span class="failed">2 failed, </span><span class="passed">18 passed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -591,40 +591,146 @@ jQuery.cookie = function(name, value, options) {
             </div>
             <div id="content">
                 <ul id="tree">
-                    <li xmlns="" class="level top open">
+                    <li xmlns="" class="level top failed open">
                         <span><em class="time">
-                                <div class="time">1 ms</div>
+                                <div class="time">8 ms</div>
                             </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica</span>
                         <ul>
                             <li class="level suite open">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
-                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica</span>
+                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @1.1 Confirmar Asistencia</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Dado que soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
+                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n de emergencia</span>
+                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n "Confirmar"</span>
+                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Confirmar'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Entonces mi asistencia es registrada en el sistema</span>
+                                            </em><em class="status">passed</em>Y se me informa que 'Se ha confirmado la solicitud enviada'</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="level suite failed open">
+                                <span><em class="time">
+                                        <div class="time">3 ms</div>
+                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @1.2 Confirmar Asistencia</span>
+                                <ul>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y se me notifica mi asignaci&oacute;n en la emergencia m&eacute;dica</span>
+                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Confirmar'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">1 ms</div>
+                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
+                                    </li>
+                                    <li class="level test failed open">
+                                        <span><em class="time">
+                                                <div class="time">2 ms</div>
+                                            </em><em class="status">failed</em>Y se me informa que 'Se ha rechazado la solicitud enviada'</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stderr">Traceback (most recent call last):<br/>  File "D:\GitHub\Sistema-de-Gestion-de-Horarios-y-Notificaciones\venv\Lib\site-packages\behave\model.py", line 1329, in run<br/>    match.run(runner.context)<br/>  File "D:\GitHub\Sistema-de-Gestion-de-Horarios-y-Notificaciones\venv\Lib\site-packages\behave\matchers.py", line 98, in run<br/>    self.func(context, *args, **kwargs)<br/>  File "gestion_voluntarios\features\steps\confirmacion_asistencia.py", line 58, in step_impl<br/>    assert F'\'{context.aviso}\'' == mensaje<br/>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>AssertionError<br/></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="level suite open">
+                                <span><em class="time">
+                                        <div class="time">2 ms</div>
+                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @2.1 Rechazar Asistencia</span>
+                                <ul>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">1 ms</div>
+                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">1 ms</div>
+                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Cancelar'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y se me informa que 'Se ha rechazado la solicitud enviada'</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="level suite failed open">
+                                <span><em class="time">
+                                        <div class="time">2 ms</div>
+                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @2.2 Rechazar Asistencia</span>
+                                <ul>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">1 ms</div>
+                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Cancelar'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
+                                    </li>
+                                    <li class="level test failed open">
+                                        <span><em class="time">
+                                                <div class="time">1 ms</div>
+                                            </em><em class="status">failed</em>Y se me informa que 'Se ha confirmado la solicitud enviada'</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stderr">Traceback (most recent call last):<br/>  File "D:\GitHub\Sistema-de-Gestion-de-Horarios-y-Notificaciones\venv\Lib\site-packages\behave\model.py", line 1329, in run<br/>    match.run(runner.context)<br/>  File "D:\GitHub\Sistema-de-Gestion-de-Horarios-y-Notificaciones\venv\Lib\site-packages\behave\matchers.py", line 98, in run<br/>    self.func(context, *args, **kwargs)<br/>  File "gestion_voluntarios\features\steps\confirmacion_asistencia.py", line 58, in step_impl<br/>    assert F'\'{context.aviso}\'' == mensaje<br/>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>AssertionError<br/></span>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
@@ -634,7 +740,7 @@ jQuery.cookie = function(name, value, options) {
             </div>
         </div>
         <div id="footer">
-            <p>Generated by PyCharm on 2/23/23, 5:09 PM</p>
+            <p>Generated by PyCharm on 2/24/23, 12:36 AM</p>
         </div>
     </body>
 </html>

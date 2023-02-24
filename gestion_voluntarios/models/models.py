@@ -11,15 +11,15 @@ class Voluntario:
 
     def respuesta(self, emergencia_aceptada):
         if not emergencia_aceptada:
-            string_respuesta = 'Se ha rechazado la solicitud enviada'
-            return string_respuesta
+            bool_respuesta = 'Se ha rechazado la solicitud enviada'
+            return bool_respuesta
         else:
-            string_respuesta = 'Se ha confirmado la solicitud enviada'
-            return string_respuesta
+            bool_respuesta = 'Se ha confirmado la solicitud enviada'
+            return bool_respuesta
 
 
 class Emergencia:
-    def __init__(self, asunto, ubicacion, tipo_emergencia, hora_entrada, encargado, actividades, detalle, dirigido_a):
+    def __init__(self, asunto, tipo_emergencia, ubicacion, hora_entrada, encargado, dirigido_a, actividades, detalle, respuesta):
         self.asunto = asunto
         self.tipo_emergencia = tipo_emergencia
         self.ubicacion = ubicacion
@@ -28,6 +28,7 @@ class Emergencia:
         self.dirigido_a = dirigido_a
         self.actividades = actividades
         self.detalle = detalle
+        self.respuesta = respuesta
 
     def notificar(self):
         texto = F'{self.asunto} \nEstimado {self.dirigido_a} el doctor {self.encargado} solicita su presencia en ' \
@@ -35,3 +36,6 @@ class Emergencia:
                 F'\nLas actividades a realizar son: \n {self.actividades} ' \
                 F'\nConsideraciones a tener en cuenta: \n {self.detalle}'
         return texto
+
+    def ejemplo(self):
+        return "Hola mundo"
