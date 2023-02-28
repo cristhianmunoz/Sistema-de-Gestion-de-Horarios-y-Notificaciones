@@ -57,7 +57,4 @@ def step_impl(context, mensaje):
     context.aviso = context.voluntario.respuesta(context.mi_emergencia.respuesta)
     assert F'\'{context.aviso}\'' == mensaje
 
-
-    #print(context.mi_emergencia.repuesta)
-
     # raise NotImplementedError(u'STEP: Y se me notifica mi asignación en la emergencia médica')

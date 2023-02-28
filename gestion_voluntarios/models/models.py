@@ -37,5 +37,4 @@ class Emergencia:
                 F'\nConsideraciones a tener en cuenta: \n {self.detalle}'
         return texto
 
-    def ejemplo(self):
-        return "Hola mundo"
+
