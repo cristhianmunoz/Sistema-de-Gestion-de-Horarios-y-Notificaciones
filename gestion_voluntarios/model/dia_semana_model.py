@@ -6,6 +6,6 @@ class DiaSemana(models.TextChoices):
     MARTES = 'Martes'
     MIERCOLES = 'Miércoles'
     JUEVES = 'Jueves'
-    VIERNS = 'Viernes'
+    VIERNES = 'Viernes'
     SABADO = 'Sábado'
     DOMINGO = 'Domingo'
