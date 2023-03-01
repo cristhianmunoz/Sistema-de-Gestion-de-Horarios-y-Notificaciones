@@ -1,7 +1,7 @@
 # Creado por el Grupo 2 el 2/24/2023
 # language: es
 
-  Característica: Registro de habilidades de los voluntarios
+  Característica: Registro de horarios de los voluntarios
     Como voluntario inscrito en el programa de voluntariado,
     quiero que tomen en cuenta mis habilidades y mi disponibilidad
     para ganar experiencia y adquirir conocimientos prácticos en el área médica.
