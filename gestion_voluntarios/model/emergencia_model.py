@@ -2,8 +2,8 @@ class Emergencia:
     def __init__(self, nombre='', es_atendida='0', voluntarios=None, actividades=None):
         self.nombre = nombre
         self.es_atendida = es_atendida
-        self.voluntarios = voluntarios
-        self.actividades = actividades
+        self.voluntarios = voluntarios or []
+        self.actividades = actividades or []
 
     def verificar_emergencia(self):
         # comprobar que todos tengan 1

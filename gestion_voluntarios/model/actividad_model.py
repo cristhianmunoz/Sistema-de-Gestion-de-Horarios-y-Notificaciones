@@ -3,7 +3,7 @@ class Actividad:
         self.nombre = nombre
         self.es_asignada = tiene_voluntario
         self.emergencia = emergencia
-        self.voluntarios = voluntarios
+        self.voluntarios = voluntarios or []
 
     def asignar_voluntario(self, voluntario):
         self.voluntarios.append(voluntario)

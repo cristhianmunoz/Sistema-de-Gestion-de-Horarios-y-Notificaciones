@@ -42,7 +42,7 @@ def step_impl(context, nombre_actividad):
 
 
 @step('se le asigna un voluntario a una actividad')
-def stsep_impl(context):
+def step_impl(context):
     # Se asigna un voluntario a una actividad
     context.actividadTest.asignar_voluntario(context.voluntarioTest)
 
