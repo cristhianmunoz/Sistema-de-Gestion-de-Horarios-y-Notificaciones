@@ -1,16 +1,14 @@
-from django.db import models
-from gestion_voluntarios.model.emergencia_model import Emergencia
-
-
-class Actividad(models.Model):
-    nombre = models.CharField(max_length=50, default='')
-    emergencias = models.ManyToManyField(Emergencia)
-
-    def __int__(self, nombre, emergencias):
+class Actividad:
+    def __init__(self, nombre='', es_asignada='0', emergencia=None, voluntarios=None):
         self.nombre = nombre
-        self.emergencias = emergencias
+        self.es_asignada = es_asignada
+        self.emergencia = emergencia
+        self.voluntarios = voluntarios or []
 
-    def asignarVoluntario(self):
-        pass
+    def asignar_actividad(self, voluntario):
+        self.es_asignada = '1'
+        voluntario.tiene_actividad = '1'
+        self.voluntarios.append(voluntario)
 
-
+    def get_es_asignada(self):
+        return self.es_asignada

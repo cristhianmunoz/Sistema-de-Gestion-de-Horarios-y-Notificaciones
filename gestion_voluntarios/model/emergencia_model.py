@@ -1,17 +1,21 @@
-from django.db import models
-from gestion_voluntarios.model.voluntario_model import Voluntario
-
-
-class Emergencia(models.Model):
-    nombre = models.CharField(max_length=50, default='')
-    # Estado que define si la emergencia fue o no atendida
-    esAtendida = models.BooleanField(default=False)
-    voluntarios = models.ManyToManyField(Voluntario)
-
-    def __int__(self, nombre, esAtendida, voluntarios):
+class Emergencia:
+    def __init__(self, nombre='', es_atendida='0', voluntarios=None, actividades=None):
         self.nombre = nombre
-        self.esAtendida = esAtendida
-        self.voluntarios = voluntarios
+        self.es_atendida = es_atendida
+        self.voluntarios = voluntarios or []
+        self.actividades = actividades or []
 
-    def obtener_esAtendida(self, estado):
-        self.esAtendida = estado
+    def verificar_emergencia(self):
+        #comprobar que todos tengan 1
+        self.es_atendida = '1'
+
+    def add_Actividades(self, actividad):
+        self.voluntarios.append(actividad)
+
+    def remove_Actividades(self, actividad):
+        self.voluntarios.remove(actividad)
+
+    def get_es_atendida(self):
+        return self.es_atendida
+
+

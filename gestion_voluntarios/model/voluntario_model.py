@@ -1,13 +1,11 @@
-from django.db import models
+class Voluntario:
+    def __init__(self, nombre='', apellido='', edad=0, tiene_actividad='0', emergencia=None):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.edad = edad
+        self.tiene_actividad = tiene_actividad
+        self.emergencia = emergencia
 
 
-class Voluntario(models.Model):
-    nombre = models.CharField(max_length=50, default='')
-    apellido = models.CharField(max_length=50, default='')
-    edad = models.IntegerField(default=0)
-
-    # habilidades = models.ManyToManyField(Habilidad)
-    # horarioDisponible = models.OneToOneField('Horario', on_delete=models.CASCADE)
-
-    def comprobar_disponibilidad(self):
-        pass
+    def get_tiene_actividad(self):
+        return self.tiene_actividad
