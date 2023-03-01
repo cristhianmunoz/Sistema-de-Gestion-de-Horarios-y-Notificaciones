@@ -1,7 +1,7 @@
 from django.urls import path
 
-from . import views
+from .view import voluntario_view
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', voluntario_view.index, name='index'),
 ]
