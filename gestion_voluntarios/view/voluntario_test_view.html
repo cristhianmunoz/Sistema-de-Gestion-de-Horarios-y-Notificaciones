@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voluntario Test View</title>
+</head>
+<body>
+    <h1>Detalle del voluntario</h1>
+    <p>Nombre: {{ voluntario.nombre }} {{ voluntario.apellido }}</p>
+    <p>Edad: {{ voluntario.edad }}</p>
+    <h2>Habilidades</h2>
+    <ul>
+        {% for habilidad in habilidades %}
+            <li>{{ habilidad.titulo }} - {{ habilidad.descripcion }}</li>
+        {% empty %}
+            <li>Este voluntario no tiene habilidades registradas.</li>
+        {% endfor %}
+    </ul>
+    <h2>Horario</h2>
+    <ul>
+        {% for periodo in horario %}
+            <li>{{ periodo.diaSemana }} - {{ periodo.horaInicio }} - {{ periodo.horaFin }}</li>
+        {% empty %}
+            <li>Este voluntario no tiene un horario registrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
