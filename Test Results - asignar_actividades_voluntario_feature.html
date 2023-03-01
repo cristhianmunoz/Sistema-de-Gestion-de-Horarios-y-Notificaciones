@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">5 ms</div>
+                <div class="time" xmlns="">1 ms</div>
                 <h1>
-                    asignar_actividades_voluntario.feature: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">7 total, </span><span class="failed">1 failed, </span><span class="ignored">3 ignored, </span><span class="passed">3 passed</span></strong>
+                    asignar_actividades_voluntario.feature: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">7 total, </span><span class="passed">7 passed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -591,55 +591,85 @@ jQuery.cookie = function(name, value, options) {
             </div>
             <div id="content">
                 <ul id="tree">
-                    <li xmlns="" class="level top failed open">
+                    <li xmlns="" class="level top open">
                         <span><em class="time">
-                                <div class="time">5 ms</div>
+                                <div class="time">1 ms</div>
                             </em>Asignaci&oacute;n de actividades a voluntarios</span>
                         <ul>
-                            <li class="level suite failed open">
+                            <li class="level suite open">
                                 <span><em class="time">
-                                        <div class="time">5 ms</div>
+                                        <div class="time">1 ms</div>
                                     </em>: Asignar una actividad a un voluntario en una emergencia -- @1.1 Asignaciones</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">1 ms</div>
                                             </em><em class="status">passed</em>Dado que se tiene una emergencia con ""Choque"" que a&uacute;n no es atendida</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y hay un voluntario con ""Alexis"", ""Vizuete"" y "23" que asistir&aacute; sin actividades asignadas</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y existe una actividad con ""Suturar""</span>
-                                    </li>
-                                    <li class="level test failed open">
-                                        <span><em class="time">
-                                                <div class="time">2 ms</div>
-                                            </em><em class="status">failed</em>Cuando se les asigna al menos una actividad diferente a cada voluntario</span>
                                         <ul>
                                             <li class="text">
-                                                <span class="stderr">Traceback (most recent call last):<br/>  File "C:\Users\nicol\OneDrive\Documentos\UNIVERSITY\7MO\Verificacion y Validacion\notificaciones_medicas\venv\Lib\site-packages\behave\model.py", line 1329, in run<br/>    match.run(runner.context)<br/>  File "C:\Users\nicol\OneDrive\Documentos\UNIVERSITY\7MO\Verificacion y Validacion\notificaciones_medicas\venv\Lib\site-packages\behave\matchers.py", line 98, in run<br/>    self.func(context, *args, **kwargs)<br/>  File "gestion_voluntarios\tests\steps\asignar_actividades_voluntario.py", line 25, in step_impl<br/>    context.emergenciaTest.asignarActividad(context.voluntarioTest, context.actividadTest)<br/>    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>AttributeError: 'Emergencia' object has no attribute 'asignarActividad'<br/></span>
+                                                <span class="stdout">Emergencia Creada<br/></span>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="level test ignored open">
+                                    <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">ignored</em>Entonces el estado de la emergencia sera "True"</span>
+                                            </em><em class="status">passed</em>Y hay un voluntario con ""Alexis"", ""Vizuete"" y "23" que asistir&aacute; sin actividades asignadas</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">Voluntario Creado<br/></span>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li class="level test ignored open">
+                                    <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">ignored</em>Y estado de voluntario sera "True"</span>
+                                            </em><em class="status">passed</em>Y existe una actividad con ""Suturar""</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">Actividad Creada<br/></span>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li class="level test ignored open">
+                                    <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">ignored</em>Y el estado de la actividad sera "True"</span>
+                                            </em><em class="status">passed</em>Cuando se les asigna al menos una actividad diferente a cada voluntario</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">Actividad asiganda a voluntario<br/></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Entonces el estado de la emergencia sera "1"</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">1<br/>1<br/></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y estado de voluntario sera "1"</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">1<br/>1<br/></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y el estado de la actividad sera "1"</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">1<br/>1<br/></span>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
@@ -649,7 +679,7 @@ jQuery.cookie = function(name, value, options) {
             </div>
         </div>
         <div id="footer">
-            <p>Generated by PyCharm on 1/3/23 09:30</p>
+            <p>Generated by PyCharm on 01/03/23 09:55</p>
         </div>
     </body>
 </html>
