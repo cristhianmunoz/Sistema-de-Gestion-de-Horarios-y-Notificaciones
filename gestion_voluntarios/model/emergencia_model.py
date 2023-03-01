@@ -1,9 +1,9 @@
 class Emergencia:
-    def __init__(self, nombre='', es_atendida='0', voluntarios=None, actividades=None):
+    def __init__(self, nombre='', es_atendida='0'):
         self.nombre = nombre
         self.es_atendida = es_atendida
-        self.voluntarios = voluntarios or []
-        self.actividades = actividades or []
+        self.voluntarios = []
+        self.actividades = []
 
     def verificar_emergencia(self):
         # comprobar que todos tengan 1
@@ -20,4 +20,4 @@ class Emergencia:
         return self.es_atendida
 
     def __str__(self):
-        return f'({self.nombre}, {self.es_atendida}, {self.voluntarios}, {self.actividades})'
+        return f'Emergencia: {self.nombre}, {self.es_atendida}, ||{self.voluntarios}||, ||{self.actividades}||'

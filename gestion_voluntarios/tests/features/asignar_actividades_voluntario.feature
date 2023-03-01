@@ -20,4 +20,4 @@
       Ejemplos: Asignaciones
       | nombre_emergencia | nombre_voluntario | apellido_voluntario | edad_voluntario | nombre_actividad | es_asignado | tiene_voluntario | estado_emergencia |
       | "Choque"          | "Alexis"          | "Vizuete"           | 23              | "Suturar"        | 1           | 1                | 1                 |
-      | "Choque"          | "Anahi "          | "Vasquez"           | 22              | "Suturar"        | 1           | 1                | 1                 |
+      # | "Choque"          | "Anahi "          | "Vasquez"           | 22              | "Suturar"        | 1           | 1                | 1                 |

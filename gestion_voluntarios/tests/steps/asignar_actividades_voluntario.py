@@ -4,8 +4,6 @@ from gestion_voluntarios.model.voluntario_model import Voluntario
 from gestion_voluntarios.model.actividad_model import Actividad
 
 use_step_matcher("parse")
-
-
 # Sirve para verificar .feature y este .py
 
 

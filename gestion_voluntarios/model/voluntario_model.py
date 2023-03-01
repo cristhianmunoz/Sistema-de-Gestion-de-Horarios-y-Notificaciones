@@ -10,4 +10,4 @@ class Voluntario:
         return self.tiene_actividad
 
     def __str__(self):
-        return f'Voluntario({self.nombre},{self.tiene_actividad},{self.emergencia})'
+        return f'Voluntario: {self.nombre}, {self.tiene_actividad}, ||{self.emergencia}||'

@@ -21,9 +21,11 @@ class Voluntario(models.Model):
 
     emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE)
 
+
 class ActividadEmergencia(models.TexChoices):
     EVACUAR = 'Evacuar'
     PRIMEROS_AUXILIOS = 'Primeros auxilios'
+
 
 class Actividad(models.Model):
     nombre = models.CharField(choices=ActividadEmergencia.choices)
