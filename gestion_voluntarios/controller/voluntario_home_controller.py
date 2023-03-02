@@ -14,7 +14,7 @@ def index(request):
     contexto = obtener_contexto(id_voluntario)
 
     # Enviando los datos obtenidos a la vista
-    return render(request=request, template_name='voluntario_home_view.html', context=contexto)
+    return render(request=request, template_name='voluntario_test_view.html', context=contexto)
 
 
 def comprobar_operacion_creacion(request):
@@ -33,7 +33,7 @@ def comprobar_operacion_edicion(request):
 
 
 def obtener_contexto(id_voluntario):
-    voluntario = Voluntario.obtener_voluntario_por_id()
+    voluntario = Voluntario.obtener_voluntario_por_id(id_voluntario)
     habilidades = Habilidad.obtener_habilidades_por_id_voluntario(id_voluntario)
     horario = Horario.obtener_horario_por_id_voluntario(id_voluntario)
     periodos = Periodo.obtener_periodos_por_id_voluntario(id_voluntario)

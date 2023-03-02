@@ -1,7 +1,10 @@
+import django
 from django.core.exceptions import ValidationError
 from django.db import models
 
 from gestion_voluntarios.model.dia_semana_model import DiaSemana
+
+django.setup()
 
 
 class Periodo(models.Model):

@@ -26,7 +26,7 @@ def index(request):
             voluntario_id=id_voluntario
         )
 
-        Habilidad.agregar_habilidad()
+        Habilidad.agregar_habilidad(habilidad)
 
     # Al recibir por GET se entiende que se quiere eliminar o editar una habilidad
     elif request.method == 'GET' and comprobar_operacion_eliminacion(request):
@@ -35,7 +35,7 @@ def index(request):
         id_habilidad = request.GET.get('id_habilidad')
 
         # Comunicándose con los modelos para eliminar la habilidad
-        Habilidad.eliminar_habilidad()
+        Habilidad.eliminar_habilidad(id_habilidad)
 
     # Al recibir por GET se entiende que se quiere eliminar o editar una habilidad
     elif request.method == 'GET' and comprobar_operacion_edicion(request):
@@ -55,7 +55,7 @@ def index(request):
             voluntario_id=id_voluntario
         )
 
-        Habilidad.editar_habilidad()
+        Habilidad.editar_habilidad(habilidad)
 
     # Comunicándose con los modelos para obtener los datos
     contexto = obtener_contexto(id_voluntario)

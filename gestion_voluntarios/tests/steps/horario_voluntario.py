@@ -14,7 +14,6 @@ use_step_matcher("parse")
 def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
     # Voluntario
     context.voluntario = Voluntario(
-        id=2,
         nombre='Francisco',
         apellido='Encalada',
         edad=23
@@ -23,18 +22,16 @@ def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
 
     # Horario del voluntario
     context.horario = Horario(
-        id=2,
-        voluntario_id=2,
+        voluntario_id=context.voluntario.id
     )
     context.horario.save()
 
     # Periodo disponible
     context.periodo = Periodo(
-        id=1,
         diaSemana=dia_disponible,
         horaInicio=inicio_disponible,
         horaFin=final_disponible,
-        horario_id=2
+        horario_id=context.horario.id
     )
     context.periodo.save()
 
@@ -44,12 +41,15 @@ def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
     '“{inicio_solicitado}“ a “{final_solicitado}”'
 )
 def step_impl(context, dia_solicitado, inicio_solicitado, final_solicitado):
+    context.horario_solicitud = Horario()
+    context.horario_solicitud.save()
+
     # Periodo solicitado
     context.periodo_solicitud = Periodo(
-        id=2,
         diaSemana=dia_solicitado,
         horaInicio=inicio_solicitado,
         horaFin=final_solicitado,
+        horario_id=context.horario_solicitud.id
     )
     context.periodo_solicitud.save()
 
@@ -65,7 +65,6 @@ def step_impl(context, disponibilidad):
 @step('que el voluntario tiene registrados “{dias_disponibles_iniciales}” días disponibles')
 def step_impl(context, dias_disponibles_iniciales):
     context.voluntario = Voluntario(
-        id=3,
         nombre='Rafael',
         apellido='Pozo',
         edad=23
@@ -73,8 +72,7 @@ def step_impl(context, dias_disponibles_iniciales):
     context.voluntario.save()
 
     context.horario = Horario(
-        id=3,
-        voluntario_id=3,
+        voluntario_id=context.voluntario.id
     )
     context.horario.save()
 
