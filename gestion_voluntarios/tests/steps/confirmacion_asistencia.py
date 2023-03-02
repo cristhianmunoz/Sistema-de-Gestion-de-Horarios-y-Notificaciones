@@ -1,6 +1,12 @@
+import os
+
 from behave import *
 
-from gestion_voluntarios.models.models import Emergencia, Voluntario
+
+from gestion_voluntarios.model.emergencia_model import Emergencia
+from gestion_voluntarios.model.voluntario_model import Voluntario
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'notificaciones_medicas.settings')
 
 use_step_matcher("parse")
 
