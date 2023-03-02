@@ -1,5 +1,8 @@
 from behave import *
 
+from gestion_voluntarios.model.habilidad_model import Habilidad
+from gestion_voluntarios.model.voluntario_model import Voluntario
+
 use_step_matcher("parse")
 
 
@@ -8,7 +11,19 @@ use_step_matcher("parse")
     '“{titulo_habilidad}” con “{horas_experiencia:f}” horas de experiencia y la descripción “{descripcion_habilidad}”'
 )
 def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas_experiencia, descripcion_habilidad):
-    pass
+    context.voluntario = Voluntario(
+        id=1,
+        nombre='Andrés',
+        apellido='Lozano'
+    )
+
+    context.habilidad = Habilidad(
+        id=1,
+        titulo=titulo_habilidad,
+        descripcion=descripcion_habilidad,
+        horas_experiencia=horas_experiencia,
+        voluntario_id=context.voluntario.id
+    )
 
 
 @step(
