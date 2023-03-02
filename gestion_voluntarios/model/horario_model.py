@@ -15,5 +15,9 @@ class Horario(models.Model):
 
     @staticmethod
     def obtener_horario_por_id_voluntario(id_voluntario):
-        horario = Horario.objects.get(voluntario_id=id_voluntario)
-        return horario
+        try:
+            horario = Horario.objects.get(voluntario_id=id_voluntario)
+            return horario
+
+        except Horario.DoesNotExist:
+            return None

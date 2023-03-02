@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from gestion_voluntarios.model.dia_semana_model import DiaSemana
+from gestion_voluntarios.model.horario_model import Horario
 
 django.setup()
 
@@ -88,4 +89,16 @@ class Periodo(models.Model):
             set_dias.add(periodo.diaSemana)
 
         return len(set_dias)
+
+    @staticmethod
+    def obtener_periodos_por_id_voluntario(id_voluntario):
+        try:
+            horario = Horario.obtener_horario_por_id_voluntario(id_voluntario)
+
+            if horario is not None:
+                periodos = Periodo.objects.filter(horario_id=horario.id)
+                return periodos
+
+        except Periodo.DoesNotExist:
+            return None
 
