@@ -9,10 +9,8 @@ use_step_matcher("parse")
     '"{dia_disponible}" en el periodo de "{hora_inicio_disponible}" a '
     '"{hora_final_disponible}" horas para asignar una actividad')
 def step_impl(context, dia_disponible, hora_inicio_disponible, hora_final_disponible):
-    context.dia_disponibleTest = DiaSemana(dia_disponible)
-    context.hora_inicio_disponible = Periodo(hora_inicio_disponible)
-    context.hora_final_disponible = Periodo(hora_final_disponible)
 
+    pass
 
 
 
