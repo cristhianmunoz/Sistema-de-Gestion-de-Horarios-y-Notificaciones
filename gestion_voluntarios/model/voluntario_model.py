@@ -11,3 +11,4 @@ class Voluntario(models.Model):
 
     def comprobar_disponibilidad(self):
         pass
+
