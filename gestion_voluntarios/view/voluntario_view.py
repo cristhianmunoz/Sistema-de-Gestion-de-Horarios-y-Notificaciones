@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+
+from django.shortcuts import render
 
 
 def index(request):
 
-    return HttpResponse("Hola, esta será la pantalla principal del perfil Voluntario!")
+    return render(request, 'index.html')

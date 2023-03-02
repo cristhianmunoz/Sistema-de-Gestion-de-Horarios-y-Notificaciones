@@ -1,23 +1,57 @@
+import django
 from django.db import models
+from django.utils.dateparse import parse_time
+
+django.setup()
 
 
 class Voluntario(models.Model):
+    # Campos de la clase Voluntario
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
     habilidades = models.CharField(max_length=500, default='')
     estado = models.BooleanField(default=False)
 
-    # habilidades = models.ManyToManyField(Habilidad)
-    # horarioDisponible = models.OneToOneField('Horario', on_delete=models.CASCADE)
+    def comprobar_disponibilidad(self, periodo_a_comprobar):
+        periodos = self.horario.periodos.all()
 
-    def comprobar_disponibilidad(self):
-        pass
+        for periodo in periodos:
+            if periodo.diaSemana != periodo_a_comprobar.diaSemana:
+                continue
+            if periodo.horaInicio > periodo_a_comprobar.horaInicio:
+                continue
+            if periodo.horaInicio < periodo_a_comprobar.horaFin:
+                continue
+            return True
 
-    def respuesta(self, emergencia_aceptada):
-        if not emergencia_aceptada:
-            bool_respuesta = 'Se ha rechazado la solicitud enviada'
-            return bool_respuesta
-        else:
-            bool_respuesta = 'Se ha confirmado la solicitud enviada'
-            return bool_respuesta
+        return False
+
+    """def comprobar_disponibilidad(self, horario):
+        # Itera por cada periodo del horario
+        for periodo_horario in horario.periodos.all():
+            # Itera por cada periodo del horario del voluntario
+            for periodo_voluntario in self.horario.periodos.all():
+                # Períodos del horario
+                inicio_horario = parse_time(periodo_horario.inicio)
+                fin_horario = parse_time(periodo_horario.fin)
+                # Periodos del horario del voluntario
+                inicio_horario_voluntario = parse_time(periodo_voluntario.inicio)
+                fin_horario_voluntario = parse_time(periodo_voluntario.fin)
+                # Revisa si los periodos se chocan entre sí
+                if max(inicio_horario, inicio_horario_voluntario) <= min(fin_horario, fin_horario_voluntario):
+                    # Los periodos chocan entre sí - Voluntario no disponible
+                    return False
+        # Los horarios no se chocan entre sí - Voluntario disponible
+        return True"""
+
+    # Toma al Voluntario de acuerdo a su ID
+    @classmethod
+    def obtener_voluntario_por_id(cls, id_voluntario):
+        try:
+            # Intenta obtener el voluntario que coincide con ese ID
+            voluntario = Voluntario.objects.get(id=id_voluntario)
+            return voluntario
+        except Voluntario.DoesNotExist:
+            # Retornar None en caso de que no se haya encontrado el Voluntario
+            return None
