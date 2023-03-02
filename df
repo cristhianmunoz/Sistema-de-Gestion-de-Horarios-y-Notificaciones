@@ -1,0 +1,184 @@
+[33mcommit 0030dfa09603c578e00989b6a086deba8691a5ad[m[33m ([m[1;36mHEAD -> [m[1;32mgr1[m[33m)[m
+Merge: c056f98 3bd9872
+Author: Fernando Sangopanta <jhon.sangopanta@epn.edu.ec>
+Date:   Thu Mar 2 00:24:01 2023 -0500
+
+    Merge branch 'gr2' of github.com:cristhianmunoz/Sistema-de-Gestion-de-Horarios-y-Notificaciones into gr1
+
+[33mcommit c056f9850eff6dfd07858e1b6603214e3981e2cf[m
+Author: Fernando Sangopanta <jhon.sangopanta@epn.edu.ec>
+Date:   Thu Mar 2 00:13:51 2023 -0500
+
+    Feat: Voluntarios asignados a actividades según sus horarios
+
+[33mcommit 3bd98727ee6de6a9bc1aca1838dfb0c61bc28b9c[m[33m ([m[1;31morigin/gr2[m[33m)[m
+Merge: 854b6c1 57d736d
+Author: cristhianmunoz <cristhian.munoz@epn.edu.ec>
+Date:   Wed Mar 1 23:19:32 2023 -0500
+
+    Merge branch 'gr2' of https://github.com/cristhianmunoz/Sistema-de-Gestion-de-Horarios-y-Notificaciones into gr2
+
+[33mcommit 854b6c11407829e356bb48c7672501b1f891660d[m
+Merge: 150b21b becb764
+Author: cristhianmunoz <cristhian.munoz@epn.edu.ec>
+Date:   Wed Mar 1 23:16:31 2023 -0500
+
+    Merge branch 'gr2' of https://github.com/cristhianmunoz/Sistema-de-Gestion-de-Horarios-y-Notificaciones into gr2
+
+[33mcommit 57d736db3bbb100564eecb3814095b829481d1b3[m
+Merge: 732b206 becb764
+Author: Erick Mayorga <erick.mayorga@epn.edu.ec>
+Date:   Wed Mar 1 23:14:37 2023 -0500
+
+    Merge branch 'gr2' of https://github.com/cristhianmunoz/Sistema-de-Gestion-de-Horarios-y-Notificaciones into gr2
+
+[33mcommit becb7643bd6491333f31e2f0c1bea110571243b3[m
+Author: Jonathan Puglla <jonathan.puglla@outlook.com>
+Date:   Wed Mar 1 22:31:50 2023 -0500
+
+    Modelo Voluntario:
+    
+    Se han implementado los métodos requeridos por los controladores hasta el momento para Comprobar la Disponibilidad y para obtener el Voluntario por su ID
+
+[33mcommit 52c822ffdfb76067842a6918df23e8eff089697a[m
+Author: Jonathan Puglla <jonathan.puglla@outlook.com>
+Date:   Wed Mar 1 21:59:12 2023 -0500
+
+    Modelo Habilidad:
+    
+    Se han agregado las funciones solicitadas por los controladores al modelo de la Habilidad del Voluntario
+
+[33mcommit fc2bc2df7a63834f0d0a433632a05af3df100097[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Wed Mar 1 21:28:44 2023 -0500
+
+    Fix: Nombres de las funciones
+    
+    Se corrigieron los nombres de las funciones utilizadas en los controladores Voluntario, Habilidad y Horario para cumplir con el estándar PEP8.
+
+[33mcommit 10d52868ebb1b1643ac47ce150865d8fc7a658e3[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Wed Mar 1 21:17:36 2023 -0500
+
+    Feat: Controladores de Voluntario, Habilidad y Horario
+    
+    Se crearon los controladores de Voluntario, Habilidad y Horario respectivamente.
+
+[33mcommit 22d6698b5f0db041efd0a26dd5f9f04c1d21bbac[m
+Author: Francisco Encalada <francisco.encalada01@epn.edu.ec>
+Date:   Wed Mar 1 20:43:40 2023 -0500
+
+    feat: Creación de página principal y ejemplo navegación
+    
+    Se creo la página principal que se usara para moverse entre interfaces, así como también un ejemplo com páginas dummies.
+
+[33mcommit 732b206026713f33bffc17554d4cd06bded84816[m
+Merge: 150b21b 1b50f4c
+Author: Erick Mayorga <erick.mayorga@epn.edu.ec>
+Date:   Wed Mar 1 17:18:14 2023 -0500
+
+    Merge branch 'gr2' of https://github.com/cristhianmunoz/Sistema-de-Gestion-de-Horarios-y-Notificaciones into gr2
+
+[33mcommit 1b50f4c898d0e92e4746c881f623872932b5e84c[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Wed Mar 1 11:29:04 2023 -0500
+
+    Fix: Modelos y migraciones
+    
+    Se ha modificado la estructura de los modelos para corregir los problemas existentes en las migraciones hacia la base de datos.
+
+[33mcommit 0150f4a4fad38a90ab584344d328b56d46413d5a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jonathan Puglla <jonathan.puglla@outlook.com>
+Date:   Tue Feb 28 21:51:17 2023 -0500
+
+    Directorios
+    
+    Se arreglaron problemas en la distribución de los directorios- cambios en el archivo de configuración
+
+[33mcommit 0f468ff281b55d3b6fdff3364d7e6390976b676e[m
+Merge: b3e2d96 b6dde06
+Author: Jonathan Puglla <76792472+jonap22@users.noreply.github.com>
+Date:   Sun Feb 26 21:57:37 2023 -0500
+
+    Merge pull request #1 from cristhianmunoz/gr2
+
+[33mcommit b6dde0677831f3b7f6a7b42b2ef554964589f1e9[m
+Merge: 225158e b3e2d96
+Author: Andrés Lozano <52755615+Confectus@users.noreply.github.com>
+Date:   Sun Feb 26 21:54:12 2023 -0500
+
+    Merge branch 'main' into gr2
+
+[33mcommit 225158ea567aeb36773597822bb30816734c462b[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Sun Feb 26 16:09:22 2023 -0500
+
+    Update: README.md actualizado
+    
+    El fichero README.md fue actualizado para incluir una sección que explica la jerarquía de paquetes que se utilizarán para el desarrollo del proyecto mediante MVC y BDD con Gherkin y Behave.
+
+[33mcommit a76b5c06ba634e0ea6141d5c95582d97949bc1c1[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Sat Feb 25 19:42:28 2023 -0500
+
+    Feat: Jerarquía de paquetes y escenarios de prueba
+    
+    Se configuró la jerarquía de paquetes y archivos del proyecto considerando el uso de MVC como arquitectura y BDD para el desarrollo.
+    Además, se crearon los escenarios de prueba para la historia de usuario asignada.
+
+[33mcommit 150b21b1887ffd4a66c8359e95d0ca81da7c5182[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Sat Feb 25 19:42:28 2023 -0500
+
+    Feat: Jerarquía de paquetes y escenarios de prueba
+    
+    Se configuró la jerarquía de paquetes y archivos del proyecto considerando el uso de MBV y BDD.
+    Además, se crearon los escenarios de prueba para la historia de usuario asignada.
+
+[33mcommit 6c918b43eedc518e01d8de5eb25dc7aec65dacd5[m
+Author: Erick Mayorga <erick.mayorga@epn.edu.ec>
+Date:   Thu Feb 23 21:03:31 2023 -0500
+
+    Update models.py
+
+[33mcommit d846d5d20cc4df1f5212ea0a62a97de5f67644bf[m
+Author: Erick Mayorga <erick.mayorga@epn.edu.ec>
+Date:   Thu Feb 23 20:34:43 2023 -0500
+
+    Update models.py
+
+[33mcommit b3e2d9604f7bdc1c9a70d8ff38839ce038f74ae3[m
+Author: David Aguirre <50632263+Davidaguirre99@users.noreply.github.com>
+Date:   Thu Feb 23 20:20:00 2023 -0500
+
+    update HU grupo 3
+    
+    Se cambia indicar por asignar actividades
+
+[33mcommit 8efba0d959ee8410dd34ef49b35457574ad5f3e6[m[33m ([m[1;31morigin/gr6[m[33m, [m[1;31morigin/gr5[m[33m, [m[1;31morigin/gr3[m[33m, [m[1;31morigin/gr1[m[33m, [m[1;32mmain[m[33m, [m[1;32mgr3[m[33m, [m[1;32mgr2[m[33m)[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Sun Feb 19 22:31:45 2023 -0500
+
+    Update: README.md updated
+    
+    README.md was modified to introduce the project configuration steps.
+
+[33mcommit 405fc71f0d8822e751b52bda05ec3c566db61aa8[m
+Author: Andrés Lozano <andreslozanoestrada@outlook.com>
+Date:   Sun Feb 19 21:16:14 2023 -0500
+
+    Feat: Django project creation
+    
+    A Django project was created with the initial structure of the working space.
+
+[33mcommit 3c842c7fa19ad74b61262b0bb88b01f341e9bfac[m
+Author: Cristhian Muñoz <50114749+cristhianmunoz@users.noreply.github.com>
+Date:   Fri Feb 17 07:35:39 2023 -0500
+
+    Update README.md
+
+[33mcommit 29bd37ef626ffbeca2b0a62bc6e23d628d9bc6ce[m
+Author: Cristhian Muñoz <50114749+cristhianmunoz@users.noreply.github.com>
+Date:   Fri Feb 10 07:21:57 2023 -0500
+
+    Initial commit
