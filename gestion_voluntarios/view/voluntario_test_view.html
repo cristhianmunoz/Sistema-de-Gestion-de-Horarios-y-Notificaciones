@@ -3,26 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <title>Voluntario Test View</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <h1>Detalle del voluntario</h1>
+    <div class="d-flex justify-content-center">
+        <h1>Detalle del voluntario</h1>
+    </div>
+
     <p>Nombre: {{ voluntario.nombre }} {{ voluntario.apellido }}</p>
     <p>Edad: {{ voluntario.edad }}</p>
-    <h2>Habilidades</h2>
-    <ul>
-        {% for habilidad in habilidades %}
-            <li>{{ habilidad.titulo }} - {{ habilidad.descripcion }}</li>
-        {% empty %}
-            <li>Este voluntario no tiene habilidades registradas.</li>
-        {% endfor %}
-    </ul>
-    <h2>Horario</h2>
-    <ul>
-        {% for periodo in horario %}
-            <li>{{ periodo.diaSemana }} - {{ periodo.horaInicio }} - {{ periodo.horaFin }}</li>
-        {% empty %}
-            <li>Este voluntario no tiene un horario registrado.</li>
-        {% endfor %}
-    </ul>
+    <div class="d-flex flex-row">
+        <h2 class="me-3">Habilidades</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#habilidadesModal">
+          <i class="bi bi-plus"></i>
+        </button>
+    </div>
+
+    {% if habilidades %}
+        <div class="container">
+            <table id="table-habilidades" class="table">
+                <thead class="header-table">
+                    <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="body-table">
+                {% for habilidad in habilidades %}
+                    <tr>
+                        <td>{{ habilidad.titulo }}</td>
+                        <td>{{ habilidad.descripcion }}</td>
+                        <td><i class="bi bi-trash-fill"></i></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="d-flex justify-content-center align-items-center">
+            <p class="d-flex justify-content-center mt-2"
+               style="background-color: #ffd454; color: black; width: 80%; border-radius: 20px; padding: 5px 0;">
+                Este voluntario no tiene habilidades registradas
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="d-flex flex-row">
+        <h2 class="me-3">Horario</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#horarioModal">
+          <i class="bi bi-plus"></i>
+        </button>
+    </div>
+
+    {% if horario %}
+        <div class="container">
+            <table id="table-horario" class="table">
+                <thead class="header-table">
+                    <tr>
+                        <th scope="col">Día de la semana</th>
+                        <th scope="col">Hora de inicio</th>
+                        <th scope="col">Hora de fin</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="body-table">
+                {% for periodo in horario %}
+                    <tr>
+                        <td>{{ periodo.diaSemana }}</td>
+                        <td>{{ periodo.horaInicio }}</td>
+                        <td>{{ periodo.horaFin }}</td>
+                        <td><i class="bi bi-trash-fill"></i></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="d-flex justify-content-center align-items-center">
+            <p class="d-flex justify-content-center mt-2"
+               style="background-color: #ffd454; color: black; width: 80%; border-radius: 20px; padding: 5px 0">
+                Este voluntario no tiene un horario registrado.
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Habilidades Modal -->
+    <div class="modal fade" id="habilidadesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Nueva habilidad</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Seleccione una o varias habilidades nuevas:
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Agregar habilidades</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horario Modal -->
+    <div class="modal fade" id="horarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Nuevo horario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Ingrese la información del nuevo horario:
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Agregar horario</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

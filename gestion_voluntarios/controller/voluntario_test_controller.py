@@ -4,8 +4,11 @@ from gestion_voluntarios.model.voluntario_model import Voluntario
 
 
 def index(request):
-    voluntario_id = request.GET.get('voluntario_id')
+    voluntario_id = request.GET.get('id_voluntario')
     contexto = {}
+    habilidades = [
+
+    ]
 
     if voluntario_id:
         try:
