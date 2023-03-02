@@ -1,17 +1,17 @@
 class Actividad:
     def __init__(self, nombre='', tiene_voluntario='0', emergencia=None):
         self.nombre = nombre
-        self.es_asignada = tiene_voluntario
+        self.tiene_voluntario = tiene_voluntario
         self.emergencia = emergencia
         self.voluntarios = []
 
     def asignar_voluntario(self, voluntario):
         self.voluntarios.append(voluntario)
-        self.es_asignada = '1'
-        voluntario.tiene_actividad = '1'
+        self.tiene_voluntario = '1'
+        voluntario.es_asignado = '1'
 
     def get_tiene_voluntario(self):
-        return self.es_asignada
+        return self.tiene_voluntario
 
     def __str__(self):
-        return f'Actividad: {self.nombre}, {self.es_asignada}, ||{self.emergencia}||, ||{self.voluntarios}||'
+        return f'Actividad: {self.nombre}, {self.tiene_voluntario}, ||{self.emergencia}||, ||{self.voluntarios}||'
