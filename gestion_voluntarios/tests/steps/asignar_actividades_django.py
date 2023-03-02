@@ -15,7 +15,6 @@ use_step_matcher("parse")
 def step_impl(context, nombre_emergencia):
     # Se crea la Emergencia
     context.emergenciaTest = Emergencia(nombre=nombre_emergencia)
-    print(context.emergenciaTest.get_id())
     context.emergenciaTest.save()
     print('Emergencia Creada')
     print(context.emergenciaTest.__str__())
@@ -26,8 +25,9 @@ def step_impl(context, nombre_emergencia):
     'actividades asignadas')
 def step_impl(context, nombre_voluntario, apellido_voluntario, edad_voluntario):
     # Se crea el voluntario
-    context.voluntarioTest = Voluntario(nombre_voluntario, apellido_voluntario, edad_voluntario, '0',
-                                        context.emergenciaTest)
+    context.voluntarioTest = Voluntario(nombre=nombre_voluntario, apellido=apellido_voluntario, edad=edad_voluntario,
+                                        emergencia=context.emergenciaTest)
+    context.voluntarioTest.save()
     print('Voluntario Creado')
     print(context.voluntarioTest.__str__())
 
@@ -35,7 +35,8 @@ def step_impl(context, nombre_voluntario, apellido_voluntario, edad_voluntario):
 @step('existe una actividad con un "{nombre_actividad}" sin voluntarios asignados')
 def step_impl(context, nombre_actividad):
     # Se crea la actividad
-    context.actividadTest = Actividad(nombre_actividad, '0', context.emergenciaTest)
+    context.actividadTest = Actividad(nombre=nombre_actividad, emergencia=context.emergenciaTest)
+    context.actividadTest.save()
     print('Actividad Creada')
     print(context.actividadTest.__str__())
 

@@ -5,8 +5,8 @@ class Emergencia(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, default='')
     es_atendida = models.CharField(max_length=1, default='0')
-    voluntarios = models.ManyToManyField('Voluntario')
-    actividades = models.ManyToManyField('Actividad')
+    # voluntarios = models.ManyToManyField('Voluntario')
+    # actividades = models.ManyToManyField('Actividad')
 
     def verificar_emergencia(self):
         # Comprobar que todos tengan 1
@@ -39,7 +39,7 @@ class Actividad(models.Model):
     # nombre = models.CharField(choices=ActividadEmergencia.choices, max_length=50)
     nombre = models.CharField(max_length=50, default='')
     tiene_voluntario = models.CharField(max_length=1, default='0')
-    emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE)
+    emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE, related_name='actividades')
     # Revisar esta relación (una actividad muchos voluntarios - un voluntario muchas actividades)
     voluntarios = models.ManyToManyField('Voluntario')
 
@@ -52,7 +52,7 @@ class Actividad(models.Model):
         return self.tiene_voluntario
 
     def __str__(self):
-        return f'Actividad: {self.nombre}, {self.tiene_voluntario}, ||{self.emergencia}||, ||{self.voluntarios.all()}||'
+        return f'Actividad: {self.nombre}, {self.tiene_voluntario}, ||{self.voluntarios.all()}||'
 
 
 class Voluntario(models.Model):
@@ -61,10 +61,10 @@ class Voluntario(models.Model):
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
     es_asignado = models.CharField(max_length=1, default='0')
-    emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE)
+    emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE, related_name='voluntarios')
 
     def get_es_asignado(self):
         return self.es_asignado
 
     def __str__(self):
-        return f'Voluntario: {self.nombre}, {self.apellido}, {self.edad}, {self.es_asignado}, ||{self.emergencia}||'
+        return f'Voluntario: {self.nombre}, {self.apellido}, {self.edad}, {self.es_asignado}'
