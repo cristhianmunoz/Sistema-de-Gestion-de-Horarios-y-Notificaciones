@@ -11,32 +11,32 @@ def index(request):
     id_voluntario = request.GET.get('id_voluntario')
 
     # Comunicándose con los modelos para obtener los datos
-    contexto = obtenerContexto(id_voluntario)
+    contexto = obtener_contexto(id_voluntario)
 
     # Enviando los datos obtenidos a la vista
     return render(request=request, template_name='voluntario_home_view.html', context=contexto)
 
 
-def comprobarOperacionCreacion(request):
+def comprobar_operacion_creacion(request):
     operacion = request.POST.get('operacion')
     return operacion and operacion == 'creacion'
 
 
-def comprobarOperacionEliminacion(request):
+def comprobar_operacion_eliminacion(request):
     operacion = request.GET.get('operacion')
     return operacion and operacion == 'eliminacion'
 
 
-def comprobarOperacionEdicion(request):
+def comprobar_operacion_edicion(request):
     operacion = request.GET.get('operacion')
     return operacion and operacion == 'edicion'
 
 
-def obtenerContexto(id_voluntario):
-    voluntario = Voluntario.obtenerVoluntarioPorID(id_voluntario)
-    habilidades = Habilidad.obtenerHabilidadesPorIDVoluntario(id_voluntario)
-    horario = Horario.obtenerHorarioPorIDVoluntario(id_voluntario)
-    periodos = Periodo.obtenerPeriodosPorIDVoluntario(id_voluntario)
+def obtener_contexto(id_voluntario):
+    voluntario = Voluntario.obtener_voluntario_por_id(id_voluntario)
+    habilidades = Habilidad.obtener_habilidades_por_id_voluntario(id_voluntario)
+    horario = Horario.obtener_horario_por_id_voluntario(id_voluntario)
+    periodos = Periodo.obtener_periodos_por_id_voluntario(id_voluntario)
     horario.periodos = periodos
 
     return {

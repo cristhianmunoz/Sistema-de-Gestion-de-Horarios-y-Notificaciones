@@ -1,17 +1,17 @@
 from django.shortcuts import render
 
 from gestion_voluntarios.model.periodo_model import Periodo
-from voluntario_home_controller import comprobarOperacionCreacion
-from voluntario_home_controller import comprobarOperacionEliminacion
-from voluntario_home_controller import comprobarOperacionEdicion
-from voluntario_home_controller import obtenerContexto
+from voluntario_home_controller import comprobar_operacion_creacion
+from voluntario_home_controller import comprobar_operacion_eliminacion
+from voluntario_home_controller import comprobar_operacion_edicion
+from voluntario_home_controller import obtener_contexto
 
 
 def index(request):
     id_voluntario = ''
 
     # Al recibir por POST se entiende que se quiere crear un horario
-    if request.method == 'POST' and comprobarOperacionCreacion(request):
+    if request.method == 'POST' and comprobar_operacion_creacion(request):
         # Obteniendo los parámetros enviados por POST
         id_voluntario = request.POST.get('id_voluntario')
         id_horario = request.POST.get('id_horario')
@@ -27,19 +27,19 @@ def index(request):
             horario_id=id_horario
         )
 
-        Periodo.agregarPeriodo(periodo)
+        Periodo.agregar_periodo(periodo)
 
     # Al recibir por GET se entiende que se quiere eliminar o editar un periodo del horario
-    elif request.method == 'GET' and comprobarOperacionEliminacion(request):
+    elif request.method == 'GET' and comprobar_operacion_eliminacion(request):
         # Obteniendo los parámetros enviados por GET
         id_voluntario = request.GET.get('id_voluntario')
         id_periodo = request.GET.get('id_periodo')
 
         # Comunicándose con los modelos para eliminar el periodo del horario
-        Periodo.eliminarPeriodo(id_periodo)
+        Periodo.eliminar_periodo(id_periodo)
 
     # Al recibir por GET se entiende que se quiere eliminar o editar una habilidad
-    elif request.method == 'GET' and comprobarOperacionEdicion(request):
+    elif request.method == 'GET' and comprobar_operacion_edicion(request):
         # Obteniendo los parámetros enviados por GET
         id_voluntario = request.GET.get('id_voluntario')
         id_horario = request.GET.get('id_horario')
@@ -57,10 +57,10 @@ def index(request):
             horario_id=id_horario
         )
 
-        Periodo.editarPeriodo(periodo)
+        Periodo.editar_periodo(periodo)
 
     # Comunicándose con los modelos para obtener los datos
-    contexto = obtenerContexto(id_voluntario)
+    contexto = obtener_contexto(id_voluntario)
 
     # Enviando los datos obtenidos a la vista
     return render(request=request, template_name='voluntario_home_view.html', context=contexto)

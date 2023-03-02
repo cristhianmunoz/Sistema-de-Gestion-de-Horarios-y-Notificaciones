@@ -1,17 +1,17 @@
 from django.shortcuts import render
 
 from gestion_voluntarios.model.habilidad_model import Habilidad
-from voluntario_home_controller import comprobarOperacionCreacion
-from voluntario_home_controller import comprobarOperacionEliminacion
-from voluntario_home_controller import comprobarOperacionEdicion
-from voluntario_home_controller import obtenerContexto
+from voluntario_home_controller import comprobar_operacion_creacion
+from voluntario_home_controller import comprobar_operacion_eliminacion
+from voluntario_home_controller import comprobar_operacion_edicion
+from voluntario_home_controller import obtener_contexto
 
 
 def index(request):
     id_voluntario = ''
 
     # Al recibir por POST se entiende que se quiere crear una habilidad
-    if request.method == 'POST' and comprobarOperacionCreacion(request):
+    if request.method == 'POST' and comprobar_operacion_creacion(request):
         # Obteniendo los parámetros enviados por POST
         id_voluntario = request.POST.get('id_voluntario')
         titulo_habilidad = request.POST.get('titulo_habilidad')
@@ -26,19 +26,19 @@ def index(request):
             voluntario_id=id_voluntario
         )
 
-        Habilidad.agregarHabilidad(habilidad)
+        Habilidad.agregar_habilidad(habilidad)
 
     # Al recibir por GET se entiende que se quiere eliminar o editar una habilidad
-    elif request.method == 'GET' and comprobarOperacionEliminacion(request):
+    elif request.method == 'GET' and comprobar_operacion_eliminacion(request):
         # Obteniendo los parámetros enviados por GET
         id_voluntario = request.GET.get('id_voluntario')
         id_habilidad = request.GET.get('id_habilidad')
 
         # Comunicándose con los modelos para eliminar la habilidad
-        Habilidad.eliminarHabilidad(id_habilidad)
+        Habilidad.eliminar_habilidad(id_habilidad)
 
     # Al recibir por GET se entiende que se quiere eliminar o editar una habilidad
-    elif request.method == 'GET' and comprobarOperacionEdicion(request):
+    elif request.method == 'GET' and comprobar_operacion_edicion(request):
         # Obteniendo los parámetros enviados por GET
         id_voluntario = request.GET.get('id_voluntario')
         id_habilidad = request.GET.get('id_habilidad')
@@ -55,10 +55,10 @@ def index(request):
             voluntario_id=id_voluntario
         )
 
-        Habilidad.editarHabilidad(habilidad)
+        Habilidad.editar_habilidad(habilidad)
 
     # Comunicándose con los modelos para obtener los datos
-    contexto = obtenerContexto(id_voluntario)
+    contexto = obtener_contexto(id_voluntario)
 
     # Enviando los datos obtenidos a la vista
     return render(request=request, template_name='voluntario_home_view.html', context=contexto)
