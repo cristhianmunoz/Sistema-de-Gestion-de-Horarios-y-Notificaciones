@@ -7,8 +7,8 @@
 
     Esquema del escenario: : Asignar un voluntario a una actividad en una emergencia
       #Dado: precondiciones
-      Dado que se tiene una emergencia con un "<nombre_emergencia>" que aún no es atendida
-      Y hay un voluntario con un "<nombre_voluntario>", "<apellido_voluntario>" y "<edad_voluntario>" que asistirá sin actividades asignadas
+      Dado que se tiene una emergencia que aún no es atendida
+      Y hay un voluntario que asistirá sin actividades asignadas
       Y existe una actividad con un "<nombre_actividad>" sin voluntarios asignados
       #Cuando: eventos
       Cuando se le asigna un voluntario a una actividad existente
@@ -18,9 +18,5 @@
       Y el estado de la emergencia sera"<estado_emergencia>"
 
       Ejemplos: Asignaciones
-      | nombre_emergencia | nombre_voluntario | apellido_voluntario | edad_voluntario | nombre_actividad    | es_asignado | tiene_voluntario | estado_emergencia |
-      | "Choque"          | "Alexis"          | "Vizuete"           | 23              | "Suturar"           | 1           | 1                | 1                 |
-      | "Asalto"          | "Anahi "          | "Vasquez"           | 22              | "Primeros Auxilios" | 1           | 1                | 1                 |
-      | "Terremoto"       | "Leonardo"        | "Salvador"          | 22              | "Evacuar"           | 1           | 1                | 1                 |
-      | "Tsunami"         | "Andrea"          | "Garces "           | 22              | "Evacuar"           | 1           | 1                | 1                 |
-      | "Inundación"      | "David "          | "Aguirre"           | 22              | "Rescate"           | 1           | 1                | 1                 |
+      | nombre_actividad    | es_asignado | tiene_voluntario | estado_emergencia |
+      |"Suturar"            | "True"      | "True"           | "True"            |
