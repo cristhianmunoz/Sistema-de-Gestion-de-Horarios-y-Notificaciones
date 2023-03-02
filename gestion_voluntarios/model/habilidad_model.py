@@ -57,15 +57,5 @@ class Habilidad(models.Model):
     # Método que recibe el código de un voluntario y retorna una lista de habilidades
     @classmethod
     def obtener_habilidades_por_id_voluntario(cls, id_voluntario):
-        habilidades = Habilidad.objects.first(voluntario=id_voluntario)
-        lista_habilidades = []
-        # Almacena las habilidades en una lista de habilidades asociadas a ese voluntario
-        for habilidad in habilidades:
-            habilidad_dict = {
-                'titulo': habilidad.titulo,
-                'descripcion': habilidad.descripcion,
-                'horas_experiencia': habilidad.horas_experiencia,
-                'voluntario': habilidad.voluntario.id
-            }
-            lista_habilidades.append(habilidad_dict)
-        return lista_habilidades
+        habilidades = Habilidad.objects.filter(voluntario_id=id_voluntario)
+        return list(habilidades)
