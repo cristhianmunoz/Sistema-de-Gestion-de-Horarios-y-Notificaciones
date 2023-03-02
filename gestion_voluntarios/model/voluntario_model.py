@@ -6,6 +6,7 @@ class Voluntario(models.Model):
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
     habilidades = models.CharField(max_length=500, default='')
+    estado = models.BooleanField(default=False)
 
     # habilidades = models.ManyToManyField(Habilidad)
     # horarioDisponible = models.OneToOneField('Horario', on_delete=models.CASCADE)
