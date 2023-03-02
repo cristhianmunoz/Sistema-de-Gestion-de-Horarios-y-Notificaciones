@@ -6,12 +6,21 @@ django.setup()
 
 
 class Voluntario(models.Model):
+    def __init__(self, nombre, apellido, edad, habilidades, estado, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.nombre = nombre
+        self.apellido = apellido
+        self.edad = edad
+        self.habilidades = habilidades
+        self.estado = estado
+
     # Campos de la clase Voluntario
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
     habilidades = models.CharField(max_length=500, default='')
-    estado = models.BooleanField(default=False)
+    estado = models.CharField(max_length=1)
+
 
     def comprobar_disponibilidad(self, periodo_a_comprobar):
         periodos = self.horario.periodos.all()

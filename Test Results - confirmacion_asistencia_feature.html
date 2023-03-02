@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">7 ms</div>
+                <div class="time" xmlns="">2 ms</div>
                 <h1>
-                    confirmacion_asistencia.feature: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">20 total, </span><span class="passed">20 passed</span></strong>
+                    confirmacion_asistencia.feature: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">6 total, </span><span class="passed">6 passed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -593,134 +593,58 @@ jQuery.cookie = function(name, value, options) {
                 <ul id="tree">
                     <li xmlns="" class="level top open">
                         <span><em class="time">
-                                <div class="time">7 ms</div>
+                                <div class="time">2 ms</div>
                             </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica</span>
                         <ul>
                             <li class="level suite open">
                                 <span><em class="time">
                                         <div class="time">2 ms</div>
-                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @1.1 Confirmar Asistencia</span>
-                                <ul>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Confirmar'</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y se me informa que 'Se ha confirmado la solicitud enviada'</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="level suite open">
-                                <span><em class="time">
-                                        <div class="time">2 ms</div>
-                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @1.2 Confirmar Asistencia</span>
+                                    </em>Confirmaci&oacute;n de asistencia de voluntarios en emergencia m&eacute;dica -- @1.1 Confirmar Asistencia</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
+                                            </em><em class="status">passed</em>Dado que se tiene el grupo de voluntarios conformado por 'VOLUNTARIOS 1'</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
+                                            </em><em class="status">passed</em>Cuando se notifica la emergencia m&eacute;dica a '5' personas</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">n:  5<br/></span>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Cancelar'</span>
+                                            </em><em class="status">passed</em>Y el numero de voluntarios es '3' confirmados</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">n confirmados:  3<br/></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y el numero de voluntarios es '2' que rechazaron la emergencia</span>
+                                        <ul>
+                                            <li class="text">
+                                                <span class="stdout">2<br/></span>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
+                                            </em><em class="status">passed</em>Entonces el n&uacute;mero de voluntarios que atender&aacute;n la 'terremoto' es '3'</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y se me informa que 'Se ha rechazado la solicitud enviada'</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="level suite open">
-                                <span><em class="time">
-                                        <div class="time">1 ms</div>
-                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @2.1 Rechazar Asistencia</span>
-                                <ul>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Cancelar'</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y se me informa que 'Se ha rechazado la solicitud enviada'</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="level suite open">
-                                <span><em class="time">
-                                        <div class="time">2 ms</div>
-                                    </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica -- @2.2 Rechazar Asistencia</span>
-                                <ul>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Dado que yo, 'Cristopher' 'Perez', soy un voluntario registrado en el programa de emergencia m&eacute;dica</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando recibo una notificaci&oacute;n inform&aacute;ndome de una emergencia que contiene los siguientes datos 'Accidente en la avenida 10 de Agosto', 'Accidente de transito', 'Quito-Norte', '18:30', 'William Zapata', 'Cristopher Perez', 'asasdsad' y 'Presentarse en el Hospital'</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y selecciono la opci&oacute;n 'Confirmar'</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Entonces la opci&oacute;n escogida se registra en el sistema</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y se me informa que 'Se ha confirmado la solicitud enviada'</span>
+                                            </em><em class="status">passed</em>Y los voluntarios asignados a esta emergencia son 'LISTA 1'</span>
                                     </li>
                                 </ul>
                             </li>
@@ -730,7 +654,7 @@ jQuery.cookie = function(name, value, options) {
             </div>
         </div>
         <div id="footer">
-            <p>Generated by PyCharm on 3/2/23, 7:44 AM</p>
+            <p>Generated by PyCharm on 3/2/23, 12:37 PM</p>
         </div>
     </body>
 </html>
