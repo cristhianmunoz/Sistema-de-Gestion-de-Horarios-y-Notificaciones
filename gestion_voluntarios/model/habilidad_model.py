@@ -1,8 +1,10 @@
-
+import django
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
-from gestion_voluntarios.model.voluntario_model import Voluntario
+
+django.setup()
 
 
 class Habilidad(models.Model):
@@ -10,7 +12,7 @@ class Habilidad(models.Model):
     titulo = models.CharField(max_length=20, choices=HabilidadMedica.choices)
     descripcion = models.CharField(max_length=200, default='')
     horas_experiencia = models.PositiveIntegerField(default=0)
-    voluntario = models.ForeignKey(Voluntario, on_delete=models.CASCADE)
+    voluntario = models.ForeignKey('Voluntario', on_delete=models.CASCADE)
 
     # Recibe el código de una habilidad y la trata de eliminar de la base de datos
     @classmethod

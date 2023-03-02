@@ -1,5 +1,8 @@
+import django
 from django.db import models
 from django.utils.dateparse import parse_time
+
+django.setup()
 
 
 class Voluntario(models.Model):
