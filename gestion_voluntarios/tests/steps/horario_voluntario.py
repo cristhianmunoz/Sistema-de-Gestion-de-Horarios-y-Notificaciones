@@ -1,5 +1,9 @@
 from behave import *
 
+from gestion_voluntarios.model.horario_model import Horario
+from gestion_voluntarios.model.periodo_model import Periodo
+from gestion_voluntarios.model.voluntario_model import Voluntario
+
 use_step_matcher("parse")
 
 
@@ -8,7 +12,30 @@ use_step_matcher("parse")
     '“{final_disponible}” horas'
 )
 def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
-    pass
+    # Voluntario
+    context.voluntario = Voluntario(
+        id=2,
+        nombre='Francisco',
+        apellido='Encalada',
+        edad=23
+    )
+    context.voluntario.save()
+
+    # Horario del voluntario
+    context.horario = Horario(
+        id=2,
+    )
+    context.horario.save()
+
+    # Periodo disponible
+    context.periodo = Periodo(
+        id=1,
+        diaSemana=dia_disponible,
+        horaInicio=inicio_disponible,
+        horaFin=final_disponible,
+        horario_id=2
+    )
+    context.periodo.save()
 
 
 @step(
@@ -16,12 +43,20 @@ def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
     '“{inicio_solicitado}“ a “{final_solicitado}”'
 )
 def step_impl(context, dia_solicitado, inicio_solicitado, final_solicitado):
-    pass
+    # Periodo solicitado
+    context.periodo_solicitud = Periodo(
+        id=2,
+        diaSemana=dia_solicitado,
+        horaInicio=inicio_solicitado,
+        horaFin=final_solicitado,
+        horario_id=2
+    )
+    context.periodo_solicitud.save()
 
 
 @step('se tendrá que la disponibilidad del voluntario en el momento requerido es “{disponibilidad}”')
 def step_impl(context, disponibilidad):
-    pass
+    context.voluntario.comprobar_disponibilidad(context.periodo_solicitud)
 
 
 @step('que el voluntario tiene registrados “{dias_disponibles_iniciales}” días disponibles')

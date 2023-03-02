@@ -11,7 +11,21 @@ class Voluntario(models.Model):
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
 
-    def comprobar_disponibilidad(self, horario):
+    def comprobar_disponibilidad(self, periodo_a_comprobar):
+        periodos = self.horario.periodos.all()
+
+        for periodo in periodos:
+            if periodo.diaSemana != periodo_a_comprobar.diaSemana:
+                continue
+            if periodo.horaInicio > periodo_a_comprobar.horaInicio:
+                continue
+            if periodo.horaInicio < periodo_a_comprobar.horaFin:
+                continue
+            return True
+
+        return False
+
+    """def comprobar_disponibilidad(self, horario):
         # Itera por cada periodo del horario
         for periodo_horario in horario.periodos.all():
             # Itera por cada periodo del horario del voluntario
@@ -27,7 +41,7 @@ class Voluntario(models.Model):
                     # Los periodos chocan entre sí - Voluntario no disponible
                     return False
         # Los horarios no se chocan entre sí - Voluntario disponible
-        return True
+        return True"""
 
     # Toma al Voluntario de acuerdo a su ID
     @classmethod
