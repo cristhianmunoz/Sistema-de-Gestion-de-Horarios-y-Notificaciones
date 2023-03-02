@@ -19,26 +19,26 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Voluntario</th>
-                <th scope="col">Actividades</th>
+                <th scope="col">Actividad</th>
+                <th scope="col">Voluntarios</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
+                <td>Suturar</td>
                 <td>
-                    <h5>Suturar</h5> <!--Ejemplo de actividad asignada-->
+                    <h5>Mark</h5> <!--Ejemplo de actividad asignada-->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
-                        Asignar actividad
+                        Asignar voluntario
                     </button>
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Actividades</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Voluntarios</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -48,25 +48,22 @@
                                         <input class="form-check-input" type="radio" name="flexRadioDefault"
                                             id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
-                                            Toma de signos
+                                            Jacob
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault"
                                             id="flexRadioDefault2">
                                         <label class="form-check-label" for="flexRadioDefault2">
-                                            Reanimación
+                                            David
                                         </label>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <!--div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder="Actividad"
                                             aria-describedby="button-addon2">
                                         <button class="btn btn-primary" type="button"
                                             id="button-addon2">Asignar</button>
-                                        <!--El botón Asignar envia la nueva actividad al controlador y al modelo
-                                        para cargarla en la lista de actividades del voluntario, del popup y
-                                        de la base de datos-->
-                                    </div>
+                                    </div-->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -83,13 +80,13 @@
             <!--Ejemplo de lista de voluntarios-->
             <tr>
                 <th scope="row">2</th>
-                <td>Jacob</td>
-                <td><input class="btn btn-primary" type="button" value="Asignar actividad"></td>
+                <td>Toma de signos</td>
+                <td><input class="btn btn-primary" type="button" value="Asignar voluntario"></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td><input class="btn btn-primary" type="button" value="Asignar actividad"></td>
+                <td>Evacuar</td>
+                <td><input class="btn btn-primary" type="button" value="Asignar voluntario"></td>
             </tr>
         </tbody>
     </table>
