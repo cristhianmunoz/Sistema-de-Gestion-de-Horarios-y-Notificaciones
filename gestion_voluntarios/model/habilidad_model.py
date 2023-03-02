@@ -67,4 +67,3 @@ class Habilidad(models.Model):
             }
             lista_habilidades.append(habilidad_dict)
         return lista_habilidades
-

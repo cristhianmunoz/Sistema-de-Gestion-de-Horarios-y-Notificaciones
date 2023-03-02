@@ -1,4 +1,3 @@
-
 from gestion_voluntarios.model.habilidad_model import Habilidad
 from gestion_voluntarios.model.voluntario_model import Voluntario
 from gestion_voluntarios.model.horario_model import Horario
