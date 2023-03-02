@@ -68,7 +68,7 @@ class Actividad(models.Model):
     voluntarios = models.ManyToManyField('Voluntario')
 
     def asignar_voluntario(self, voluntario):
-        # self.voluntarios.add(voluntario)
+        self.voluntarios.add(voluntario)
         self.tiene_voluntario = True
         voluntario.es_asignado = True
 
