@@ -8,3 +8,7 @@ class Voluntario(models.Model):
 
     def comprobar_disponibilidad(self):
         pass
+
+    @classmethod
+    def obtener_voluntario_por_id(cls, id_voluntario):
+        pass
