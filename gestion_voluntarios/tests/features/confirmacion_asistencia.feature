@@ -13,11 +13,11 @@ Esquema del escenario: Confirmación de asistencia de voluntario en emergencia m
   Y se me informa que '<mensaje>'
 
   Ejemplos: Confirmar Asistencia
-  |nombre     |apellido |asunto                              |   tipo_emergencia    |ubicacion    |hora_entrada |encargado     |dirigido_a      |actividades |detalle                   |   deseada   | mensaje                               |
-  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad   |Presentarse en el Hospital |  Confirmar  | Se ha confirmado la solicitud enviada |
-  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad   |Presentarse en el Hospital |  Confirmar  | Se ha rechazado la solicitud enviada  |
+  |nombre     |apellido |asunto                              |   tipo_emergencia    |ubicacion   |hora_entrada  |encargado     |dirigido_a      |actividades |detalle                    |   deseada   | mensaje                               |
+  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad    |Presentarse en el Hospital |  Confirmar  | Se ha confirmado la solicitud enviada |
+  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad    |Presentarse en el Hospital |  Cancelar   | Se ha rechazado la solicitud enviada  |
 
   Ejemplos: Rechazar Asistencia
-  |nombre     |apellido |asunto                              |   tipo_emergencia    |ubicacion    |hora_entrada |encargado     |dirigido_a      |actividades |detalle                   |   deseada   | mensaje                               |
-  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad   |Presentarse en el Hospital |  Cancelar   | Se ha rechazado la solicitud enviada  |
-  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad   |Presentarse en el Hospital |  Cancelar   | Se ha confirmado la solicitud enviada |
+  |nombre     |apellido |asunto                              |   tipo_emergencia    |ubicacion   |hora_entrada  |encargado     |dirigido_a      |actividades |detalle                    |   deseada   | mensaje                               |
+  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad    |Presentarse en el Hospital |  Cancelar   | Se ha rechazado la solicitud enviada  |
+  |Cristopher |Perez    |Accidente en la avenida 10 de Agosto|Accidente de transito |Quito-Norte |18:30         |William Zapata|Cristopher Perez|asasdsad    |Presentarse en el Hospital |  Confirmar  | Se ha confirmado la solicitud enviada |
