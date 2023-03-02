@@ -44,8 +44,8 @@ class Voluntario(models.Model):
         return True"""
 
     # Toma al Voluntario de acuerdo a su ID
-    @classmethod
-    def obtener_voluntario_por_id(cls, id_voluntario):
+    @staticmethod
+    def obtener_voluntario_por_id(id_voluntario):
         try:
             # Intenta obtener el voluntario que coincide con ese ID
             voluntario = Voluntario.objects.get(id=id_voluntario)

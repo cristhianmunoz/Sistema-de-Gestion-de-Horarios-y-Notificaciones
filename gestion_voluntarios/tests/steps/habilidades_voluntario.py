@@ -13,7 +13,6 @@ use_step_matcher("parse")
 )
 def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas_experiencia, descripcion_habilidad):
     context.voluntario = Voluntario(
-        id=1,
         nombre='Andrés',
         apellido='Lozano',
         edad=24
@@ -21,7 +20,6 @@ def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas
     context.voluntario.save()
 
     context.habilidad = Habilidad(
-        id=1,
         titulo=titulo_habilidad,
         descripcion=descripcion_habilidad,
         horas_experiencia=horas_experiencia,
@@ -74,7 +72,6 @@ def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas
 @step('que el voluntario tiene registradas “{cantidad_habilidades_registradas:f}” habilidades médicas')
 def step_impl(context, cantidad_habilidades_registradas):
     context.voluntario = Voluntario(
-        id=2,
         nombre='Francisco',
         apellido='Encalada',
         edad=22

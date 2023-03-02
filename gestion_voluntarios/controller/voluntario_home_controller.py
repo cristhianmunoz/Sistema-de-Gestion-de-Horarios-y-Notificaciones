@@ -33,7 +33,7 @@ def comprobar_operacion_edicion(request):
 
 
 def obtener_contexto(id_voluntario):
-    voluntario = Voluntario.obtener_voluntario_por_id(id_voluntario)
+    voluntario = Voluntario.obtener_voluntario_por_id()
     habilidades = Habilidad.obtener_habilidades_por_id_voluntario(id_voluntario)
     horario = Horario.obtener_horario_por_id_voluntario(id_voluntario)
     periodos = Periodo.obtener_periodos_por_id_voluntario(id_voluntario)
