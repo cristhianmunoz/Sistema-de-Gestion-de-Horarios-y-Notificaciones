@@ -1,6 +1,8 @@
 import django
 from django.db import models
-from django.utils.dateparse import parse_time
+
+from gestion_voluntarios.model.horario_model import Horario
+from gestion_voluntarios.model.periodo_model import Periodo
 
 django.setup()
 
@@ -12,36 +14,20 @@ class Voluntario(models.Model):
     edad = models.IntegerField(default=0)
 
     def comprobar_disponibilidad(self, periodo_a_comprobar):
-        periodos = self.horario.periodos.all()
+        periodos = Periodo.obtener_periodos_por_id_horario(Horario.obtener_horario_por_id_voluntario(self.id).id)
+        periodo_a_comprobar_aux = Periodo.obtener_periodo_por_id(periodo_a_comprobar.id)
 
+        # comprobar la disponibilidad por etapas
         for periodo in periodos:
-            if periodo.diaSemana != periodo_a_comprobar.diaSemana:
+            if periodo.diaSemana != periodo_a_comprobar_aux.diaSemana:
                 continue
-            if periodo.horaInicio > periodo_a_comprobar.horaInicio:
+            if periodo.horaInicio > periodo_a_comprobar_aux.horaInicio:
                 continue
-            if periodo.horaInicio < periodo_a_comprobar.horaFin:
+            if periodo.horaFin < periodo_a_comprobar_aux.horaFin:
                 continue
             return True
 
         return False
-
-    """def comprobar_disponibilidad(self, horario):
-        # Itera por cada periodo del horario
-        for periodo_horario in horario.periodos.all():
-            # Itera por cada periodo del horario del voluntario
-            for periodo_voluntario in self.horario.periodos.all():
-                # Períodos del horario
-                inicio_horario = parse_time(periodo_horario.inicio)
-                fin_horario = parse_time(periodo_horario.fin)
-                # Periodos del horario del voluntario
-                inicio_horario_voluntario = parse_time(periodo_voluntario.inicio)
-                fin_horario_voluntario = parse_time(periodo_voluntario.fin)
-                # Revisa si los periodos se chocan entre sí
-                if max(inicio_horario, inicio_horario_voluntario) <= min(fin_horario, fin_horario_voluntario):
-                    # Los periodos chocan entre sí - Voluntario no disponible
-                    return False
-        # Los horarios no se chocan entre sí - Voluntario disponible
-        return True"""
 
     # Toma al Voluntario de acuerdo a su ID
     @staticmethod

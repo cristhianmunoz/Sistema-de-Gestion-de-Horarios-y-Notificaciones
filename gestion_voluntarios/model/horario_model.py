@@ -9,3 +9,8 @@ class Horario(models.Model):
         blank=True,
         related_name='horario'
     )
+
+    @staticmethod
+    def obtener_horario_por_id_voluntario(id_voluntario):
+        horario = Horario.objects.get(voluntario_id=id_voluntario)
+        return horario
