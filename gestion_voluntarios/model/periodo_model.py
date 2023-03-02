@@ -20,55 +20,48 @@ class Periodo(models.Model):
         blank=True
     )
 
-    def agregar_periodo(self):
+    def save(self, *args, **kwargs):
+        # Validar que periodo tenga lógica
+        if self.horaInicio > self.horaFin:
+            return False
+
+        # Validar que el periodo creado no se cruce con otro periodo existente
+        periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
+        for periodo in periodos:
+            if periodo.diaSemana != self.diaSemana:
+                continue
+            if periodo.horaInicio < self.horaInicio < periodo.horaFin:
+                continue
+            if periodo.horaInicio < self.horaFin < periodo.horaFin:
+                continue
+
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def agregar_periodo(periodo):
         try:
-            periodo_nuevo = Periodo(
-                diaSemana=self.diaSemana,
-                horaInicio=self.horaInicio,
-                horaFin=self.horaFin,
-                horario=self.horario
-            )
-            # validar que periodo tenga lógica
-            if self.horaInicio > self.horaFin:
-                return False
-
-            # validar que el periodo creado no se cruce con otro periodo existente
-            periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
-            for periodo in periodos:
-                if periodo.diaSemana != self.diaSemana:
-                    continue
-                if periodo.horaInicio < self.horaInicio < periodo.horaFin:
-                    continue
-                if periodo.horaInicio < self.horaFin < periodo.horaFin:
-                    continue
-
-            # validar los campos del modelo antes de guardarlo
-            periodo_nuevo.full_clean()
-            periodo_nuevo.save()
+            periodo.save()
             return True
+
         except ValidationError:
-            # Maneja la excepción de validación de campos requeridos
             return False
 
-    @classmethod
-    def eliminar_periodo(cls, id_periodo):
+    @staticmethod
+    def eliminar_periodo(id_periodo):
         try:
-            periodo = Periodo.objects.get(id=id_periodo)
-            periodo.delete()
+            Periodo.objects.get(id=id_periodo).delete()
             return True
+
         except Periodo.DoesNotExist:
             return False
 
-    def editar_periodo(self):
+    @staticmethod
+    def editar_periodo(periodo):
         try:
-            periodo_existente = self.objects.get(id=self.id)
-            periodo_existente.diaSemana = self.diaSemana
-            periodo_existente.horaInicio = self.horaInicio
-            periodo_existente.horaFin = self.horaFin
-            periodo_existente.save()
+            periodo.save()
             return True
-        except Periodo.DoesNotExist:
-            # Maneja la excepción si el Periodo no existe para actualizarla
+
+        except ValidationError:
             return False
 
     @staticmethod
@@ -101,4 +94,3 @@ class Periodo(models.Model):
 
         except Periodo.DoesNotExist:
             return None
-
