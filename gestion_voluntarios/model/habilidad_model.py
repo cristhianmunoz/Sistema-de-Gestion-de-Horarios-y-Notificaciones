@@ -14,6 +14,18 @@ class Habilidad(models.Model):
     horas_experiencia = models.PositiveIntegerField(default=0)
     voluntario = models.ForeignKey('Voluntario', on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        # Comprobando que el título de la habilidad exista
+        if self.titulo not in HabilidadMedica:
+            return
+
+        for habilidad in self.obtener_habilidades_por_id_voluntario(self.voluntario.id):
+            # Comprobando que no se haya registrado la habilidad anteriormente para el voluntario
+            if habilidad.titulo == self.titulo and habilidad.voluntario.id:
+                return
+
+        super().save(*args, **kwargs)
+
     # Recibe el código de una habilidad y la trata de eliminar de la base de datos
     @classmethod
     def eliminar_habilidad(cls, id_habilidad):
@@ -55,7 +67,14 @@ class Habilidad(models.Model):
             return False
 
     # Método que recibe el código de un voluntario y retorna una lista de habilidades
-    @classmethod
-    def obtener_habilidades_por_id_voluntario(cls, id_voluntario):
+    @staticmethod
+    def obtener_habilidades_por_id_voluntario(id_voluntario):
         habilidades = Habilidad.objects.filter(voluntario_id=id_voluntario)
         return list(habilidades)
+
+    @staticmethod
+    def obtener_numero_habilidades_por_id_voluntario(id_voluntario):
+        try:
+            return Habilidad.objects.filter(voluntario_id=id_voluntario).count()
+        except Habilidad.DoesNotExist:
+            return 0
