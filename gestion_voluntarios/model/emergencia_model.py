@@ -35,7 +35,7 @@ class Emergencia(models.Model):
 
     def obtener_voluntarios_habilidad(self, habilidad_solicitada):
         for voluntario in self.lista:
-            print("Este voluntario: " + voluntario.getNombre())
+            print("Este voluntario: " + voluntario.nombre)
 
     def obtener_lista_priorizada(self):
         return self.lista_priorizada

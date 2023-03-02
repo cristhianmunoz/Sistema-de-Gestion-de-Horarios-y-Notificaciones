@@ -20,7 +20,7 @@ def step_impl(context, lista_voluntarios_confirmados):
     context.lista_voluntarios = []
     for voluntario in lista.values():
         voluntario_creado = Voluntario(voluntario["Nombre"])
-        habilidad = Habilidad(voluntario=voluntario_creado, titulo=voluntario["Habilidad"], horasExperiencia=voluntario["horas_experiencia"])
+        habilidad = Habilidad(voluntario=voluntario_creado, titulo=voluntario["Habilidad"], horas_experiencia=voluntario["horas_experiencia"])
         context.lista_voluntarios.append(voluntario_creado)
         context.emergencia.lista = context.lista_voluntarios
         print(context.emergencia.lista)
@@ -28,12 +28,12 @@ def step_impl(context, lista_voluntarios_confirmados):
         # print(voluntario)
 
 
-@step('quiera priorizar los voluntarios con mas experiencia en la habilidad "{habilidad_solicitada}"')
+@step('deseo priorizar los voluntarios con mas experiencia según la habilidad "{habilidad_solicitada}"')
 def step_impl(context, habilidad_solicitada):
     #context.emergencia.priorizar_voluntarios(context.lista_voluntarios, habilidad_solicitada)
     pass
 
 
-@step('tendré a los voluntarios priorizados con mayor experiencia con la habilidad "{habilidad_solicitada}"')
-def step_impl(context, habilidad_solicitada):
+@step('tendré una lista "{lista_voluntarios_priorizada}" priorizada')
+def step_impl(context, lista_voluntarios_priorizada):
     pass

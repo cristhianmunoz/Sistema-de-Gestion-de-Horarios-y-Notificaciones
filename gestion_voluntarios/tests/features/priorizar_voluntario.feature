@@ -7,10 +7,10 @@ Característica: Priorizar voluntarios
   Esquema del escenario: Priorizar voluntarios confirmados en base a una habilidad requerida
     Dado que tengo una emergencia que necesita de "<vacantes>" voluntarios con la habilidad "<habilidad_solicitada>"
     Y tengo a varios "<lista_voluntarios_confirmados>" que confirmaron la asistencia
-    Cuando quiera priorizar los voluntarios con mas experiencia en la habilidad "<habilidad_solicitada>"
-    Entonces tendré a los voluntarios priorizados con mayor experiencia con la habilidad "<habilidad_solicitada>"
+    Cuando deseo priorizar los voluntarios con mas experiencia según la habilidad "<habilidad_solicitada>"
+    Entonces tendré una lista "<lista_voluntarios_priorizada>" priorizada
     Ejemplos:
-      | vacantes | habilidad_solicitada | lista_voluntarios_confirmados                                                                                                                                         |
-      | 10.0     | suturar            | {"voluntario1": {"Nombre":"Andres", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}} |
-      | 20.0     | "RCP"                | {"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}} |
-      | 5.0      | "RCP"                | {"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}} |
+      | vacantes | habilidad_solicitada | lista_voluntarios_confirmados| lista_voluntarios_priorizada|
+      | 1.0     | "SUTURAR"            | {"voluntario1": {"Nombre":"Andres", "horas_experiencia": 25.0, "Habilidad": "RCP"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}} | {"voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}}                          |
+      | 2.0     | "RCP"                | {"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "RCP"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"RCP"}} | {"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}}                            |
+      | 3.0      | "RCP"                | {"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}} |  null |
