@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Emergencia(models.Model):
-    id = models.BigAutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, default='')
     es_atendida = models.CharField(max_length=1, default='0')
     voluntarios = models.ManyToManyField('Voluntario')
@@ -22,6 +22,9 @@ class Emergencia(models.Model):
     def get_es_atendida(self):
         return self.es_atendida
 
+    def get_id(self):
+        return self.id
+
     def __str__(self):
         return f'Emergencia: {self.nombre}, {self.es_atendida}, ||{self.voluntarios.all()}||, ||{self.actividades.all()}||'
 
@@ -32,6 +35,7 @@ class Emergencia(models.Model):
 
 
 class Actividad(models.Model):
+    id = models.AutoField(primary_key=True)
     # nombre = models.CharField(choices=ActividadEmergencia.choices, max_length=50)
     nombre = models.CharField(max_length=50, default='')
     tiene_voluntario = models.CharField(max_length=1, default='0')
@@ -52,6 +56,7 @@ class Actividad(models.Model):
 
 
 class Voluntario(models.Model):
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)

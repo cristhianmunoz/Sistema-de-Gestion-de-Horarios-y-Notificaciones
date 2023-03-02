@@ -14,7 +14,8 @@ use_step_matcher("parse")
 @step('que se tiene una emergencia con un "{nombre_emergencia}" que aún no es atendida')
 def step_impl(context, nombre_emergencia):
     # Se crea la Emergencia
-    context.emergenciaTest = Emergencia(nombre_emergencia)
+    context.emergenciaTest = Emergencia(nombre=nombre_emergencia)
+    print(context.emergenciaTest.get_id())
     context.emergenciaTest.save()
     print('Emergencia Creada')
     print(context.emergenciaTest.__str__())
