@@ -18,6 +18,9 @@
       Y el estado de la emergencia sera"<estado_emergencia>"
 
       Ejemplos: Asignaciones
-      | nombre_emergencia | nombre_voluntario | apellido_voluntario | edad_voluntario | nombre_actividad | es_asignado | tiene_voluntario | estado_emergencia |
-      | "Choque"          | "Alexis"          | "Vizuete"           | 23              | "Suturar"        | 1           | 1                | 1                 |
-      # | "Choque"          | "Anahi "          | "Vasquez"           | 22              | "Suturar"        | 1           | 1                | 1                 |
+      | nombre_emergencia | nombre_voluntario | apellido_voluntario | edad_voluntario | nombre_actividad    | es_asignado | tiene_voluntario | estado_emergencia |
+      | "Choque"          | "Alexis"          | "Vizuete"           | 23              | "Suturar"           | 1           | 1                | 1                 |
+      | "Asalto"          | "Anahi "          | "Vasquez"           | 22              | "Primeros Auxilios" | 1           | 1                | 1                 |
+      | "Terremoto"       | "Leonardo"        | "Salvador"          | 22              | "Evacuar"           | 1           | 1                | 1                 |
+      | "Tsunami"         | "Andrea"          | "Garces "           | 22              | "Evacuar"           | 1           | 1                | 1                 |
+      | "Inundación"      | "David "          | "Aguirre"           | 22              | "Rescate"           | 1           | 1                | 1                 |

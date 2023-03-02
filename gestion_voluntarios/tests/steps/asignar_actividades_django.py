@@ -51,13 +51,14 @@ def step_impl(context, nombre_actividad):
 def step_impl(context):
     # Se asigna un voluntario a una actividad
     context.actividadTest.asignar_voluntario(context.voluntarioTest)
-
-    print('Actividad asignada a voluntario')
+    context.actividadTest.save()
+    context.voluntarioTest.save()
+    print('Voluntario asignado a actividad')
     print(context.actividadTest.__str__())
 
     # Se verifica que dentro de la emergencia los voluntarios y actividades cambien su bandera
     context.emergenciaTest.verificar_emergencia()
-
+    context.emergenciaTest.save()
 
 @step('el estado de voluntario sera"{es_asignado}"')
 def step_impl(context, es_asignado):
