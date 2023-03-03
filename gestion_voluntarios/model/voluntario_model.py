@@ -7,6 +7,7 @@ django.setup()
 
 class Voluntario(models.Model):
     # Campos de la clase Voluntario
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
@@ -28,6 +29,16 @@ class Voluntario(models.Model):
                     return False
         # Los horarios no se chocan entre sí - Voluntario disponible
         return True
+
+    def horas_experiencia_habilidad(self, habilidad_requerida):
+        from gestion_voluntarios.model.habilidad_model import Habilidad
+        habilidad = Habilidad.objects.filter(voluntario=self, titulo=habilidad_requerida).first()
+        if habilidad is None:
+            return None
+        elif habilidad.titulo != habilidad_requerida:
+            return -1
+        elif habilidad.titulo == habilidad_requerida:
+            return habilidad.horas_experiencia
 
     # Toma al Voluntario de acuerdo a su ID
     @classmethod

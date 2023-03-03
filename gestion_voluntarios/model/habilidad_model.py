@@ -9,6 +9,7 @@ django.setup()
 
 class Habilidad(models.Model):
     # Campos de la clase Habilidad
+    id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=20, choices=HabilidadMedica.choices)
     descripcion = models.CharField(max_length=200, default='')
     horas_experiencia = models.PositiveIntegerField(default=0)
