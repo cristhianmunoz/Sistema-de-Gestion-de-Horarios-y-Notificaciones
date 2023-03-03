@@ -1,10 +1,7 @@
 class Emergencia:
-    def __init__(self, titulo, descripcion, habilidadesRequeridas):
+    def __init__(self, titulo, descripcion):
         self.titulo = titulo
         self.descripcionEmergencia = descripcion
-        self.habilidadesRequeridas = habilidadesRequeridas
-
-
 
     def enviarNotificacion(self, voluntarios, habilidades):
         for nombre in voluntarios:
