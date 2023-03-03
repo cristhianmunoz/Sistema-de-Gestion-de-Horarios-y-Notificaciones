@@ -1,10 +1,10 @@
 def obtener_voluntarios_confirmados(lista_voluntarios):
     lista_confirmados = []
     for voluntario in lista_voluntarios:
-        #print(voluntario)
+        # print(voluntario)
         if voluntario.estado == 'D':
             lista_confirmados.append(voluntario)
-    #print(lista_confirmados)
+    # print(lista_confirmados)
     return lista_confirmados
 
 
@@ -23,3 +23,17 @@ def contar_elementos(lista):
         contador += 1
 
     return contador
+
+
+def obtener_nombres(lista):
+    aux_lista = ""
+    if len(lista) == 0:
+        aux_lista = "null"
+        return aux_lista
+    tamanio = len(lista)
+    for voluntario in lista:
+        if lista.index(voluntario) < tamanio - 1:
+            aux_lista += voluntario.to_string() + ", "
+        else:
+            aux_lista += voluntario.to_string()
+    return aux_lista

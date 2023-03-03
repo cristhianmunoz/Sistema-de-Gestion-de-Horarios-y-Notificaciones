@@ -19,8 +19,7 @@ class Voluntario(models.Model):
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
     habilidades = models.CharField(max_length=500, default='')
-    estado = models.CharField(max_length=1)
-
+    estado = models.CharField(max_length=1, default="D")
 
     def comprobar_disponibilidad(self, periodo_a_comprobar):
         periodos = self.horario.periodos.all()
@@ -64,3 +63,6 @@ class Voluntario(models.Model):
         except Voluntario.DoesNotExist:
             # Retornar None en caso de que no se haya encontrado el Voluntario
             return None
+
+    def to_string(self):
+        return self.nombre + " " + self.apellido
