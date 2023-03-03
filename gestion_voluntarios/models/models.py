@@ -2,12 +2,11 @@
 # from django.db import models
 
 class Voluntario:
-    def __init__(self, nombre, apellido, edad, habilidades, estado):
+    def __init__(self, nombre, apellido, edad, habilidades):
         self.nombre = nombre
         self.apellido = apellido
         self.edad = edad
         self.habilidades = habilidades
-        self.estado = estado
 
     def respuesta(self, emergencia_aceptada):
         if not emergencia_aceptada:
