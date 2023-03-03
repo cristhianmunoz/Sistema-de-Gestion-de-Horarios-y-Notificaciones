@@ -1,8 +1,10 @@
+import django
 import os
 
 from behave import *
 
-from gestion_voluntarios.model.emergencia_model import Emergencia
+django.setup()
+
 from gestion_voluntarios.model.voluntario_model import Voluntario
 from gestion_voluntarios.controller.voluntario_notificacion_controller import obtener_voluntarios_confirmados, \
     contar_elementos, obtener_nombres
