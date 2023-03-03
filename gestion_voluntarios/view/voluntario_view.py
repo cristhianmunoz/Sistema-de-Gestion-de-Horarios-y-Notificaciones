@@ -1,4 +1,6 @@
-from django.shortcuts import  render
+from django.http import HttpResponse
+
 
 def index(request):
-    return render(request, 'gestion_voluntarios/notif_voluntarios.html')
+
+    return HttpResponse("Hola, esta será la pantalla principal del perfil Voluntario!")
