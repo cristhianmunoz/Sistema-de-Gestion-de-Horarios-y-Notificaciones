@@ -23,7 +23,6 @@ class Emergencia:
     # debería ser un arreglo de voluntarios
     actividades = models.CharField(max_length=200, default='')
     detalle = models.CharField(max_length=500, default='')
-    respuesta = models.BooleanField(default=False)
 
     def notificar(self):
         texto = F'{self.asunto} \nEstimado {self.dirigido_a} el doctor {self.encargado} solicita su presencia en ' \
