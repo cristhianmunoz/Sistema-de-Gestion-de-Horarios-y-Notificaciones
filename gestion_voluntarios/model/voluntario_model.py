@@ -1,6 +1,8 @@
 import django
 from django.db import models
-from django.utils.dateparse import parse_time
+
+from gestion_voluntarios.model.horario_model import Horario
+from gestion_voluntarios.model.periodo_model import Periodo
 
 django.setup()
 
@@ -22,7 +24,9 @@ class Voluntario(models.Model):
     estado = models.CharField(max_length=1, default="D")
 
     def comprobar_disponibilidad(self, periodo_a_comprobar):
-        periodos = self.horario.periodos.all()
+        periodos = Periodo.obtener_periodos_por_id_horario(Horario.obtener_horario_por_id_voluntario(self.id).id)
+        periodo_a_comprobar_aux = Periodo.obtener_periodo_por_id(periodo_a_comprobar.id)
+
 
         for periodo in periodos:
             if periodo.diaSemana != periodo_a_comprobar.diaSemana:
@@ -30,8 +34,17 @@ class Voluntario(models.Model):
             if periodo.horaInicio > periodo_a_comprobar.horaInicio:
                 continue
             if periodo.horaInicio < periodo_a_comprobar.horaFin:
-                continue
-            return True
+
+        # comprobar la disponibilidad por etapas
+                for periodo in periodos:
+                    if periodo.diaSemana != periodo_a_comprobar_aux.diaSemana:
+                        continue
+                    if periodo.horaInicio > periodo_a_comprobar_aux.horaInicio:
+                        continue
+                    if periodo.horaFin < periodo_a_comprobar_aux.horaFin:
+
+                        continue
+                    return True
 
         return False
 
@@ -54,8 +67,9 @@ class Voluntario(models.Model):
         return True"""
 
     # Toma al Voluntario de acuerdo a su ID
-    @classmethod
-    def obtener_voluntario_por_id(cls, id_voluntario):
+    @staticmethod
+    def obtener_voluntario_por_id(id_voluntario):
+
         try:
             # Intenta obtener el voluntario que coincide con ese ID
             voluntario = Voluntario.objects.get(id=id_voluntario)
@@ -63,6 +77,3 @@ class Voluntario(models.Model):
         except Voluntario.DoesNotExist:
             # Retornar None en caso de que no se haya encontrado el Voluntario
             return None
-
-    def to_string(self):
-        return self.nombre + " " + self.apellido

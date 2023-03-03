@@ -57,7 +57,7 @@ def index(request):
             horario_id=id_horario
         )
 
-        Periodo.editar_periodo(periodo)
+        Periodo.editar_periodo()
 
     # Comunicándose con los modelos para obtener los datos
     contexto = obtener_contexto(id_voluntario)

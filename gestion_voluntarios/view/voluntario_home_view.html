@@ -61,7 +61,7 @@
         </button>
     </div>
 
-    {% if horario %}
+    {% if periodos %}
         <div class="container">
             <table id="table-horario" class="table">
                 <thead class="header-table">
@@ -73,7 +73,7 @@
                     </tr>
                 </thead>
                 <tbody class="body-table">
-                {% for periodo in horario %}
+                {% for periodo in periodos %}
                     <tr>
                         <td>{{ periodo.diaSemana }}</td>
                         <td>{{ periodo.horaInicio }}</td>
@@ -87,7 +87,7 @@
     {% else %}
         <div class="d-flex justify-content-center align-items-center">
             <p class="d-flex justify-content-center mt-2 advertencia-voluntario">
-                Este voluntario no tiene un horario registrado.
+                Este voluntario no tiene periodos registrados.
             </p>
         </div>
     {% endif %}
@@ -104,10 +104,10 @@
           </div>
           <div class="modal-body">
             <span>Seleccione una o varias habilidades nuevas:</span><br>
-            {% for habilidadCatalogo in catalogoHabilidades %}
+            {% for habilidad_catalogo in catalogo_habilidades %}
                 <div style="margin: 5px 0">
-                    <input type="checkbox" class="btn-check" id="{{ habilidadCatalogo }}" checked autocomplete="off">
-                    <label class="btn btn-outline-secondary" for="{{ habilidadCatalogo }}">{{ habilidadCatalogo }}</label>
+                    <input type="checkbox" class="btn-check" id="{{ habilidad_catalogo }}" checked autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="{{ habilidad_catalogo }}">{{ habilidad_catalogo }}</label>
                 </div>
 
             {% endfor %}
@@ -135,8 +135,8 @@
             <div class="d-flex justify-content-around">
                 <select class="form-select" aria-label="Dia de la semana" style="margin: 0 5px">
                     <option selected>Seleccione el día de la semana</option>
-                    {% for diaSemana in diasSemana %}
-                        <option>{{ diaSemana }}</option>
+                    {% for dia_semana in dias_semana %}
+                        <option>{{ dia_semana }}</option>
                     {% endfor %}
                 </select>
                 <select class="form-select" aria-label="Hora de inicio" style="margin: 0 5px">

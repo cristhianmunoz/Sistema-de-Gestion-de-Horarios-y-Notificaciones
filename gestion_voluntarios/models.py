@@ -1,2 +1,0 @@
-from gestion_voluntarios.model.horario_model import Horario
-from gestion_voluntarios.model.periodo_model import Periodo
