@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">21 ms</div>
+                <div class="time" xmlns="">1 ms</div>
                 <h1>
-                    confirmacion_asistencia.feature: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">6 total, </span><span class="failed">1 failed, </span><span class="passed">5 passed</span></strong>
+                    confirmacion_asistencia.feature: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">6 total, </span><span class="passed">6 passed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -591,65 +591,45 @@ jQuery.cookie = function(name, value, options) {
             </div>
             <div id="content">
                 <ul id="tree">
-                    <li xmlns="" class="level top failed open">
+                    <li xmlns="" class="level top open">
                         <span><em class="time">
-                                <div class="time">21 ms</div>
+                                <div class="time">1 ms</div>
                             </em>Confirmaci&oacute;n de asistencia de voluntario en emergencia m&eacute;dica</span>
                         <ul>
-                            <li class="level suite failed open">
+                            <li class="level suite open">
                                 <span><em class="time">
-                                        <div class="time">21 ms</div>
+                                        <div class="time">1 ms</div>
                                     </em>Confirmaci&oacute;n de asistencia de voluntarios en emergencia m&eacute;dica -- @1.1 Confirmar Asistencia Parcial</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
-                                                <div class="time">0 ms</div>
+                                                <div class="time">1 ms</div>
                                             </em><em class="status">passed</em>Dado que se tiene el grupo de voluntarios conformado por 'Juan P&eacute;rez, Pepe Rodr&iacute;guez, Tom&aacute;s Muenala, Ana Freire, Gerardo Zapata'</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
                                             </em><em class="status">passed</em>Cuando se notifica la emergencia m&eacute;dica a '5' personas</span>
-                                        <ul>
-                                            <li class="text">
-                                                <span class="stdout">n:  5<br/></span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y el numero de voluntarios que confirmaron su asistencia es '0'</span>
-                                        <ul>
-                                            <li class="text">
-                                                <span class="stdout">n confirmados:  0<br/></span>
-                                            </li>
-                                        </ul>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y el numero de voluntarios que rechazaron la emergencia es '5'</span>
-                                        <ul>
-                                            <li class="text">
-                                                <span class="stdout">5<br/></span>
-                                            </li>
-                                        </ul>
+                                            </em><em class="status">passed</em>Y el numero de voluntarios que confirmaron su asistencia es '3'</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Entonces el n&uacute;mero de voluntarios que atender&aacute;n la emergencia es '0'</span>
+                                            </em><em class="status">passed</em>Y el numero de voluntarios que rechazaron la emergencia es '2'</span>
                                     </li>
-                                    <li class="level test failed open">
+                                    <li class="level test">
                                         <span><em class="time">
-                                                <div class="time">20 ms</div>
-                                            </em><em class="status">failed</em>Y los voluntarios asignados a esta emergencia son ''''</span>
-                                        <ul>
-                                            <li class="text">
-                                                <span class="stderr">Traceback (most recent call last):<br/>  File "D:\GitHub\Sistema-de-Gestion-de-Horarios-y-Notificaciones\venv\Lib\site-packages\behave\model.py", line 1329, in run<br/>    match.run(runner.context)<br/>  File "D:\GitHub\Sistema-de-Gestion-de-Horarios-y-Notificaciones\venv\Lib\site-packages\behave\matchers.py", line 98, in run<br/>    self.func(context, *args, **kwargs)<br/>  File "gestion_voluntarios\tests\steps\confirmacion_asistencia.py", line 87, in step_impl<br/>    assert aux_voluntarios == lista_confirmados<br/>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>AssertionError<br/></span>
-                                            </li>
-                                        </ul>
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Entonces el n&uacute;mero de voluntarios que atender&aacute;n la emergencia es '3'</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">0 ms</div>
+                                            </em><em class="status">passed</em>Y los voluntarios asignados a esta emergencia son 'Juan P&eacute;rez, Pepe Rodr&iacute;guez, Tom&aacute;s Muenala'</span>
                                     </li>
                                 </ul>
                             </li>
@@ -659,7 +639,7 @@ jQuery.cookie = function(name, value, options) {
             </div>
         </div>
         <div id="footer">
-            <p>Generated by PyCharm on 3/2/23, 10:10 PM</p>
+            <p>Generated by PyCharm on 3/2/23, 10:57 PM</p>
         </div>
     </body>
 </html>

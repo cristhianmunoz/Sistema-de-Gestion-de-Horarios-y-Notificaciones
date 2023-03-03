@@ -77,3 +77,6 @@ class Voluntario(models.Model):
         except Voluntario.DoesNotExist:
             # Retornar None en caso de que no se haya encontrado el Voluntario
             return None
+
+    def to_string(self):
+        return self.nombre + " " + self.apellido
