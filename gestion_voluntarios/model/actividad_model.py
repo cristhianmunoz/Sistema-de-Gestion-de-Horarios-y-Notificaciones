@@ -1,5 +1,6 @@
 import django
 from django.db import models
+from django.db import connection
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
 
@@ -20,6 +21,11 @@ class Actividad(models.Model):
         voluntario.es_asignado = True
         voluntario.save()
         self.save()
+
+    def borrar_actividad(self):
+        with connection.cursor() as cursor:
+            cursor.execute("delete from gestion_voluntarios_actividad where tiene_voluntario=1")
+
 
     def get_tiene_voluntario(self):
         return self.tiene_voluntario

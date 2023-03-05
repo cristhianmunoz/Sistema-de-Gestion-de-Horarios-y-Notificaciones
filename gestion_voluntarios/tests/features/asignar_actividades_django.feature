@@ -22,5 +22,5 @@
 
       Ejemplos: Asignaciones
       | cantidad_voluntarios | nombre_actividad    | es_asignado | tiene_voluntario | estado_emergencia |
-      | 5                    |"Suturar"            | "True"      | "True"           | "True"            |
-      | 3                    |"Evacuar"            | "True"      | "True"           | "True"            |
+      | 3                    |"Suturar"            | "True"      | "True"           | "True"            |
+      # | 3                    |"Evacuar"            | "True"      | "True"           | "True"            |

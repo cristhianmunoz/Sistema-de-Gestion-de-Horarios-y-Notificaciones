@@ -1,5 +1,6 @@
 import django
 from django.db import models
+from django.db import connection
 
 django.setup()
 
@@ -37,6 +38,11 @@ class Emergencia(models.Model):
             else:
                 respuesta = False
         return respuesta
+
+    def borrar_emergencia(self):
+        with connection.cursor() as cursor:
+            cursor.execute("delete from gestion_voluntarios_emergencia where es_atendida=1")
+
 
 
     def add_actividades(self, actividad):
