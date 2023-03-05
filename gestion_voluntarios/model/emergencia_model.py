@@ -2,7 +2,7 @@ import django
 from django.db import models
 from django.db import connection
 
-django.setup()
+#django.setup()
 
 
 class Emergencia(models.Model):

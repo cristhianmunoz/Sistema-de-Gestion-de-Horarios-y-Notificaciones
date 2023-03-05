@@ -114,9 +114,9 @@ def step_impl(context, estado_emergencia):
     print('Estado de Emergencia correcto')
 
     # BORRAR BASE DE DATOS
-    context.voluntarioTest.borrar_voluntario()
-    context.actividadTest.borrar_actividad()
-    context.emergenciaTest.borrar_emergencia()
+    # context.voluntarioTest.borrar_voluntario()
+    # context.actividadTest.borrar_actividad()
+    # context.emergenciaTest.borrar_emergencia()
 
 
 
