@@ -1,7 +1,7 @@
 # Created by Dan at 02/03/2023
 # language: es
 
-Característica: Asignar un voluntario a una actividad
+Característica: Asignar staff médico a una actividad
   Como administrador del personal médico deseo gestionar los horarios del personal para así organizar
   la atención de pacientes y determinar tiempos críticos faltantes
 
