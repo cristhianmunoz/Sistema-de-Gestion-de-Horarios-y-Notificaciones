@@ -50,10 +50,17 @@ class Habilidad(models.Model):
     @staticmethod
     def editar_habilidad(habilidad):
         try:
-            habilidad.save()
+            Habilidad.objects.filter(id=habilidad.id).update(
+                titulo=habilidad.titulo,
+                descripcion=habilidad.descripcion,
+                horas_experiencia=habilidad.horas_experiencia
+            )
             return True
 
         except ValidationError:
+            return False
+
+        except Habilidad.DoesNotExist:
             return False
 
     @staticmethod

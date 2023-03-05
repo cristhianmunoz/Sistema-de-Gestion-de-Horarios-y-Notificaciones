@@ -102,6 +102,6 @@ def step_impl(context, dias_disponibles_finales):
       '“{final_disponible}” horas')
 def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
     periodo_inicial = context.periodo
-    assert periodo_inicial.diaSemana == dia_disponible
-    assert periodo_inicial.horaInicio == inicio_disponible
-    assert periodo_inicial.horaFin == final_disponible
+    assert periodo_inicial.dia_semana == dia_disponible
+    assert periodo_inicial.hora_inicio == inicio_disponible
+    assert periodo_inicial.hora_fin == final_disponible

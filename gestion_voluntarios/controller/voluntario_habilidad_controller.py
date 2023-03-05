@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 from gestion_voluntarios.model.habilidad_model import Habilidad
 from gestion_voluntarios.controller.voluntario_home_controller import comprobar_operacion_creacion
@@ -52,12 +52,6 @@ def index(request):
             horas_experiencia=int(horas_experiencia_habilidad),
             voluntario_id=id_voluntario
         )
-
-        # print(id_habilidad)
-        # print(titulo_habilidad)
-        # print(descripcion_habilidad)
-        # print(horas_experiencia_habilidad)
-        # print(id_voluntario)
 
         Habilidad.editar_habilidad(habilidad)
 

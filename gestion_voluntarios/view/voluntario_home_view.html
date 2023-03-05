@@ -83,13 +83,13 @@
                 <tbody class="body-table">
                 {% for periodo in periodos %}
                     <tr>
-                        <td>{{ periodo.diaSemana }}</td>
-                        <td>{{ periodo.horaInicio }}</td>
-                        <td>{{ periodo.horaFin }}</td>
+                        <td>{{ periodo.dia_semana }}</td>
+                        <td>{{ periodo.hora_inicio }}</td>
+                        <td>{{ periodo.hora_fin }}</td>
                         <td>
                             <div class="d-flex flex-row justify-content-around">
                                 <i class="bi bi-pencil-fill" style="cursor: pointer"
-                                   data-toggle="modal" data-target="#horarioModal" data-whatever="{{ periodo.diaSemana }}-{{ periodo.horaInicio }}-{{ periodo.horaFin }}-{{ periodo.horario_id }}-{{ periodo.id }}"></i>
+                                   data-toggle="modal" data-target="#horarioModal" data-whatever="{{ periodo.dia_semana }}-{{ periodo.hora_inicio }}-{{ periodo.hora_fin }}-{{ periodo.horario_id }}-{{ periodo.id }}"></i>
                                 <i class="bi bi-trash-fill" style="cursor: pointer"
                                    data-toggle="modal" data-target="#eliminarModal" data-whatever="horario-{{ periodo.id }}"></i>
                             </div>
@@ -172,8 +172,8 @@
                         <label for="dia_semana_periodo" class="form-label">Día de la semana:</label>
                         <select id="dia_semana_periodo" name="dia_semana_periodo" class="form-select" aria-label="Dia de la semana" style="margin: 0 5px">
                             <option selected style="background-color: gray"></option>
-                            {% for diaSemana in dias_semana %}
-                                <option>{{ diaSemana }}</option>
+                            {% for dia_semana in dias_semana %}
+                                <option>{{ dia_semana }}</option>
                             {% endfor %}
                         </select>
                     </div>

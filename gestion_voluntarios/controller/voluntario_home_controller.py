@@ -1,5 +1,3 @@
-import datetime
-
 from django.shortcuts import render
 
 from gestion_voluntarios.model.dia_semana_model import DiaSemana

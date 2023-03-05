@@ -1,6 +1,6 @@
-from datetime import time
+from datetime import datetime, time
 
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 from gestion_voluntarios.model.periodo_model import Periodo
 from gestion_voluntarios.controller.voluntario_home_controller import comprobar_operacion_creacion
@@ -22,9 +22,9 @@ def index(request):
 
         # Comunicándose con los modelos para agregar un periodo en el horario
         periodo = Periodo(
-            diaSemana=dia_semana_periodo,
-            horaInicio=hora_inicio_periodo,
-            horaFin=hora_fin_periodo,
+            dia_semana=dia_semana_periodo,
+            hora_inicio=datetime.strptime(hora_inicio_periodo, '%H:%M').time(),
+            hora_fin=datetime.strptime(hora_fin_periodo, '%H:%M').time(),
             horario_id=id_horario
         )
 
@@ -55,9 +55,9 @@ def index(request):
         # Comunicándose con los modelos para editar un periodo del horario
         periodo = Periodo(
             id=id_periodo,
-            diaSemana=dia_semana_periodo,
-            horaInicio=time(hour=int(parts_hora_inicio[0]), minute=int(parts_hora_inicio[1])),
-            horaFin=time(hour=int(parts_hora_fin[0]), minute=int(parts_hora_fin[1])),
+            dia_semana=dia_semana_periodo,
+            hora_inicio=time(hour=int(parts_hora_inicio[0]), minute=int(parts_hora_inicio[1])),
+            hora_fin=time(hour=int(parts_hora_fin[0]), minute=int(parts_hora_fin[1])),
             horario_id=id_horario
         )
 
