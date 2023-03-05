@@ -1,7 +1,7 @@
 # Creado por el Grupo 2 el 2/24/2023
 # language: es
 
-  Característica: Registro de habilidades de los voluntarios
+  Característica: Registro de horarios de los voluntarios
     Como voluntario inscrito en el programa de voluntariado,
     quiero que tomen en cuenta mis habilidades y mi disponibilidad
     para ganar experiencia y adquirir conocimientos prácticos en el área médica.
@@ -13,10 +13,10 @@
 
     Ejemplos:
       | dia_disponible | inicio_disponible | final_disponible | dia_solicitado | inicio_solicitado | final_solicitado | disponibilidad |
-      | Lunes          | 14:00             | 16:00            | Lunes          | 14:00             | 20:00            | false          |
-      | Viernes        | 14:00             | 16:00            | Martes         | 14:00             | 16:00            | false          |
-      | Martes         | 14:00             | 21:00            | Martes         | 18:00             | 20:00            | true           |
-      | Jueves         | 7:00              | 9:00             | Jueves         | 7:00              | 9:00             | true           |
+      | Lunes          | 14:00             | 16:00            | Lunes          | 14:00             | 20:00            | False          |
+      | Viernes        | 14:00             | 16:00            | Martes         | 14:00             | 16:00            | False          |
+      | Martes         | 14:00             | 21:00            | Martes         | 18:00             | 20:00            | True           |
+      | Jueves         | 7:00              | 9:00             | Jueves         | 7:00              | 9:00             | True           |
 
     Esquema del escenario: El voluntario intenta registrar horarios de disponibilidad con horas incorrectas
     Dado que el voluntario tiene registrados “<dias_disponibles_iniciales>” días disponibles
