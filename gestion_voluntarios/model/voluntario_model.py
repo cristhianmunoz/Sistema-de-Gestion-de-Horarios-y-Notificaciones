@@ -12,7 +12,6 @@ class Voluntario(models.Model):
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
-    habilidades = models.CharField(max_length=500, default='')
 
     def comprobar_disponibilidad(self, periodo_a_comprobar):
         periodos = Periodo.obtener_periodos_por_id_horario(Horario.obtener_horario_por_id_voluntario(self.id).id)

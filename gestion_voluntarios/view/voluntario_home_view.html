@@ -15,7 +15,6 @@
     <div class="d-flex justify-content-center">
         <h1>Detalle del voluntario</h1>
     </div>
-
     <p>Nombre: {{ voluntario.nombre }} {{ voluntario.apellido }}</p>
     <p>Edad: {{ voluntario.edad }}</p>
     <div class="d-flex flex-row mb-3">
@@ -32,6 +31,7 @@
                     <tr class="table-primary">
                         <th scope="col">Título</th>
                         <th scope="col">Descripción</th>
+                        <th scope="col">Horas de experiencia</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -40,7 +40,15 @@
                     <tr>
                         <td>{{ habilidad.titulo }}</td>
                         <td>{{ habilidad.descripcion }}</td>
-                        <td><i class="bi bi-trash-fill" style="cursor: pointer"></i></td>
+                        <td>{{ habilidad.horas_experiencia }}</td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-around">
+                                <i class="bi bi-pencil-fill" style="cursor: pointer"
+                                   data-toggle="modal" data-target="#habilidadesModal" data-whatever="{{ habilidad.titulo }}-{{ habilidad.descripcion }}-{{ habilidad.horas_experiencia }}-{{ habilidad.id }}"></i>
+                                <i class="bi bi-trash-fill" style="cursor: pointer"
+                                   data-toggle="modal" data-target="#eliminarModal" data-whatever="habilidad-{{ habilidad.id }}"></i>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -56,7 +64,7 @@
 
     <div class="d-flex flex-row mb-3">
         <h2 class="me-3">Horario</h2>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#horarioModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#horarioModal" data-whatever="{{ id_horario }}">
           <i class="bi bi-plus"></i>
         </button>
     </div>
@@ -78,7 +86,14 @@
                         <td>{{ periodo.diaSemana }}</td>
                         <td>{{ periodo.horaInicio }}</td>
                         <td>{{ periodo.horaFin }}</td>
-                        <td><i class="bi bi-trash-fill" style="cursor: pointer"></i></td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-around">
+                                <i class="bi bi-pencil-fill" style="cursor: pointer"
+                                   data-toggle="modal" data-target="#horarioModal" data-whatever="{{ periodo.diaSemana }}-{{ periodo.horaInicio }}-{{ periodo.horaFin }}-{{ periodo.horario_id }}-{{ periodo.id }}"></i>
+                                <i class="bi bi-trash-fill" style="cursor: pointer"
+                                   data-toggle="modal" data-target="#eliminarModal" data-whatever="horario-{{ periodo.id }}"></i>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -92,30 +107,48 @@
         </div>
     {% endif %}
 
+    <!-- MODALES -->
+
     <!-- Habilidades Modal -->
     <div class="modal fade" id="habilidadesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Nueva habilidad</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <span>Seleccione una o varias habilidades nuevas:</span><br>
-            {% for habilidad_catalogo in catalogo_habilidades %}
-                <div style="margin: 5px 0">
-                    <input type="checkbox" class="btn-check" id="{{ habilidad_catalogo }}" checked autocomplete="off">
-                    <label class="btn btn-outline-secondary" for="{{ habilidad_catalogo }}">{{ habilidad_catalogo }}</label>
+            <form action="/gestion_voluntarios/habilidad" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloModalHabilidad">Habilidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-
-            {% endfor %}
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Agregar habilidades</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          </div>
+                <div class="modal-body">
+                    <span class="mb-3">Seleccione una o varias habilidades nuevas:</span><br>
+                    <div class="cs-form">
+                        <label for="titulo_habilidad" class="form-label">Habilidad:</label>
+                        <select id="titulo_habilidad" name="titulo_habilidad" class="form-select" aria-label="Habilidad" style="margin: 0 5px">
+                            <option selected style="background-color: gray"></option>
+                            {% for habilidadCatalogo in catalogo_habilidades %}
+                                <option>{{ habilidadCatalogo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="cs-form">
+                        <label for="descripcion_habilidad" class="form-label">Descripción:</label>
+                        <input type="text" id="descripcion_habilidad" name="descripcion_habilidad" class="form-control">
+                    </div>
+                    <div class="cs-form">
+                        <label for="horas_experiencia_habilidad" class="form-label">Horas de experiencia:</label>
+                        <input type="number" id="horas_experiencia_habilidad" name="horas_experiencia_habilidad" class="form-control" min="1">
+                    </div>
+                    <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+                    <input type="hidden" id="id_habilidad" name="id_habilidad" value="">
+                    <input type="hidden" id="operacion" name="operacion" value="creacion">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Agregar habilidades</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
         </div>
       </div>
     </div>
@@ -124,40 +157,73 @@
     <div class="modal fade" id="horarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Nuevo horario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <span>Ingrese la información del nuevo horario:</span><br>
-            <div class="d-flex justify-content-around">
-                <select class="form-select" aria-label="Dia de la semana" style="margin: 0 5px">
-                    <option selected>Seleccione el día de la semana</option>
-                    {% for dia_semana in dias_semana %}
-                        <option>{{ dia_semana }}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-select" aria-label="Hora de inicio" style="margin: 0 5px">
-                    <option selected>Seleccione una hora de inicio</option>
-                    {% for hora in horasPeriodo %}
-                        <option>{{ hora }}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-select" aria-label="Hora de fin" style="margin: 0 5px">
-                    <option selected>Seleccione una hora de fin</option>
-                    {% for hora in horasPeriodo %}
-                        <option>{{ hora }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            <form action="/gestion_voluntarios/horario" method="post">
+            {% csrf_token %}
+              <div class="modal-header">
+                <h5 class="modal-title" id="tituloModalHorario">Horario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <span class="mb-3">Ingrese la información del nuevo horario:</span><br>
+                <div class="d-flex justify-content-around">
+                    <div class="cs-form">
+                        <label for="dia_semana_periodo" class="form-label">Día de la semana:</label>
+                        <select id="dia_semana_periodo" name="dia_semana_periodo" class="form-select" aria-label="Dia de la semana" style="margin: 0 5px">
+                            <option selected style="background-color: gray"></option>
+                            {% for diaSemana in dias_semana %}
+                                <option>{{ diaSemana }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="cs-form">
+                        <label for="hora_inicio_periodo" class="form-label">Hora de inicio:</label>
+                        <input type="time" id="hora_inicio_periodo" name="hora_inicio_periodo" class="form-control">
+                    </div>
+                    <div class="cs-form">
+                        <label for="hora_fin_periodo" class="form-label">Hora de fin:</label>
+                        <input type="time" id="hora_fin_periodo" name="hora_fin_periodo" class="form-control">
+                    </div>
+                </div>
+                <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+                <input type="hidden" id="id_horario" name="id_horario" value="">
+                <input type="hidden" id="id_periodo" name="id_periodo" value="">
+                <input type="hidden" id="operacion" name="operacion" value="creacion">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Agregar horario</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Agregar horario</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          </div>
+    <!-- Eliminar Modal -->
+    <div class="modal fade" id="eliminarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form class="formEliminar" method="post">
+            {% csrf_token %}
+              <div class="modal-header">
+                <h5 class="modal-title">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <span class="mb-3 modal-question">¿Está seguro de que desea eliminar?</span><br>
+                <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+                <input type="hidden" id="id_habilidad" name="id_habilidad" value="">
+                <input type="hidden" id="id_periodo" name="id_periodo" value="">
+                <input type="hidden" id="operacion" name="operacion" value="eliminacion">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Eliminar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
         </div>
       </div>
     </div>
@@ -166,5 +232,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- My scripts -->
+    <script type="text/javascript" src="{% static 'voluntario_script.js' %}"></script>
 </body>
 </html>
