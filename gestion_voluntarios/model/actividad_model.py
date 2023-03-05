@@ -18,6 +18,8 @@ class Actividad(models.Model):
         self.voluntarios.add(voluntario)
         self.tiene_voluntario = True
         voluntario.es_asignado = True
+        voluntario.save()
+        self.save()
 
     def get_tiene_voluntario(self):
         return self.tiene_voluntario

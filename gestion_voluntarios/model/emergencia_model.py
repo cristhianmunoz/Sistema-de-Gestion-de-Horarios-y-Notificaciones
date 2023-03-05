@@ -14,6 +14,7 @@ class Emergencia(models.Model):
         if self.verificar_voluntarios() and self.verificar_actividades():
             # Se cambia el valor de la bandera
             self.es_atendida = True
+            self.save()
 
     def verificar_actividades(self):
         # Recorrer actividades y verificar su valor en tiene_voluntario
@@ -36,6 +37,7 @@ class Emergencia(models.Model):
             else:
                 respuesta = False
         return respuesta
+
 
     def add_actividades(self, actividad):
         self.actividades.add(actividad)

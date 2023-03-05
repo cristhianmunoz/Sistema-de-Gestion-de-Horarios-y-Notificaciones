@@ -4,7 +4,6 @@ from behave import *
 from faker import Faker
 
 from gestion_voluntarios.models import Emergencia, Actividad, Voluntario
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'notificaciones_medicas.settings')
 
 faker = Faker("es_ES")
@@ -69,8 +68,8 @@ def step_impl(context):
     # Asignamos voluntarios a la actividad
     for voluntario in lista_voluntarios:
         context.actividadTest.asignar_voluntario(voluntario)
-        context.actividadTest.save()
-        voluntario.save()
+        # context.actividadTest.save()
+        # voluntario.save()
         print('Voluntario asignado a actividad')
 
     print('Voluntarios asignados a la Actividad existente')
@@ -80,7 +79,7 @@ def step_impl(context):
 
     # Se verifica que dentro de la emergencia los voluntarios y actividades cambien su bandera
     context.emergenciaTest.verificar_emergencia()
-    context.emergenciaTest.save()
+    # context.emergenciaTest.save()
     print(context.emergenciaTest.__str__())
 
 
@@ -113,3 +112,9 @@ def step_impl(context, estado_emergencia):
     resultado = context.emergenciaTest.get_es_atendida()
     assert resultado == estado_emergencia_boolean, "No pasa el step"
     print('Estado de Emergencia correcto')
+
+
+
+
+
+
