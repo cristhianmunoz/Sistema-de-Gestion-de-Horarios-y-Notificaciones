@@ -12,9 +12,6 @@ faker = Faker("es_ES")
 use_step_matcher("parse")
 
 
-# Sirve para verificar .feature y este .py
-
-
 @step('que se tiene una emergencia que aún no es atendida')
 def step_impl(context):
     # Se crea la Emergencia
@@ -26,16 +23,24 @@ def step_impl(context):
     print(context.emergenciaTest.__str__())
 
 
-@step(
-    'hay un voluntario que asistirá sin actividades asignadas')
-def step_impl(context):
-    # Se crea el voluntario
-    id_voluntario = faker.pystr(max_chars=10)
-    nombre_voluntario = faker.name()
-    context.voluntarioTest = Voluntario(id=id_voluntario, nombre=nombre_voluntario, emergencia=context.emergenciaTest)
-    context.voluntarioTest.save()
-    print('Voluntario Creado')
-    print(context.voluntarioTest.__str__())
+@step('hay una "{cantidad_voluntarios}" que asistirán sin actividades asignadas')
+def step_impl(context, cantidad_voluntarios):
+    # Uso de la cantidad de voluntarios
+    cantidad_voluntarios_int = int(cantidad_voluntarios)
+    print('Valor de cantidad de voluntarios:', cantidad_voluntarios)
+    # Se crean voluntarios con ayuda de la cantidad
+    for i in range(cantidad_voluntarios_int):
+        # Creación de los voluntarios
+        id_voluntario = faker.pystr(max_chars=10)
+        nombre_voluntario = faker.name()
+        context.voluntarioTest = Voluntario(id=id_voluntario, nombre=nombre_voluntario,
+                                            emergencia=context.emergenciaTest)
+        context.voluntarioTest.save()
+        context.emergenciaTest.add_voluntarios(context.voluntarioTest)
+        print('Voluntario Creado: ', i + 1)
+        print(context.voluntarioTest.__str__())
+
+    print('SE CREARON LOS VOLUNTARIOS')
 
 
 @step('existe una actividad con un "{nombre_actividad}" sin voluntarios asignados')
@@ -49,19 +54,29 @@ def step_impl(context, nombre_actividad):
 
     # Creamos la actividad y voluntario dentro de la Emergencia
     # Tomar en cuenta que las listas
-    context.emergenciaTest.add_voluntarios(context.voluntarioTest)
     context.emergenciaTest.add_actividades(context.actividadTest)
+    # print(context.emergenciaTest.__str__())
+
+    context.emergenciaTest.save()
+    print('Emergencia Creada')
     print(context.emergenciaTest.__str__())
 
 
-@step("se le asigna un voluntario a una actividad existente")
+@step('se le asigna un voluntario a una actividad existente')
 def step_impl(context):
-    # Se asigna un voluntario a una actividad
-    context.actividadTest.asignar_voluntario(context.voluntarioTest)
-    context.actividadTest.save()
-    context.voluntarioTest.save()
-    print('Voluntario asignado a actividad')
+    # Obtenga los voluntarios
+    lista_voluntarios = context.emergenciaTest.get_voluntarios()
+    # Asignamos voluntarios a la actividad
+    for voluntario in lista_voluntarios:
+        context.actividadTest.asignar_voluntario(voluntario)
+        context.actividadTest.save()
+        voluntario.save()
+        print('Voluntario asignado a actividad')
+
+    print('Voluntarios asignados a la Actividad existente')
     print(context.actividadTest.__str__())
+    context.emergenciaTest.save()
+    print(context.emergenciaTest.__str__())
 
     # Se verifica que dentro de la emergencia los voluntarios y actividades cambien su bandera
     context.emergenciaTest.verificar_emergencia()
@@ -73,9 +88,13 @@ def step_impl(context):
 def step_impl(context, es_asignado):
     # Se realiza la conversión de str a boolean del test
     aux = bool(es_asignado)
-    resultado = context.voluntarioTest.get_es_asignado()
-    assert resultado == aux, "No pasa el step"
-    print('Estado de Voluntario correcto')
+    # Se verifica los valores dentro de emergencia
+    lista_vol = context.emergenciaTest.get_voluntarios()
+    for voluntario in lista_vol:
+        resultado = voluntario.get_es_asignado()
+        assert resultado == aux, "No pasa el step"
+        print('Estado de Voluntario correcto')
+    print('Estados voluntarios correctos')
 
 
 @step('el estado de la actividad sera"{tiene_voluntario}"')
