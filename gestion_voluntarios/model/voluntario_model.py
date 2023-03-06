@@ -32,13 +32,11 @@ class Voluntario(models.Model):
 
     def horas_experiencia_habilidad(self, habilidad_requerida):
         from gestion_voluntarios.model.habilidad_model import Habilidad
-        habilidad = Habilidad.objects.filter(voluntario=self, titulo=habilidad_requerida).first()
-        if habilidad is None:
-            return None
-        elif habilidad.titulo != habilidad_requerida:
-            return -1
-        elif habilidad.titulo == habilidad_requerida:
-            return habilidad.horas_experiencia
+        habilidad = Habilidad.objects.filter(voluntario=self)
+        habilidades_habilidad_requerida = [h for h in habilidad if h.titulo == habilidad_requerida]
+        if not habilidades_habilidad_requerida:
+            return max(habilidad, key=lambda x: x.horas_experiencia, default=None)
+        return max(habilidades_habilidad_requerida, key=lambda x: x.horas_experiencia)
 
     # Toma al Voluntario de acuerdo a su ID
     @classmethod
