@@ -61,7 +61,7 @@ def step_impl(context, nombre_actividad):
     print(context.emergenciaTest.__str__())
 
 
-@step('se le asigna un voluntario a una actividad existente')
+@step('se le asigna voluntarios a una actividad existente')
 def step_impl(context):
     # Obtenga los voluntarios
     lista_voluntarios = context.emergenciaTest.get_voluntarios()
@@ -113,10 +113,18 @@ def step_impl(context, estado_emergencia):
     assert resultado == estado_emergencia_boolean, "No pasa el step"
     print('Estado de Emergencia correcto')
 
+
     # BORRAR BASE DE DATOS
-    # context.voluntarioTest.borrar_voluntario()
-    # context.actividadTest.borrar_actividad()
-    # context.emergenciaTest.borrar_emergencia()
+    lista_vol = context.emergenciaTest.get_voluntarios()
+    for v in lista_vol:
+        v.delete()
+
+    lista_vol_act = context.actividadTest.get_voluntarios()
+    for va in lista_vol_act:
+        va.delete()
+
+    context.emergenciaTest.delete()
+
 
 
 

@@ -13,11 +13,6 @@ class Voluntario(models.Model):
     es_asignado = models.BooleanField(default=False)
     emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE, related_name='voluntarios')
 
-    def borrar_voluntario(self):
-        with connection.cursor() as cursor:
-            cursor.execute("delete from gestion_voluntarios_actividad_voluntarios where id>=1;")
-            cursor.execute("delete from gestion_voluntarios_voluntario where es_asignado=1")
-
     def get_es_asignado(self):
         return self.es_asignado
 

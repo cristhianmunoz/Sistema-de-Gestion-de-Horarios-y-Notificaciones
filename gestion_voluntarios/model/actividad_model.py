@@ -22,13 +22,11 @@ class Actividad(models.Model):
         voluntario.save()
         self.save()
 
-    def borrar_actividad(self):
-        with connection.cursor() as cursor:
-            cursor.execute("delete from gestion_voluntarios_actividad where tiene_voluntario=1")
-
-
     def get_tiene_voluntario(self):
         return self.tiene_voluntario
+
+    def get_voluntarios(self):
+        return self.voluntarios.all()
 
     def __str__(self):
         return f'Actividad: {self.nombre}, {self.tiene_voluntario}, ||{self.voluntarios.all()}||'
