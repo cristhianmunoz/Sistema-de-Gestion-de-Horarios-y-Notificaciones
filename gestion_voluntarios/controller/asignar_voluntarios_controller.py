@@ -34,17 +34,25 @@ def get_voluntarios(request):
 def asignar_voluntarios(request):
     if request.method == 'POST':
         if 'cerrar' in request.POST:
+            emergencia_id = request.POST.get("emergencia_id")
+            print("Emergencia: " + emergencia_id)
+            actividad_id = request.POST.get("actividad_id")
+            print("Actividad: " + actividad_id)
             print('boton cerrar')
         if 'guardar' in request.POST:
             print('boton guardar')
+            emergencia_id = request.POST.get("emergencia_id")
+            print("Emergencia: " + emergencia_id)
             voluntarios_seleccionados = request.POST.getlist("voluntarios")
             actividad_id = request.POST.get("actividad_id")
             print("actividad: " + actividad_id)
             print(voluntarios_seleccionados)
             actividad = Actividad.objects.get(pk=actividad_id)
+            emergencia = Emergencia.objects.get(pk=emergencia_id)
             for voluntario_id in voluntarios_seleccionados:
                 voluntario = Voluntario.objects.get(pk=voluntario_id)
                 actividad.asignar_voluntario(voluntario)
+                emergencia.verificar_emergencia()
 
                 print("voluntario asignado a actividad")
         return HttpResponseRedirect('/gestion_voluntarios/')

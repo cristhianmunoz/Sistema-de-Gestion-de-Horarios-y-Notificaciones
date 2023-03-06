@@ -51,8 +51,10 @@
                                 </ul>
                                 <input class="btn btn-primary" type="button" value="Asignar voluntarios"
                                        data-bs-toggle="modal"
-                                       data-bs-target="#voluntariosModal" data-voluntarios="{{ voluntarios }}"
-                                       data-actividad="{{ actividad.id }}">
+                                       data-bs-target="#voluntariosModal"
+                                       data-voluntarios="{{ emergencia.voluntarios.all }}"
+                                       data-actividad="{{ actividad.id }}"
+                                       data-emergencia="{{ emergencia.id }}">
                             </td>
                         </tr>
                     {% endfor %}
@@ -77,7 +79,8 @@
                 <form method="post" action="{% url 'asignar_voluntarios' %}">
                     {% csrf_token %}
                     <input type="hidden" name="actividad_id" value="{{ actividad.id }}" id="actividad_id">
-                    {#                <input type="hidden" name="actividad_id" value="{{ actividad.id }}" id="actividad_id">#}
+                    <input type="hidden" name="emergencia_id" value="{{ emergencia.id }}" id="emergencia_id">
+
                     {% for voluntario in voluntarios %}
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="voluntarios"
@@ -107,8 +110,10 @@
         $('#voluntariosModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var actividad_id = button.data('actividad');
+            var emergencia_id = button.data('emergencia');
             var modal = $(this);
             modal.find('#actividad_id').val(actividad_id);
+            modal.find('#emergencia_id').val(emergencia_id);
         });
     });
 </script>
