@@ -1,6 +1,16 @@
 from django.http import HttpResponseRedirect
 
-from gestion_voluntarios.models import Actividad, Voluntario
+from gestion_voluntarios.models import Actividad, Voluntario, Emergencia
+
+
+def get_emergencia(request):
+    emergencias = Emergencia.objects.all()
+    for emergencia in emergencias:
+        emergencia.nombre = emergencia.nombre.replace('"', '')
+    context = {
+        'emergencias': emergencias
+    }
+    return context
 
 
 def cargar_actividades(request):

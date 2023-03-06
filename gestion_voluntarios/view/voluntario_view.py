@@ -6,6 +6,7 @@ def index(request):
     context = {}
     context.update(render_actividades(request))
     context.update(popup_voluntarios(request))
+    context.update(render_emergencia(request))
     return render(request, 'gestion_voluntarios/asignar_voluntarios.html', context)
 
 
@@ -16,6 +17,11 @@ def render_actividades(request):
 
 def popup_voluntarios(request):
     context = asignar_voluntarios_controller.get_voluntarios(request)
+    return context
+
+
+def render_emergencia(request):
+    context = asignar_voluntarios_controller.get_emergencia(request)
     return context
 
 
