@@ -56,4 +56,4 @@ def index(request):
         Habilidad.editar_habilidad(habilidad)
 
     # Redirigiendo a voluntario home
-    return redirect('/gestion_voluntarios/?id_voluntario=' + id_voluntario)
+    return redirect('/gestion_voluntarios/voluntario?id_voluntario=' + id_voluntario)

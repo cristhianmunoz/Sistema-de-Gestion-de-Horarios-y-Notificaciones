@@ -32,26 +32,8 @@ $('#horarioModal').on('show.bs.modal', function(event) {
         modal.find('.btn-primary').text('Actualizar horario')
         modal.find('#operacion').val('edicion')
     }
-    /*
-    if(recipient){
-        // const parts = recipient.split('-')
-        modal.find('#tituloModalHorario').text('Actualización de horario')
-        modal.find('#dia_semana_periodo').val(parts[0])
-        modal.find('#hora_inicio_periodo').val(obtenerFormatoHora(parts[1]))
-        modal.find('#hora_fin_periodo').val(obtenerFormatoHora(parts[2]))
-        modal.find('.btn-primary').text('Actualizar horario')
-        modal.find('#operacion').val('edicion')
-    }else{
-        modal.find('#tituloModalHorario').text('Nuevo horario')
-        modal.find('#dia_semana_periodo').val('')
-        modal.find('#hora_inicio_periodo').val('')
-        modal.find('#hora_fin_periodo').val('')
-        modal.find('.btn-primary').text('Agregar horario')
-        modal.find('#operacion').val('creacion')
-    }
-
-     */
 })
+
 $('#habilidadesModal').on('show.bs.modal', function(event) {
     const button = $(event.relatedTarget) // Button that triggered the modal
     const recipient = button.data('whatever') // Extract info from data-* attributes
@@ -75,6 +57,7 @@ $('#habilidadesModal').on('show.bs.modal', function(event) {
         modal.find('.btn-primary').text('Agregar habilidad')
     }
 })
+
 $('#eliminarModal').on('show.bs.modal', function(event) {
     const button = $(event.relatedTarget) // Button that triggered the modal
     const recipient = button.data('whatever') // Extract info from data-* attributes

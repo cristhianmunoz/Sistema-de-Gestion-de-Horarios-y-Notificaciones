@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+identifier.sqlite
 
 # Flask stuff:
 instance/
@@ -130,3 +131,9 @@ dmypy.json
 
 # PyCharm IDLE
 .idea/
+
+# Gherkin features executions
+*feature.html
+
+# Django migrations
+gestion_voluntarios/migrations/*

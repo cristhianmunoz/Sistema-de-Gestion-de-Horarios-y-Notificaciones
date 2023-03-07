@@ -23,7 +23,7 @@ class Habilidad(models.Model):
             return
 
         for habilidad in self.obtener_habilidades_por_id_voluntario(self.voluntario.id):
-            # Comprobando que no se haya registrado la habilidad anteriormente para el voluntario
+            # Comprobando que no se haya registrado la misma habilidad anteriormente para el voluntario
             if habilidad.titulo == self.titulo and habilidad.voluntario.id:
                 return
 
@@ -65,8 +65,12 @@ class Habilidad(models.Model):
 
     @staticmethod
     def obtener_habilidades_por_id_voluntario(id_voluntario):
-        habilidades = Habilidad.objects.filter(voluntario_id=id_voluntario)
-        return list(habilidades)
+        try:
+            habilidades = Habilidad.objects.filter(voluntario_id=id_voluntario)
+            return list(habilidades)
+
+        except Habilidad.DoesNotExist:
+            return None
 
     @staticmethod
     def obtener_numero_habilidades_por_id_voluntario(id_voluntario):
