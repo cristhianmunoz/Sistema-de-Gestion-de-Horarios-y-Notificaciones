@@ -14,7 +14,6 @@
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"></script>
 
-    <!--VARIABLE PARA EL DICCIONARIO-->
     <script type="text/javascript">
         var voluntarios_por_emergencia = [];
     </script>
@@ -36,7 +35,6 @@
             <th scope="row">{{ emergencia.id }}</th>
             <td>{{ emergencia.nombre }}
 
-                <!--CAPTURA DE LOS VOLUNTARIOS EN FUNCIÓN DE LA EMERGENCIA-->
                 <script type="text/javascript">
                 voluntarios_por_emergencia.push({ key: "Emergencia{{emergencia.id}}", value :
                     [
@@ -90,7 +88,6 @@
     </tbody>
 </table>
 
-<!-- ESTA PARTE SE DEBE MODIFICAR PARA MOSTRAR LOS VOLUNTARIOS DE DICHA EMERGENCIA-->
 <div class="modal fade" id="voluntariosModal" tabindex="-1" aria-labelledby="voluntariosModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -105,8 +102,6 @@
                     <input type="hidden" name="actividad_id" value="" id="actividad_id">
                     <input type="hidden" name="emergencia_id" value="" id="emergencia_id">
 
-                    <!--DIV QUE MUESTRA EL CONTENIDO AL EJECUTARSE EL BOTÓN -->
-                    <!--CÓDIGO EN LA LÍNEA 138 (BORRAR) 147(CONTENIDO) -->
                     <div id="voluntarios_emergencia">
                     </div>
 
@@ -135,17 +130,17 @@
             var emergencia_id = button.data('emergencia');
             var voluntarios_emergencia_seleccionada = null;
 
-            //Se debe limpiar la instancia
+            // Se debe limpiar la instancia
             $('#voluntarios_emergencia').empty();
 
-            //se recorre el diccionario en función del id de la emergencia
+            // Se recorre el diccionario en función del id de la emergencia
             voluntarios_por_emergencia.forEach(function (item_emergencia){
                 if(item_emergencia.key == "Emergencia"+emergencia_id.toString()){
                     voluntarios_emergencia_seleccionada = item_emergencia.value;
                 }
             })
 
-            //se agregan los voluntarios para imprimirse en el div de la línea 109
+            // Se agregan los voluntarios para imprimirse en el div de la línea 109
             voluntarios_emergencia_seleccionada.forEach(function (voluntarioFor){
                     $('#voluntarios_emergencia').append(
                         "<input class='form-check-input' type='checkbox' name='ids_voluntarios' " +
@@ -159,7 +154,6 @@
             var modal = $(this);
             modal.find('#actividad_id').val(actividad_id);
             modal.find('#emergencia_id').val(emergencia_id);
-            modal.find('#prueba').val(emergencia_id);
         });
     });
 </script>
