@@ -12,16 +12,46 @@
     <link rel="stylesheet" href="{% static 'voluntario_styles.css' %}">
 </head>
 <body>
-    <div class="d-flex justify-content-center">
-        <h1>Detalle del voluntario</h1>
+    <!-- Detalles del voluntario -->
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white text-center">
+              <h1 class="fw-bold fs-1">
+                <i class="bi bi-person me-2"></i>
+                Detalles del Voluntario
+              </h1>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-4">
+                  <h5 class="card-title fs-5 fw-bold text-secondary">Nombres Completos:</h5>
+                </div>
+                <div class="col-8">
+                  <p class="card-text fs-5">{{ voluntario.nombre }} {{ voluntario.apellido }}</p>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-4">
+                  <h5 class="card-title fs-5 fw-bold text-secondary">Edad:</h5>
+                </div>
+                <div class="col-8">
+                  <p class="card-text fs-5">{{ voluntario.edad }} años </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p>Nombre: {{ voluntario.nombre }} {{ voluntario.apellido }}</p>
-    <p>Edad: {{ voluntario.edad }}</p>
-    <div class="d-flex flex-row mb-3">
-        <h2 class="me-3">Habilidades</h2>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#habilidadesModal">
-          <i class="bi bi-plus"></i>
-        </button>
+
+    <!-- Habilidades del voluntario -->
+    <div class="d-flex flex-row align-items-center mb-3">
+      <h2 class="me-3 fs-4">Habilidades:</h2>
+      <button type="button" class="btn btn-primary fs-5" data-toggle="modal" data-target="#habilidadesModal">
+        <i class="bi bi-plus me-2"></i> Añadir Habilidad
+      </button>
     </div>
 
     {% if habilidades %}
@@ -62,12 +92,14 @@
         </div>
     {% endif %}
 
-    <div class="d-flex flex-row mb-3">
-        <h2 class="me-3">Horario</h2>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#horarioModal" data-whatever="{{ id_horario }}">
-          <i class="bi bi-plus"></i>
+    <!-- Horarios del voluntario -->
+    <div class="d-flex align-items-center mb-4">
+      <h2 class="me-3 fs-4">Horarios:</h2>
+        <button type="button" class="btn btn-primary fs-5" data-toggle="modal" data-target="#horarioModal" data-whatever="{{ id_horario }}">
+            <i class="bi bi-plus me-2"></i> Añadir Horario
         </button>
     </div>
+
 
     {% if periodos %}
         <div class="container">
