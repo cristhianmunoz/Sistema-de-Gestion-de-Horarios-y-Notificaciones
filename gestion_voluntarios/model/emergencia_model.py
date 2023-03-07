@@ -1,18 +1,29 @@
-# from datetime import datetime
+from datetime import datetime
 from django.db import models
+from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
 
 
-class Emergencia:
-    def __init__(self, asunto, tipo_emergencia, ubicacion, hora_entrada, encargado, dirigido_a, actividades, detalle, respuesta):
-        self.asunto = asunto
-        self.tipo_emergencia = tipo_emergencia
-        self.ubicacion = ubicacion
-        self.hora_entrada = hora_entrada
-        self.encargado = encargado
-        self.dirigido_a = dirigido_a
-        self.actividades = actividades
-        self.detalle = detalle
-        self.respuesta = respuesta
+class Emergencia(models.Model):
+    id = models.AutoField(primary_key=True)
+    vacantes = models.IntegerField(default=0)
+    habilidad_requerida = models.TextField(choices=HabilidadMedica.choices)
+    lista_priorizada = []
+    lista = []
+
+    def priorizar_voluntarios(self):
+        lista_ordenada = [voluntario.horas_experiencia_habilidad(self.habilidad_requerida) for voluntario in self.lista]
+        voluntarios_con_habilidad = list(filter(lambda x: x.titulo == self.habilidad_requerida, lista_ordenada))
+        voluntarios_sin_habilidad = list(filter(lambda x: x.titulo != self.habilidad_requerida, lista_ordenada))
+        self.lista_priorizada = self.ordenar_voluntarios(voluntarios_con_habilidad) + self.ordenar_voluntarios(
+            voluntarios_sin_habilidad)[:self.vacantes]
+        return self.lista_priorizada
+
+    def ordenar_voluntarios(self, lista_filter):
+        return sorted(lista_filter, key=lambda x: x.horas_experiencia, reverse=True)
+
+    def obtener_lista_nombres(self):
+        lista_voluntarios = [habilidad.voluntario for habilidad in self.lista_priorizada]
+        return [voluntario.nombre + " " + voluntario.apellido for voluntario in lista_voluntarios]
 
     asunto = models.CharField(max_length=200, default='')
     tipo_emergencia = models.CharField(max_length=20, default='')
@@ -20,7 +31,6 @@ class Emergencia:
     hora_entrada = models.CharField(max_length=20, default='')
     encargado = models.CharField(max_length=20, default='')
     dirigido_a = models.CharField(max_length=200, default='')
-    # debería ser un arreglo de voluntarios
     actividades = models.CharField(max_length=200, default='')
     detalle = models.CharField(max_length=500, default='')
     respuesta = models.BooleanField(default=False)
