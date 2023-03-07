@@ -134,3 +134,6 @@ dmypy.json
 
 # Gherkin features executions
 *feature.html
+
+# Django migrations
+gestion_voluntarios/migrations/*

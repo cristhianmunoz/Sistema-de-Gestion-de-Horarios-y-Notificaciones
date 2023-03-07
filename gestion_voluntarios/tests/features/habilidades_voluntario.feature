@@ -1,7 +1,6 @@
 # Creado por el Grupo 2 el 2/24/2023
 # language: es
 
-  @expensive_setup
   Característica: Registro de habilidades de los voluntarios
     Como voluntario inscrito en el programa de voluntariado,
     quiero que tomen en cuenta mis habilidades y mi disponibilidad
