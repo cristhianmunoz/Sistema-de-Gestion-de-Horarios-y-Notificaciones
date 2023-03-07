@@ -2,11 +2,8 @@ from gestion_voluntarios.model.voluntario_model import Voluntario
 
 # Listado de escenarios del feature habilidades_voluntario
 habilidades_voluntario_scenarios = [
-    'El voluntario intenta registrar una habilidad médica registrada previamente',
-    'El voluntario intenta registrar una habilidad médica que no existe',
-    'El voluntario registra una nueva habilidad médica',
-    'El voluntario intenta registrar una habilidad médica con horas de experiencia incorrectas -- @1.1 ',
-    'El voluntario intenta registrar una habilidad médica con horas de experiencia incorrectas -- @1.2 '
+    'El voluntario registra una nueva habilidad médica en su perfil',
+    'El voluntario actualiza la información de una de sus habilidades médicas'
 ]
 
 # Listado de escenarios del feature horario_voluntario
