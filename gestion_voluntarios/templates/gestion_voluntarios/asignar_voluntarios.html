@@ -78,17 +78,20 @@
             <div class="modal-body">
                 <form method="post" action="{% url 'asignar_voluntarios' %}">
                     {% csrf_token %}
-                    <input type="hidden" name="actividad_id" value="{{ actividad.id }}" id="actividad_id">
-                    <input type="hidden" name="emergencia_id" value="{{ emergencia.id }}" id="emergencia_id">
+                    <input type="hidden" name="actividad_id" value="" id="actividad_id">
+                    <input type="hidden" name="emergencia_id" value="" id="emergencia_id">
 
                     {% for voluntario in voluntarios %}
-                        <div class="form-check">
+                        <!-- SE DEBE MOSTRAR SOLO LOS VOLUNTARIOS QUE TENGAN EL ID DE LA EMERGENCIA NECESARIA -->
+                        {% if voluntario.emergencia_id == '1' %}
+                            <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="voluntarios"
                                    value="{{ voluntario.id }}">
                             <label class="form-check-label">
                                 {{ voluntario.nombre }}
                             </label>
                         </div>
+                        {% endif %}
                     {% endfor %}
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrar-btn"
@@ -114,6 +117,7 @@
             var modal = $(this);
             modal.find('#actividad_id').val(actividad_id);
             modal.find('#emergencia_id').val(emergencia_id);
+            modal.find('#prueba').val(emergencia_id);
         });
     });
 </script>
