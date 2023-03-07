@@ -9,9 +9,9 @@ django.setup()
 
 
 class Periodo(models.Model):
-    diaSemana = models.CharField(max_length=20, choices=DiaSemana.choices)
-    horaInicio = models.TimeField()
-    horaFin = models.TimeField()
+    dia_semana = models.CharField(max_length=20, choices=DiaSemana.choices)
+    hora_inicio = models.TimeField()
+    hora_fin = models.TimeField()
     horario = models.ForeignKey(
         'Horario',
         on_delete=models.CASCADE,
@@ -21,18 +21,18 @@ class Periodo(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        # Validar que periodo tenga lógica
-        if self.horaInicio > self.horaFin:
+        # Comprobando que la hora de inicio no sea mayor a la hora de fin
+        if self.hora_inicio > self.hora_fin:
             return False
 
-        # Validar que el periodo creado no se cruce con otro periodo existente
+        # Comprobando que el periodo no choque con otro periodo existente
         periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
         for periodo in periodos:
-            if periodo.diaSemana != self.diaSemana:
+            if periodo.dia_semana != self.dia_semana:
                 continue
-            if periodo.horaInicio < self.horaInicio < periodo.horaFin:
+            if periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
                 continue
-            if periodo.horaInicio < self.horaFin < periodo.horaFin:
+            if periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
                 continue
 
         super().save(*args, **kwargs)
@@ -58,28 +58,44 @@ class Periodo(models.Model):
     @staticmethod
     def editar_periodo(periodo):
         try:
-            periodo.save()
+            Periodo.objects.filter(id=periodo.id).update(
+                dia_semana=periodo.dia_semana,
+                hora_inicio=periodo.hora_inicio,
+                hora_fin=periodo.hora_fin
+            )
             return True
 
         except ValidationError:
             return False
 
+        except Periodo.DoesNotExist:
+            return False
+
     @staticmethod
     def obtener_periodos_por_id_horario(id_horario):
-        periodos = Periodo.objects.filter(horario_id=id_horario)
-        return list(periodos)
+        try:
+            periodos = Periodo.objects.filter(horario_id=id_horario)
+            return list(periodos)
+
+        except Periodo.DoesNotExist:
+            return None
 
     @staticmethod
     def obtener_periodo_por_id(id_periodo):
-        periodo = Periodo.objects.get(id=id_periodo)
-        return periodo
+        try:
+            periodo = Periodo.objects.get(id=id_periodo)
+            return periodo
+
+        except Periodo.DoesNotExist:
+            return None
 
     @staticmethod
     def obtener_cantidad_dias_disponibles(id_horario):
         periodos = Periodo.obtener_periodos_por_id_horario(id_horario)
         set_dias = set()
+
         for periodo in periodos:
-            set_dias.add(periodo.diaSemana)
+            set_dias.add(periodo.dia_semana)
 
         return len(set_dias)
 
