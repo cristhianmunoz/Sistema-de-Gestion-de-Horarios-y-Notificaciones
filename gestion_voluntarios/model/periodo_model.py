@@ -1,5 +1,3 @@
-import datetime
-
 import django
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -55,12 +53,13 @@ class Periodo(models.Model):
     @staticmethod
     def editar_periodo(periodo):
         try:
-            Periodo.objects.filter(id=periodo.id).update(
-                dia_semana=periodo.dia_semana,
-                hora_inicio=periodo.hora_inicio,
-                hora_fin=periodo.hora_fin
-            )
-            return True
+            if periodo.no_tiene_conflicto() and periodo.es_consistente():
+                Periodo.objects.filter(id=periodo.id).update(
+                    dia_semana=periodo.dia_semana,
+                    hora_inicio=periodo.hora_inicio,
+                    hora_fin=periodo.hora_fin
+                )
+                return True
 
         except ValidationError:
             return False
@@ -119,13 +118,9 @@ class Periodo(models.Model):
             # Comprobar: Si el día de la semana no coincide, continuar
             if periodo.dia_semana != self.dia_semana:
                 continue
-            # Comprobar: Si la hora de inicio está dentro de un periodo existente, continuar
-            if not periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
-                continue
-            # Comprobar: Si la hora de fin está dentro de un periodo existente, continuar
-            if not periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
-                continue
-            return False
+            # Comprobar: Si las horas del periodo chocan con las horas del otro
+            if self.hora_inicio <= periodo.hora_fin and self.hora_fin >= periodo.hora_inicio:
+                return False
 
         return True
 
