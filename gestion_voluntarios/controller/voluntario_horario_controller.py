@@ -64,4 +64,4 @@ def index(request):
         Periodo.editar_periodo(periodo)
 
     # Redirigiendo a voluntario home
-    return redirect('/gestion_voluntarios/?id_voluntario=' + id_voluntario)
+    return redirect('/gestion_voluntarios/voluntario?id_voluntario=' + id_voluntario)
