@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">2 ms</div>
+                <div class="time" xmlns="">90 ms</div>
                 <h1>
-                    priorizar_voluntario.feature:Priorizar voluntarios confirmados en base a una habilidad requerida: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">12 total, </span><span class="passed">12 passed</span></strong>
+                    priorizar_voluntario.feature:Priorizar voluntarios confirmados en base a una habilidad requerida: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">12 total, </span><span class="failed">1 failed, </span><span class="passed">11 passed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -591,104 +591,107 @@ jQuery.cookie = function(name, value, options) {
             </div>
             <div id="content">
                 <ul id="tree">
-                    <li xmlns="" class="level top open">
+                    <li xmlns="" class="level top failed open">
                         <span><em class="time">
-                                <div class="time">2 ms</div>
+                                <div class="time">90 ms</div>
                             </em>Priorizar voluntarios</span>
                         <ul>
-                            <li class="level suite open">
+                            <li class="level suite failed open">
                                 <span><em class="time">
-                                        <div class="time">1 ms</div>
+                                        <div class="time">34 ms</div>
                                     </em>Priorizar voluntarios confirmados en base a una habilidad requerida -- @1.1</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Dado que tengo una emergencia que necesita de "10.0" voluntarios con la habilidad "suturar"</span>
+                                                <div class="time">7 ms</div>
+                                            </em><em class="status">passed</em>Dado que tengo una emergencia que necesita de "10" voluntarios con la habilidad ""Anestesiar""</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
-                                                <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Y tengo a varios "{"voluntario1": {"Nombre":"Andres", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}}" que confirmaron la asistencia</span>
+                                                <div class="time">21 ms</div>
+                                            </em><em class="status">passed</em>Y tengo a varios "{"voluntario1": {"nombre":"Andres", "apellido":"Soto", "horas_experiencia": [55.0, 125.0], "habilidad": ["Rcp","Anestesiar"]}, "voluntario2":{"nombre":"Elizabeth","apellido":"Alma","horas_experiencia":[105.0],"habilidad":["Anestesiar"]}}" que confirmaron la asistencia</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">3 ms</div>
+                                            </em><em class="status">passed</em>Cuando priorizo los voluntarios con mas experiencia seg&uacute;n la habilidad ""Anestesiar""</span>
+                                    </li>
+                                    <li class="level test failed open">
+                                        <span><em class="time">
+                                                <div class="time">3 ms</div>
+                                            </em><em class="status">failed</em>Entonces tendr&eacute; una lista "['Andres Soto']" priorizada</span>
                                         <ul>
                                             <li class="text">
-                                                <span class="stdout">[<Voluntario: Voluntario object (Andres)>]<br/>[<Voluntario: Voluntario object (Andres)>, <Voluntario: Voluntario object (Juan)>]<br/>Este voluntario: <br/>Este voluntario: <br/></span>
+                                                <span class="stdout">['Andres Soto', 'Elizabeth Alma']<br/></span>
+                                            </li>
+                                            <li class="text">
+                                                <span class="stderr">Traceback (most recent call last):<br/>  File "C:\Users\rpmas\PycharmProjects\BD\notificaciones_medicas\venv\Lib\site-packages\behave\model.py", line 1329, in run<br/>    match.run(runner.context)<br/>  File "C:\Users\rpmas\PycharmProjects\BD\notificaciones_medicas\venv\Lib\site-packages\behave\matchers.py", line 98, in run<br/>    self.func(context, *args, **kwargs)<br/>  File "gestion_voluntarios\tests\steps\priorizar_voluntario.py", line 56, in step_impl<br/>    assert context.emergencia.obtener_lista_nombres() == eval(lista_voluntarios_priorizada)<br/>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>AssertionError<br/></span>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando priorizo seg&uacute;n "suturar" en emergencia</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Entonces tendr&eacute; a los voluntarios priorizados con mayor experiencia con la habilidad "suturar"</span>
                                     </li>
                                 </ul>
                             </li>
                             <li class="level suite open">
                                 <span><em class="time">
-                                        <div class="time">0 ms</div>
+                                        <div class="time">31 ms</div>
                                     </em>Priorizar voluntarios confirmados en base a una habilidad requerida -- @1.2</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Dado que tengo una emergencia que necesita de "20.0" voluntarios con la habilidad ""RCP""</span>
+                                                <div class="time">4 ms</div>
+                                            </em><em class="status">passed</em>Dado que tengo una emergencia que necesita de "2" voluntarios con la habilidad ""Rcp""</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y tengo a varios "{"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}}" que confirmaron la asistencia</span>
+                                                <div class="time">23 ms</div>
+                                            </em><em class="status">passed</em>Y tengo a varios "{"voluntario1": {"nombre":"Andres", "apellido":"Soto", "horas_experiencia": [55.0, 125.0], "habilidad": ["Rcp","Anestesiar"]}, "voluntario2":{"nombre":"Elizabeth","apellido":"Alma","horas_experiencia":[105.0],"habilidad":["Anestesiar"]}}" que confirmaron la asistencia</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">3 ms</div>
+                                            </em><em class="status">passed</em>Cuando priorizo los voluntarios con mas experiencia seg&uacute;n la habilidad ""Rcp""</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">1 ms</div>
+                                            </em><em class="status">passed</em>Entonces tendr&eacute; una lista "['Andres Soto', 'Elizabeth Alma']" priorizada</span>
                                         <ul>
                                             <li class="text">
-                                                <span class="stdout">[<Voluntario: Voluntario object (Juan)>]<br/>[<Voluntario: Voluntario object (Juan)>, <Voluntario: Voluntario object (Juan)>]<br/>Este voluntario: <br/>Este voluntario: <br/></span>
+                                                <span class="stdout">['Andres Soto', 'Elizabeth Alma']<br/></span>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando priorizo seg&uacute;n ""RCP"" en emergencia</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Entonces tendr&eacute; a los voluntarios priorizados con mayor experiencia con la habilidad ""RCP""</span>
                                     </li>
                                 </ul>
                             </li>
                             <li class="level suite open">
                                 <span><em class="time">
-                                        <div class="time">1 ms</div>
+                                        <div class="time">25 ms</div>
                                     </em>Priorizar voluntarios confirmados en base a una habilidad requerida -- @1.3</span>
                                 <ul>
                                     <li class="level test">
                                         <span><em class="time">
+                                                <div class="time">4 ms</div>
+                                            </em><em class="status">passed</em>Dado que tengo una emergencia que necesita de "3" voluntarios con la habilidad ""Suturar""</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
+                                                <div class="time">20 ms</div>
+                                            </em><em class="status">passed</em>Y tengo a varios "{"voluntario1": {"nombre":"Andres", "apellido":"Soto", "horas_experiencia": [55.0, 125.0], "habilidad": ["Rcp","Anestesiar"]}, "voluntario2":{"nombre":"Elizabeth","apellido":"Alma","horas_experiencia":[105.0],"habilidad":["Anestesiar"]}}" que confirmaron la asistencia</span>
+                                    </li>
+                                    <li class="level test">
+                                        <span><em class="time">
                                                 <div class="time">1 ms</div>
-                                            </em><em class="status">passed</em>Dado que tengo una emergencia que necesita de "5.0" voluntarios con la habilidad ""RCP""</span>
+                                            </em><em class="status">passed</em>Cuando priorizo los voluntarios con mas experiencia seg&uacute;n la habilidad ""Suturar""</span>
                                     </li>
                                     <li class="level test">
                                         <span><em class="time">
                                                 <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Y tengo a varios "{"voluntario1": {"Nombre":"Juan", "horas_experiencia": 25.0, "Habilidad": "SUTURAR"}, "voluntario2":{"Nombre":"Juan","horas_experiencia":25.0,"Habilidad":"SUTURAR"}}" que confirmaron la asistencia</span>
+                                            </em><em class="status">passed</em>Entonces tendr&eacute; una lista "['Andres Soto', 'Elizabeth Alma']" priorizada</span>
                                         <ul>
                                             <li class="text">
-                                                <span class="stdout">[<Voluntario: Voluntario object (Juan)>]<br/>[<Voluntario: Voluntario object (Juan)>, <Voluntario: Voluntario object (Juan)>]<br/>Este voluntario: <br/>Este voluntario: <br/></span>
+                                                <span class="stdout">['Andres Soto', 'Elizabeth Alma']<br/></span>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Cuando priorizo seg&uacute;n ""RCP"" en emergencia</span>
-                                    </li>
-                                    <li class="level test">
-                                        <span><em class="time">
-                                                <div class="time">0 ms</div>
-                                            </em><em class="status">passed</em>Entonces tendr&eacute; a los voluntarios priorizados con mayor experiencia con la habilidad ""RCP""</span>
                                     </li>
                                 </ul>
                             </li>
@@ -698,7 +701,7 @@ jQuery.cookie = function(name, value, options) {
             </div>
         </div>
         <div id="footer">
-            <p>Generated by PyCharm on 1/3/23 22:46</p>
+            <p>Generated by PyCharm on 6/3/23 21:38</p>
         </div>
     </body>
 </html>
