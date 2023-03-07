@@ -27,7 +27,6 @@ class Voluntario(models.Model):
         periodos = Periodo.obtener_periodos_por_id_horario(Horario.obtener_horario_por_id_voluntario(self.id).id)
         periodo_a_comprobar_aux = Periodo.obtener_periodo_por_id(periodo_a_comprobar.id)
 
-
         for periodo in periodos:
             if periodo.diaSemana != periodo_a_comprobar.diaSemana:
                 continue
@@ -35,14 +34,13 @@ class Voluntario(models.Model):
                 continue
             if periodo.horaInicio < periodo_a_comprobar.horaFin:
 
-        # comprobar la disponibilidad por etapas
+                # comprobar la disponibilidad por etapas
                 for periodo in periodos:
                     if periodo.diaSemana != periodo_a_comprobar_aux.diaSemana:
                         continue
                     if periodo.horaInicio > periodo_a_comprobar_aux.horaInicio:
                         continue
                     if periodo.horaFin < periodo_a_comprobar_aux.horaFin:
-
                         continue
                     return True
 
