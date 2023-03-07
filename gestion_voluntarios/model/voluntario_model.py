@@ -8,6 +8,7 @@ django.setup()
 
 
 class Voluntario(models.Model):
+    # Campos de la clase Voluntario
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
