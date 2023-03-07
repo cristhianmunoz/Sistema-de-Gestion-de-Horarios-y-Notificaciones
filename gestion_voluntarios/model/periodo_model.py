@@ -1,6 +1,9 @@
+import datetime
+
 import django
 from django.core.exceptions import ValidationError
 from django.db import models
+from datetime import datetime as dt
 
 from gestion_voluntarios.model.dia_semana_model import DiaSemana
 from gestion_voluntarios.model.horario_model import Horario
@@ -22,18 +25,12 @@ class Periodo(models.Model):
 
     def save(self, *args, **kwargs):
         # Comprobando que la hora de inicio no sea mayor a la hora de fin
-        if self.hora_inicio > self.hora_fin:
-            return False
+        if not self.es_consistente():
+            return
 
         # Comprobando que el periodo no choque con otro periodo existente
-        periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
-        for periodo in periodos:
-            if periodo.dia_semana != self.dia_semana:
-                continue
-            if periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
-                continue
-            if periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
-                continue
+        if not self.no_tiene_conflicto():
+            return
 
         super().save(*args, **kwargs)
 
@@ -110,3 +107,31 @@ class Periodo(models.Model):
 
         except Periodo.DoesNotExist:
             return None
+
+    def es_consistente(self):
+        if self.hora_inicio > self.hora_fin:
+            return False
+        return True
+
+    def no_tiene_conflicto(self):
+        periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
+        for periodo in periodos:
+            # Comprobar: Si el día de la semana no coincide, continuar
+            if periodo.dia_semana != self.dia_semana:
+                continue
+            # Comprobar: Si la hora de inicio está dentro de un periodo existente, continuar
+            if not periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
+                continue
+            # Comprobar: Si la hora de fin está dentro de un periodo existente, continuar
+            if not periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
+                continue
+            return False
+
+        return True
+
+    @staticmethod
+    def str_to_time(string):
+        try:
+            return dt.strptime(string, '%H:%M').time(), True
+        except ValueError:
+            return None, False
