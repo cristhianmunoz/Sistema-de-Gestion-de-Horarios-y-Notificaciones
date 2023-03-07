@@ -28,9 +28,9 @@ def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
 
     # Periodo disponible
     context.periodo = Periodo(
-        diaSemana=dia_disponible,
-        horaInicio=inicio_disponible,
-        horaFin=final_disponible,
+        dia_semana=dia_disponible,
+        hora_inicio=inicio_disponible,
+        hora_fin=final_disponible,
         horario_id=context.horario.id
     )
     context.periodo.save()
@@ -46,9 +46,9 @@ def step_impl(context, dia_solicitado, inicio_solicitado, final_solicitado):
 
     # Periodo solicitado
     context.periodo_solicitud = Periodo(
-        diaSemana=dia_solicitado,
-        horaInicio=inicio_solicitado,
-        horaFin=final_solicitado,
+        dia_semana=dia_solicitado,
+        hora_inicio=inicio_solicitado,
+        hora_fin=final_solicitado,
         horario_id=context.horario_solicitud.id
     )
     context.periodo_solicitud.save()
@@ -84,9 +84,9 @@ def step_impl(context, dias_disponibles_iniciales):
 def step_impl(context, dia_solicitado, inicio_solicitado, final_solicitado):
     id_horario = Horario.obtener_horario_por_id_voluntario(context.voluntario.id)
     context.nuevo_periodo = Periodo(
-        diaSemana=dia_solicitado,
-        horaInicio=inicio_solicitado,
-        horaFin=final_solicitado,
+        dia_semana=dia_solicitado,
+        hora_inicio=inicio_solicitado,
+        hora_fin=final_solicitado,
         horario_id=id_horario
     )
 
@@ -102,6 +102,6 @@ def step_impl(context, dias_disponibles_finales):
       '“{final_disponible}” horas')
 def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
     periodo_inicial = context.periodo
-    assert periodo_inicial.diaSemana == dia_disponible
-    assert periodo_inicial.horaInicio == inicio_disponible
-    assert periodo_inicial.horaFin == final_disponible
+    assert periodo_inicial.dia_semana == dia_disponible
+    assert periodo_inicial.hora_inicio == inicio_disponible
+    assert periodo_inicial.hora_fin == final_disponible

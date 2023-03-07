@@ -95,15 +95,19 @@ Es recomendable crear un ambiente virtual de Python que se utilizará únicament
 
 Considerando la [estructura de archivos propuesta en clase](https://coggle.it/diagram/YKwIGLwdFm3ufpye/t/bdd/bbc003c7d1c0544999001d47e8effe4a9987a3226e473307526633410016956a) para el desarrollo de software mediante BDD con Gherkin y Behave se utilizará un directorio ```test``` en cada aplicación del proyecto. El directorio ```test``` tendrá un directorio ```features``` para los archivos de Gherkin y un directorio ```steps``` para los archivos de Behave:
 
+Adicionalmente, se utilizará el archivo ```environment.py``` para gestionar las operaciones que se realizan antes o después de la ejecución de los escenarios de prueba.
+
 La estructura mencionada para el uso de Gherkin y Behave se muestra a continuación:
 
-![Estructura de archivos para BDD con Gherkin y Behave](https://i.ibb.co/LzP5bRV/BDD.png)
+![Estructura de archivos para BDD con Gherkin y Behave](https://i.ibb.co/p2HQPJ6/tests.png)
 
-Por otro lado, para la arquitectura MVC en cada aplicación del proyecto se utilizarán los paquetes MVC ```controller```, ```model``` y ```view```. Esto con el objetivo de crear un archivo para cada controlador, modelo o vista respectivamente. Además, se usará un directorio ```common``` que contendrá los paquetes MVC de uso común.
+Por otro lado, para la arquitectura MVC en cada aplicación del proyecto se utilizarán los paquetes MVC ```controller```, ```model``` y ```view```. Esto con el objetivo de crear un archivo para cada controlador, modelo o vista respectivamente.
+
+Además, se utilizará el directorio ```static``` para almacenar archivos estáticos que son utilizados por las páginas web.
 
 La estructura mencionada para el uso de MVC como arquitectura se muestra a continuación:
 
-![Estructura de paquetes para MVC](https://i.ibb.co/Y8KdxFj/MVC.png)
+![Estructura de paquetes para MVC](https://i.ibb.co/MkzpFPd/mvc.png)
 
 ## 3. Uso de GitHub
 

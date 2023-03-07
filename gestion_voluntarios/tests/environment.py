@@ -33,11 +33,11 @@ def after_scenario(context, scenario):
 
 
 def after_habilidades_voluntario_scenarios(context):
-    Voluntario.obtener_voluntario_por_id(context.voluntario.id).delete() # +++++++++++++++++++++++++++++++++++++++++++++++++
+    Voluntario.obtener_voluntario_por_id(context.voluntario.id).delete()
 
 
 def after_horario_voluntario_scenarios(context):
-    Voluntario.obtener_voluntario_por_id(context.voluntario.id).delete()  # +++++++++++++++++++++++++++++++++++++++++++++++++
+    Voluntario.obtener_voluntario_por_id(context.voluntario.id).delete()
 
     if 'horario_solicitud' in context:
-        context.horario_solicitud.delete()  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        context.horario_solicitud.delete()
