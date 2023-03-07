@@ -8,5 +8,7 @@ urlpatterns = [
     # path('gestion_voluntarios/controller/asignar_voluntarios_controller',
     #      asignar_voluntarios_controller.cerrar_popup_voluntarios, name='cerrar_popup_voluntarios'),
     path('gestion_voluntarios/controller/asignar_voluntarios_controller',
-         asignar_voluntarios_controller.asignar_voluntarios, name='asignar_voluntarios')
+         asignar_voluntarios_controller.asignar_voluntarios, name='asignar_voluntarios'),
+    path('gestion_voluntarios/controller/asignar_voluntarios_controller',
+         asignar_voluntarios_controller.get_id_emergencia, name='get_id_emergencia'),
 ]

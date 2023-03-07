@@ -39,9 +39,6 @@ class Emergencia(models.Model):
                 respuesta = False
         return respuesta
 
-    def add_actividades(self, actividad):
-        self.actividades.add(actividad)
-
     def add_voluntarios(self, voluntario):
         self.voluntarios.add(voluntario)
 
@@ -53,6 +50,9 @@ class Emergencia(models.Model):
 
     def get_voluntarios(self):
         return self.voluntarios.all()
+
+    def get_actividades(self):
+        return self.actividades.all()
 
     def __str__(self):
         return f'Emergencia: {self.nombre}, {self.es_atendida}, ||{self.voluntarios.all()}||, ' \

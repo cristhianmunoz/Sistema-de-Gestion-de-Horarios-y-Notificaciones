@@ -17,4 +17,4 @@ class Voluntario(models.Model):
         return self.es_asignado
 
     def __str__(self):
-        return f'Voluntario: {self.nombre}, {self.es_asignado}'
+        return f'Voluntario: {self.id},{self.nombre}, {self.es_asignado}'
