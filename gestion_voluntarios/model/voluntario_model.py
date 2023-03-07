@@ -5,7 +5,7 @@ from gestion_voluntarios.model.horario_model import Horario
 from gestion_voluntarios.model.periodo_model import Periodo
 from gestion_voluntarios.model.emergencia_model import Emergencia
 
-#django.setup()
+django.setup()
 
 
 class Voluntario(models.Model):

@@ -4,7 +4,7 @@ from django.db import connection
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
 
-#django.setup()
+django.setup()
 
 
 class Actividad(models.Model):
