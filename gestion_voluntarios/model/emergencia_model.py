@@ -2,11 +2,11 @@ import django
 from django.db import models
 from django.db import connection
 
-#django.setup()
+django.setup()
 
 
 class Emergencia(models.Model):
-    id = models.CharField(primary_key=True, max_length=50, default='')
+    # id = models.CharField(primary_key=True, max_length=50, default='')
     nombre = models.CharField(max_length=50, default='')
     es_atendida = models.BooleanField(default=False)
 
@@ -42,6 +42,9 @@ class Emergencia(models.Model):
     def add_voluntarios(self, voluntario):
         self.voluntarios.add(voluntario)
 
+    def add_actividades(self, actividad):
+        self.actividades.add(actividad)
+
     def get_es_atendida(self):
         return self.es_atendida
 
@@ -53,7 +56,3 @@ class Emergencia(models.Model):
 
     def get_actividades(self):
         return self.actividades.all()
-
-    def __str__(self):
-        return f'Emergencia: {self.nombre}, {self.es_atendida}, ||{self.voluntarios.all()}||, ' \
-               f'||{self.actividades.all()}||'

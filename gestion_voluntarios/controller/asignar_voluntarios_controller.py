@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect
 
-from gestion_voluntarios.models import Actividad, Voluntario, Emergencia
+from gestion_voluntarios.model.actividad_model import Actividad
+from gestion_voluntarios.model.voluntario_model import Voluntario
+from gestion_voluntarios.model.emergencia_model import Emergencia
 
 
 def get_emergencia(request):
@@ -11,40 +13,6 @@ def get_emergencia(request):
         'emergencias': emergencias
     }
     return context
-
-
-def get_emergencia_voluntario(request):
-    emergencias = Emergencia.objects.all()
-    context = {
-        'emergencias': emergencias
-    }
-    return context
-
-
-def cargar_actividades(request):
-    actividades = Actividad.objects.all()
-    for actividad in actividades:
-        actividad.nombre = actividad.nombre.replace('"', '')
-    context = {
-        'actividades': actividades
-    }
-    return context
-
-
-def get_voluntarios(request):
-    voluntarios = Voluntario.objects.all()
-    context = {
-        'voluntarios': voluntarios
-    }
-    return context
-
-
-def get_id_emergencia(request):
-    print("entra a get id")
-    if request.method == 'POST':
-        emergencia_id = request.POST.get("emergencia_id")
-        print("emergencia: " + emergencia_id)
-        emergencia = Emergencia.objects.get(pk=emergencia_id)
 
 
 def asignar_voluntarios(request):
@@ -79,5 +47,5 @@ def asignar_voluntarios(request):
                 emergencia.verificar_emergencia()
 
                 print("voluntario asignado a actividad")
-                print("Emergencia " + str(emergencia_id) + " es Atentida: "+str(emergencia.get_es_atendida()))
+                print("Emergencia " + str(emergencia_id) + " es Atendida: "+str(emergencia.get_es_atendida()))
         return HttpResponseRedirect('/gestion_voluntarios/')

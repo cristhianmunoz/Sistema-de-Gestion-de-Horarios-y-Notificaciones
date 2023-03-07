@@ -4,14 +4,19 @@ from django.db import connection
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
 
-#django.setup()
+django.setup()
 
 
 class Actividad(models.Model):
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, default='')
     tiene_voluntario = models.BooleanField(default=False)
-    emergencia = models.ForeignKey(Emergencia, on_delete=models.CASCADE, related_name='actividades')
+    emergencia = models.ForeignKey(Emergencia,
+                                   on_delete=models.CASCADE,
+                                   null=True,
+                                   blank=True,
+                                   related_name='actividades'
+                                   )
     # Revisar esta relación (una actividad muchos voluntarios - un voluntario muchas actividades)
     voluntarios = models.ManyToManyField('Voluntario')
 
@@ -27,6 +32,3 @@ class Actividad(models.Model):
 
     def get_voluntarios(self):
         return self.voluntarios.all()
-
-    def __str__(self):
-        return f'Actividad: {self.nombre}, {self.tiene_voluntario}, ||{self.voluntarios.all()}||'
