@@ -1,8 +1,15 @@
 from django.http import HttpResponseRedirect
-
+from django.shortcuts import render
 from gestion_voluntarios.model.actividad_model import Actividad
 from gestion_voluntarios.model.voluntario_model import Voluntario
 from gestion_voluntarios.model.emergencia_model import Emergencia
+
+
+def index(request):
+    print("Dentro del index")
+    context = {}
+    context.update(get_emergencia(request))
+    return render(request, 'asignar_voluntarios.html', context)
 
 
 def get_emergencia(request):
@@ -16,6 +23,7 @@ def get_emergencia(request):
 
 
 def asignar_voluntarios(request):
+    print("Dentro de asignar_voluntarios")
     if request.method == 'POST':
         if 'cerrar' in request.POST:
             # Emergencia
@@ -41,11 +49,10 @@ def asignar_voluntarios(request):
             emergencia = Emergencia.objects.get(pk=emergencia_id)
 
             for voluntario_id in voluntarios_seleccionados:
-
                 voluntario = Voluntario.objects.get(pk=voluntario_id)
                 actividad.asignar_voluntario(voluntario)
                 emergencia.verificar_emergencia()
 
                 print("voluntario asignado a actividad")
-                print("Emergencia " + str(emergencia_id) + " es Atendida: "+str(emergencia.get_es_atendida()))
-        return HttpResponseRedirect('/gestion_voluntarios/')
+                print("Emergencia " + str(emergencia_id) + " es Atendida: " + str(emergencia.get_es_atendida()))
+        return HttpResponseRedirect('/gestion_voluntarios/actividad')

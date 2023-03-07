@@ -4,7 +4,7 @@ from django.db import models
 
 from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
 
-django.setup()
+#django.setup()
 
 
 class Habilidad(models.Model):

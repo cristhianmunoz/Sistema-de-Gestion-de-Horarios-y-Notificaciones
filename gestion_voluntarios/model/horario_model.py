@@ -1,7 +1,7 @@
 import django
 from django.db import models
 
-django.setup()
+#django.setup()
 
 
 class Horario(models.Model):

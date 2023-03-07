@@ -5,7 +5,7 @@ from django.db import models
 from gestion_voluntarios.model.dia_semana_model import DiaSemana
 from gestion_voluntarios.model.horario_model import Horario
 
-django.setup()
+#django.setup()
 
 
 class Periodo(models.Model):
