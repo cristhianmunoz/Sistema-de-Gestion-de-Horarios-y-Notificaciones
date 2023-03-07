@@ -36,3 +36,11 @@ class Voluntario(models.Model):
             return voluntario
         except Voluntario.DoesNotExist:
             return None
+
+    def horas_experiencia_habilidad(self, habilidad_requerida):
+        from gestion_voluntarios.model.habilidad_model import Habilidad
+        habilidad = Habilidad.objects.filter(voluntario=self)
+        habilidades_habilidad_requerida = [h for h in habilidad if h.titulo == habilidad_requerida]
+        if not habilidades_habilidad_requerida:
+            return max(habilidad, key=lambda x: x.horas_experiencia, default=None)
+        return max(habilidades_habilidad_requerida, key=lambda x: x.horas_experiencia)
