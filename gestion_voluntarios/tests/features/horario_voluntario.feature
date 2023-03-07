@@ -13,10 +13,10 @@
 
     Ejemplos:
       | dia_disponible | inicio_disponible | final_disponible | dia_solicitado | inicio_solicitado | final_solicitado | disponibilidad |
-      | Lunes          | 14:00             | 16:00            | Lunes          | 14:00             | 20:00            | false          |
-      | Viernes        | 14:00             | 16:00            | Martes         | 14:00             | 16:00            | false          |
-      | Martes         | 14:00             | 21:00            | Martes         | 18:00             | 20:00            | true           |
-      | Jueves         | 7:00              | 9:00             | Jueves         | 7:00              | 9:00             | true           |
+      | Lunes          | 14:00             | 16:00            | Lunes          | 14:00             | 20:00            | False          |
+      | Viernes        | 14:00             | 16:00            | Martes         | 14:00             | 16:00            | False          |
+      | Martes         | 14:00             | 21:00            | Martes         | 18:00             | 20:00            | True           |
+      | Jueves         | 7:00              | 9:00             | Jueves         | 7:00              | 9:00             | True           |
 
     Esquema del escenario: El voluntario intenta registrar horarios de disponibilidad con horas incorrectas
     Dado que el voluntario tiene registrados “<dias_disponibles_iniciales>” días disponibles

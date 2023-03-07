@@ -1,6 +1,8 @@
 import django
 from django.db import models
-from django.utils.dateparse import parse_time
+
+from gestion_voluntarios.model.horario_model import Horario
+from gestion_voluntarios.model.periodo_model import Periodo
 
 django.setup()
 
@@ -12,23 +14,21 @@ class Voluntario(models.Model):
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
 
-    def comprobar_disponibilidad(self, horario):
-        # Itera por cada periodo del horario
-        for periodo_horario in horario.periodos.all():
-            # Itera por cada periodo del horario del voluntario
-            for periodo_voluntario in self.horario.periodos.all():
-                # Períodos del horario
-                inicio_horario = parse_time(periodo_horario.inicio)
-                fin_horario = parse_time(periodo_horario.fin)
-                # Periodos del horario del voluntario
-                inicio_horario_voluntario = parse_time(periodo_voluntario.inicio)
-                fin_horario_voluntario = parse_time(periodo_voluntario.fin)
-                # Revisa si los periodos se chocan entre sí
-                if max(inicio_horario, inicio_horario_voluntario) <= min(fin_horario, fin_horario_voluntario):
-                    # Los periodos chocan entre sí - Voluntario no disponible
-                    return False
-        # Los horarios no se chocan entre sí - Voluntario disponible
-        return True
+    def comprobar_disponibilidad(self, periodo_a_comprobar):
+        periodos = Periodo.obtener_periodos_por_id_horario(Horario.obtener_horario_por_id_voluntario(self.id).id)
+        periodo_a_comprobar_aux = Periodo.obtener_periodo_por_id(periodo_a_comprobar.id)
+
+        # comprobar la disponibilidad por etapas
+        for periodo in periodos:
+            if periodo.dia_semana != periodo_a_comprobar_aux.dia_semana:
+                continue
+            if periodo.hora_inicio > periodo_a_comprobar_aux.hora_inicio:
+                continue
+            if periodo.hora_fin < periodo_a_comprobar_aux.hora_fin:
+                continue
+            return True
+
+        return False
 
     def horas_experiencia_habilidad(self, habilidad_requerida):
         from gestion_voluntarios.model.habilidad_model import Habilidad
@@ -39,8 +39,8 @@ class Voluntario(models.Model):
         return max(habilidades_habilidad_requerida, key=lambda x: x.horas_experiencia)
 
     # Toma al Voluntario de acuerdo a su ID
-    @classmethod
-    def obtener_voluntario_por_id(cls, id_voluntario):
+    @staticmethod
+    def obtener_voluntario_por_id(id_voluntario):
         try:
             # Intenta obtener el voluntario que coincide con ese ID
             voluntario = Voluntario.objects.get(id=id_voluntario)
@@ -48,3 +48,11 @@ class Voluntario(models.Model):
         except Voluntario.DoesNotExist:
             # Retornar None en caso de que no se haya encontrado el Voluntario
             return None
+
+    def respuesta(self, emergencia_aceptada):
+        if not emergencia_aceptada:
+            bool_respuesta = 'Se ha rechazado la solicitud enviada'
+            return bool_respuesta
+        else:
+            bool_respuesta = 'Se ha confirmado la solicitud enviada'
+            return bool_respuesta

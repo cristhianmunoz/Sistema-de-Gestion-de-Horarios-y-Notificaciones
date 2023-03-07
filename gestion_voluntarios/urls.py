@@ -1,7 +1,11 @@
 from django.urls import path
 
-from .controller import voluntario_test_controller
+from gestion_voluntarios.controller import voluntario_home_controller
+from gestion_voluntarios.controller import voluntario_habilidad_controller
+from gestion_voluntarios.controller import voluntario_horario_controller
 
 urlpatterns = [
-    path('', voluntario_test_controller.index, name='index'),
+    path('', voluntario_home_controller.index, name='index'),
+    path('habilidad', voluntario_habilidad_controller.index, name='habilidad'),
+    path('horario', voluntario_horario_controller.index, name='horario'),
 ]
