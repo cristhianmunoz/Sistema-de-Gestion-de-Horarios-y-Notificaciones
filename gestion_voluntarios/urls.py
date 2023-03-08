@@ -4,6 +4,8 @@ from gestion_voluntarios.controller import voluntario_home_controller
 from gestion_voluntarios.controller import voluntario_habilidad_controller
 from gestion_voluntarios.controller import voluntario_horario_controller
 from gestion_voluntarios.controller import asignar_voluntarios_controller
+from gestion_voluntarios.controller import emergencia_controller
+
 
 urlpatterns = [
     # path('', voluntario_view.index, name='index'),
@@ -12,4 +14,6 @@ urlpatterns = [
     path('horario', voluntario_horario_controller.index, name='horario'),
     path('actividad', asignar_voluntarios_controller.index, name='actividad'),
     path('asignar', asignar_voluntarios_controller.asignar_voluntarios, name='asignar_voluntarios'),
+    path('asignar_emergencia', emergencia_controller.registrar_emergencia, name='registrar_emergencia'),
+
 ]

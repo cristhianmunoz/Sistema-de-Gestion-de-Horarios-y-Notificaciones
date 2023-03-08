@@ -1,5 +1,30 @@
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from gestion_voluntarios.model.emergencia_model import Emergencia
 from gestion_voluntarios.model.habilidad_model import Habilidad
 from gestion_voluntarios.model.voluntario_model import Voluntario
+
+
+def registrar_emergencia(request):
+    print("Dentro de crear emergencia")
+    # Obtener Parametros
+    if request.method == 'POST':
+        titulo = request.POST.get("name")
+        habilidad_requerida = request.POST.get("select")
+        nume_voluntarios_requeridos = request.POST.get("num_voluntarios")
+        descripcion = request.POST.get("descripcion")
+
+    # Comunicarse con el modelo
+    emergencia = Emergencia(
+        num_voluntarios_necesarios=nume_voluntarios_requeridos,
+        nombre=titulo,
+        asunto=descripcion,
+        habilidad_requerida=habilidad_requerida
+    )
+    emergencia.save()
+    print("Emergencia guardada con exito")
+    # Solicitar voluntarios
 
 
 def obtener_nombres_voluntario(voluntarios_seleccionados):
