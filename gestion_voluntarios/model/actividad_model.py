@@ -3,6 +3,7 @@ from django.db import models
 from django.db import connection
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
+from gestion_voluntarios.model.horario_model import Horario
 
 django.setup()
 

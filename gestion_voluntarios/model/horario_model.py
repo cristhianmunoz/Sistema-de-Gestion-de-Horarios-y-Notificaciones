@@ -12,11 +12,27 @@ class Horario(models.Model):
         blank=True,
         related_name='horario'
     )
+    actividad = models.ForeignKey(
+        'Actividad',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='horario'
+    )
 
     @staticmethod
     def obtener_horario_por_id_voluntario(id_voluntario):
         try:
             horario = Horario.objects.get(voluntario_id=id_voluntario)
+            return horario
+
+        except Horario.DoesNotExist:
+            return None
+
+    @staticmethod
+    def obtener_horario_por_id_actividad(id_actividad):
+        try:
+            horario = Horario.objects.get(actividad_id=id_actividad)
             return horario
 
         except Horario.DoesNotExist:
