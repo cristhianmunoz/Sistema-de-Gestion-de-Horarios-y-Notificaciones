@@ -1,70 +1,74 @@
-# from datetime import datetime
+# from datetime import datetime    
+import django
 from django.db import models
+from django.db import connection
+
+from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
+
+# django.setup()
 
 
-class Emergencia:
-    def __init__(self,vacantes, asunto, tipo_emergencia,habilidades, ubicacion, hora_entrada, encargado, dirigido_a, actividades, detalle, respuesta):
-        self.numero_de_voluntarios_requeridos=vacantes
-        self.asunto = asunto
-        self.tipo_emergencia = tipo_emergencia
-        self.ubicacion = ubicacion
-        self.hora_entrada = hora_entrada
-        self.encargado = encargado
-        self.dirigido_a = dirigido_a
-        self.actividades = actividades
-        self.detalle = detalle
-        self.respuesta = respuesta
-        self.habilidades_requeridas =habilidades
-
+class Emergencia(models.Model):
+    # id = models.CharField(primary_key=True, max_length=50, default='')
+    nombre = models.CharField(max_length=50, default='')
     asunto = models.CharField(max_length=200, default='')
-    tipo_emergencia = models.CharField(max_length=20, default='')
     ubicacion = models.CharField(max_length=300, default='')
     hora_entrada = models.CharField(max_length=20, default='')
-    encargado = models.CharField(max_length=20, default='')
-    dirigido_a = models.CharField(max_length=200, default='')
+    num_voluntarios_necesarios = models.IntegerField(default=0)
+    # habilidad_requerida = models.TextField(choices=HabilidadMedica.choices, default='')
     # debería ser un arreglo de voluntarios
-    actividades = models.CharField(max_length=200, default='')
-    detalle = models.CharField(max_length=500, default='')
+    es_atendida = models.BooleanField(default=False)
 
+    def verificar_emergencia(self):
+        # Comprobar que todos tengan True
+        if self.verificar_voluntarios() and self.verificar_actividades():
+            # Se cambia el valor de la bandera
+            self.es_atendida = True
+            self.save()
+
+    def verificar_actividades(self):
+        # Recorrer actividades y verificar su valor en tiene_voluntario
+        respuesta = False
+        actividades = self.actividades.all()
+        for actividad in actividades:
+            if actividad.get_tiene_voluntario():
+                respuesta = True
+            else:
+                respuesta = False
+        return respuesta
+
+    def verificar_voluntarios(self):
+        # Recorrer voluntarios y verificar su valor en es_asignado
+        respuesta = False
+        voluntarios = self.voluntarios.all()
+        for voluntario in voluntarios:
+            if voluntario.get_es_asignado():
+                respuesta = True
+            else:
+                respuesta = False
+        return respuesta
+
+    def add_voluntarios(self, voluntario):
+        self.voluntarios.add(voluntario)
+
+    def add_actividades(self, actividad):
+        self.actividades.add(actividad)
+
+    def get_es_atendida(self):
+        return self.es_atendida
+
+    def get_id(self):
+        return self.id
+
+    def get_voluntarios(self):
+        return self.voluntarios.all()
+
+    def get_actividades(self):
+        return self.actividades.all()
+    
     def notificar(self):
         texto = F'{self.asunto} \nEstimado {self.dirigido_a} el doctor {self.encargado} solicita su presencia en ' \
                 F'{self.ubicacion} a las {self.hora_entrada} para atender un(a) {self.tipo_emergencia} ' \
                 F'\nLas actividades a realizar son: \n {self.actividades} ' \
                 F'\nConsideraciones a tener en cuenta: \n {self.detalle}'
         return texto
-
-    def enviarNotificacion(self, voluntariosSeleccionados, habilidades):
-        notificacion = 0
-        for nombre in voluntariosSeleccionados:
-            notificacion += 1
-            print(f"Estimado: {nombre} se necesita de su ayuda")
-            print(f"Las habilidades requeridas son: {habilidades}")
-        return f"Se han enviado: {notificacion} notificaciones a los voluntarios seleccionados"
-
-    def getHabilidadesRequeridas(self):
-        return self.habilidades_requeridas
-
-    @staticmethod
-    def obtenerVoluntarios():
-        return ['Juan', 'Carlos', 'Andres']
-
-    def filtrarVoluntarios(self, voluntarios, habilidadesVoluntario):
-        return self.obtenerVoluntarios()
-        '''voluntariosSeleccionados = []
-        for vol in voluntarios:
-            if vol.habilidades == habilidadesVoluntario:
-                voluntariosSeleccionados.append(vol)
-            return voluntariosSeleccionados'''
-
-    def obtenerNumeroVoluntariosSeleccionados(self, voluntariosSeleccionados):
-        return len(voluntariosSeleccionados)
-
-    def crear_habilidades_requeridas_emergencia(self):
-        # Se crean las habilidades requeridas
-        habilidades_requeridas = []
-        for habilidad in habilidades:
-            habilidad_descripcion = habilidad.obtener_descripcion_habilidad()
-            habilidades_requeridas.append(habilidad_descripcion)
-        # Lista o un array de habilidades
-        return habilidades_requeridas
-

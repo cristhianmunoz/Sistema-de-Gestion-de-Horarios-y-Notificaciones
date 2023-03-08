@@ -1,10 +1,8 @@
 def obtener_voluntarios_confirmados(lista_voluntarios):
     lista_confirmados = []
     for voluntario in lista_voluntarios:
-        # print(voluntario)
         if voluntario.estado == 'D':
             lista_confirmados.append(voluntario)
-    # print(lista_confirmados)
     return lista_confirmados
 
 

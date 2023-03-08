@@ -2,11 +2,8 @@ from gestion_voluntarios.model.voluntario_model import Voluntario
 
 # Listado de escenarios del feature habilidades_voluntario
 habilidades_voluntario_scenarios = [
-    'El voluntario intenta registrar una habilidad médica registrada previamente',
-    'El voluntario intenta registrar una habilidad médica que no existe',
-    'El voluntario registra una nueva habilidad médica',
-    'El voluntario intenta registrar una habilidad médica con horas de experiencia incorrectas -- @1.1 ',
-    'El voluntario intenta registrar una habilidad médica con horas de experiencia incorrectas -- @1.2 '
+    'El voluntario registra una nueva habilidad médica en su perfil',
+    'El voluntario actualiza la información de una de sus habilidades médicas'
 ]
 
 # Listado de escenarios del feature horario_voluntario
@@ -15,10 +12,12 @@ horario_voluntario_scenarios = [
     'Se comprueba la disponibilidad del voluntario en un horario específico -- @1.2 ',
     'Se comprueba la disponibilidad del voluntario en un horario específico -- @1.3 ',
     'Se comprueba la disponibilidad del voluntario en un horario específico -- @1.4 ',
-    'El voluntario intenta registrar horarios de disponibilidad con horas incorrectas -- @1.1 ',
-    'El voluntario intenta registrar horarios de disponibilidad con horas incorrectas -- @1.2 ',
-    'El voluntario intenta registrar horarios de disponibilidad con horas incorrectas -- @1.3 ',
-    'El voluntario registra su horario de disponibilidad'
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.1 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.2 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.3 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.4 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.5 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.6 ',
 ]
 
 

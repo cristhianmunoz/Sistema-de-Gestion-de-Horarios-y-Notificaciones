@@ -1,103 +1,103 @@
+import random
+
 from behave import *
+from faker import Faker
 
 from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
 from gestion_voluntarios.model.habilidad_model import Habilidad
 from gestion_voluntarios.model.voluntario_model import Voluntario
 
 use_step_matcher("parse")
+fake = Faker('es_ES')
 
 
-@step(
-    'que el voluntario tiene registrada “{cantidad_habilidades_registradas:f}” habilidad médica con el título '
-    '“{titulo_habilidad}” con “{horas_experiencia:f}” horas de experiencia y la descripción “{descripcion_habilidad}”'
-)
-def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas_experiencia, descripcion_habilidad):
+@step('que soy un voluntario inscrito en el programa de voluntariado de la institución médica')
+def step_impl(context):
     context.voluntario = Voluntario(
-        nombre='Andrés',
-        apellido='Lozano',
-        edad=24
+        nombre=fake.first_name(),
+        apellido=fake.last_name(),
+        edad=fake.pyint(min_value=18, max_value=50)
     )
+
     context.voluntario.save()
 
-    context.habilidad = Habilidad(
-        titulo=titulo_habilidad,
-        descripcion=descripcion_habilidad,
-        horas_experiencia=horas_experiencia,
+    print('Se creó el voluntario ' + context.voluntario.nombre + ' ' + context.voluntario.apellido + '.')
+
+
+@step('registre mi nueva habilidad médica en mi perfil de voluntario')
+def step_impl(context):
+    context.nueva_habilidad = Habilidad(
+        titulo=random.choice(list(HabilidadMedica)),
+        descripcion=fake.sentence(nb_words=10),
+        horas_experiencia=fake.pyint(min_value=1, max_value=1000),
         voluntario_id=context.voluntario.id
     )
-    context.habilidad.save()
 
-    assert Habilidad.obtener_numero_habilidades_por_id_voluntario(
-        context.voluntario.id) == cantidad_habilidades_registradas
+    Habilidad.agregar_habilidad(context.nueva_habilidad)
 
-
-@step(
-    'únicamente existen las habilidades médicas “{habilidad_suturar}”, “{habilidad_vacunar}” y “{habilidad_anestesiar}”'
-)
-def step_impl(context, habilidad_suturar, habilidad_vacunar, habilidad_anestesiar):
-    assert habilidad_suturar in HabilidadMedica
-    assert habilidad_vacunar in HabilidadMedica
-    assert habilidad_anestesiar in HabilidadMedica
+    print(
+        'Se agregó la habilidad ' +
+        context.nueva_habilidad.titulo + ' en el perfil del voluntario ' +
+        context.voluntario.nombre + ' ' + context.voluntario.apellido + '.'
+    )
 
 
-@step(
-    'el voluntario intente registrar una nueva habilidad médica con el título “{titulo_habilidad}”, '
-    'con “{horas_experiencia:f}” horas de experiencia y la descripción “{descripcion_habilidad}”'
-)
-def step_impl(context, titulo_habilidad, horas_experiencia, descripcion_habilidad):
-    context.habilidad = Habilidad(
-        titulo=titulo_habilidad,
-        descripcion=descripcion_habilidad,
-        horas_experiencia=horas_experiencia,
+@step('la nueva habilidad médica estará registrada en mi perfil de voluntario')
+def step_impl(context):
+    habilidades_registradas = Habilidad.obtener_habilidades_por_id_voluntario(context.voluntario.id)
+
+    assert context.nueva_habilidad in habilidades_registradas
+
+    print(
+        'La habilidad ' + context.nueva_habilidad.titulo +
+        ' se encuentra registrada en el perfil del voluntario ' +
+        context.voluntario.nombre + ' ' + context.voluntario.apellido + '.\n'
+    )
+
+
+@step('Tengo registrada al menos una habilidad médica en mi perfil de voluntario')
+def step_impl(context):
+    context.habilidad_registrada = Habilidad(
+        titulo=random.choice(list(HabilidadMedica)),
+        descripcion=fake.sentence(nb_words=10),
+        horas_experiencia=fake.pyint(min_value=1, max_value=1000),
         voluntario_id=context.voluntario.id
     )
-    context.habilidad.save()
 
+    Habilidad.agregar_habilidad(context.habilidad_registrada)
 
-@step(
-    'el voluntario tendrá registrada “{cantidad_habilidades_registradas:f}” habilidad médica con el título '
-    '“{titulo_habilidad}”, con “{horas_experiencia:f}” horas de experiencia y la descripción “{descripcion_habilidad}”'
-)
-def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas_experiencia, descripcion_habilidad):
-    habilidades = Habilidad.obtener_habilidades_por_id_voluntario(context.voluntario.id)
-
-    assert Habilidad.obtener_numero_habilidades_por_id_voluntario(
-        context.voluntario.id) == cantidad_habilidades_registradas
-
-    assert habilidades[0].titulo == titulo_habilidad
-    assert habilidades[0].descripcion == descripcion_habilidad
-    assert habilidades[0].horas_experiencia == horas_experiencia
-
-
-@step('que el voluntario tiene registradas “{cantidad_habilidades_registradas:f}” habilidades médicas')
-def step_impl(context, cantidad_habilidades_registradas):
-    context.voluntario = Voluntario(
-        nombre='Francisco',
-        apellido='Encalada',
-        edad=22
+    print(
+        'La habilidad ' +
+        context.habilidad_registrada.titulo + ' se encuentra registrada en el perfil del voluntario ' +
+        context.voluntario.nombre + ' ' + context.voluntario.apellido + '.'
     )
-    context.voluntario.save()
-
-    assert Habilidad.obtener_numero_habilidades_por_id_voluntario(
-        context.voluntario.id) == cantidad_habilidades_registradas
 
 
-@step('el voluntario tendrá registradas “{cantidad_habilidades_registradas:f}” habilidades médicas')
-def step_impl(context, cantidad_habilidades_registradas):
-    assert Habilidad.obtener_numero_habilidades_por_id_voluntario(
-        context.voluntario.id) == cantidad_habilidades_registradas
+@step('actualice la información de una de mis habilidades médicas en mi perfil de voluntario')
+def step_impl(context):
+    context.habilidad_actualizada = Habilidad(
+        id=context.habilidad_registrada.id,
+        titulo=context.habilidad_registrada.titulo,
+        descripcion=fake.sentence(nb_words=10),
+        horas_experiencia=fake.pyint(min_value=1, max_value=1000),
+        voluntario_id=context.voluntario.id
+    )
+
+    Habilidad.editar_habilidad(context.habilidad_actualizada)
+
+    print(
+        'La habilidad ' + context.habilidad_actualizada.titulo + ' del voluntario ' +
+        context.voluntario.nombre + ' ' + context.voluntario.apellido + ' ha sido actualizada.'
+    )
 
 
-@step(
-    'el voluntario tendrá registrada “{cantidad_habilidades_registradas:f}” habilidad médica registrada con el título '
-    '“{titulo_habilidad}”, con “{horas_experiencia:f}” horas de experiencia y la descripción “{descripcion_habilidad}”'
-)
-def step_impl(context, cantidad_habilidades_registradas, titulo_habilidad, horas_experiencia, descripcion_habilidad):
-    habilidades = Habilidad.obtener_habilidades_por_id_voluntario(context.voluntario.id)
+@step("la habilidad médica será actualizada en mi perfil de voluntario")
+def step_impl(context):
+    habilidades_registradas = Habilidad.obtener_habilidades_por_id_voluntario(context.voluntario.id)
 
-    assert Habilidad.obtener_numero_habilidades_por_id_voluntario(
-        context.voluntario.id) == cantidad_habilidades_registradas
+    assert context.habilidad_actualizada in habilidades_registradas
 
-    assert habilidades[0].titulo == titulo_habilidad
-    assert habilidades[0].descripcion == descripcion_habilidad
-    assert habilidades[0].horas_experiencia == horas_experiencia
+    print(
+        'La habilidad ' + context.habilidad_actualizada.titulo + ' del voluntario ' +
+        context.voluntario.nombre + ' ' + context.voluntario.apellido + ' se encuentra actualizada.'
+    )
