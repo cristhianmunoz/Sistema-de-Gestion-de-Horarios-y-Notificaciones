@@ -12,10 +12,12 @@ horario_voluntario_scenarios = [
     'Se comprueba la disponibilidad del voluntario en un horario específico -- @1.2 ',
     'Se comprueba la disponibilidad del voluntario en un horario específico -- @1.3 ',
     'Se comprueba la disponibilidad del voluntario en un horario específico -- @1.4 ',
-    'El voluntario intenta registrar horarios de disponibilidad con horas incorrectas -- @1.1 ',
-    'El voluntario intenta registrar horarios de disponibilidad con horas incorrectas -- @1.2 ',
-    'El voluntario intenta registrar horarios de disponibilidad con horas incorrectas -- @1.3 ',
-    'El voluntario registra su horario de disponibilidad'
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.1 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.2 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.3 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.4 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.5 ',
+    'El voluntario intenta registrar periodos de disponibilidad en su horario -- @1.6 ',
 ]
 
 

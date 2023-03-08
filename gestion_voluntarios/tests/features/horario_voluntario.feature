@@ -30,5 +30,8 @@ Característica: Registro de horarios de los voluntarios
       | Jueves         | 20:00             | 13:00            |
       | Lunes          | 20:00             | 27:00            |
       | Lunes          | -10:00            | 12:00            |
+      | Martes         | 9:00              | 11:00            |
+      | Martes         | 9:00              | 11:00            |
+      | Domingo        | 9:00              | 11:00            |
 
 
