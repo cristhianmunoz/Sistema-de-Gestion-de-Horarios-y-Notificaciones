@@ -1,18 +1,12 @@
-def obtener_voluntarios_confirmados(lista_voluntarios):
+import random
+
+
+def obtener_voluntarios_confirmados(lista_voluntarios, num_voluntarios_requeridos):
     lista_confirmados = []
-    for voluntario in lista_voluntarios:
-        if voluntario.estado == 'D':
-            lista_confirmados.append(voluntario)
+    for i in range(num_voluntarios_requeridos):
+        lista_confirmados.append(lista_voluntarios[i])
+
     return lista_confirmados
-
-
-def obtener_voluntarios_rechazados(lista_voluntarios):
-    lista_rechazos = []
-    for voluntario in lista_voluntarios:
-        if voluntario.estado == 'O':
-            lista_rechazos.append(voluntario)
-
-    return lista_rechazos
 
 
 def contar_elementos(lista):
@@ -21,6 +15,18 @@ def contar_elementos(lista):
         contador += 1
 
     return contador
+
+
+def notificar(emergencia, lista_voluntarios):
+    for voluntario in lista_voluntarios:
+        texto = F'{emergencia.nombre} \n{emergencia.asunto} \nEstimado {voluntario.nombre}, se solicita su presencia en ' \
+                F'{emergencia.ubicacion} a las {emergencia.hora_entrada}\n'
+        print(texto)
+
+
+def letra_random():
+    letras = ['D', 'O']
+    return random.choice(letras)
 
 
 def obtener_nombres(lista):
