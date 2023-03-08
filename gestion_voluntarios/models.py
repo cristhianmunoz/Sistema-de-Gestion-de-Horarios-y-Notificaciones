@@ -1,1 +1,0 @@
-from gestion_voluntarios.model.emergencia_model import Emergencia

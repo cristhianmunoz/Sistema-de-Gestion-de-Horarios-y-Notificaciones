@@ -1,6 +1,7 @@
 import django
 from django.core.exceptions import ValidationError
 from django.db import models
+from datetime import datetime as dt
 
 from gestion_voluntarios.model.dia_semana_model import DiaSemana
 from gestion_voluntarios.model.horario_model import Horario
@@ -22,18 +23,12 @@ class Periodo(models.Model):
 
     def save(self, *args, **kwargs):
         # Comprobando que la hora de inicio no sea mayor a la hora de fin
-        if self.hora_inicio > self.hora_fin:
-            return False
+        if not self.es_consistente():
+            return
 
         # Comprobando que el periodo no choque con otro periodo existente
-        periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
-        for periodo in periodos:
-            if periodo.dia_semana != self.dia_semana:
-                continue
-            if periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
-                continue
-            if periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
-                continue
+        if not self.no_tiene_conflicto():
+            return
 
         super().save(*args, **kwargs)
 
@@ -58,12 +53,13 @@ class Periodo(models.Model):
     @staticmethod
     def editar_periodo(periodo):
         try:
-            Periodo.objects.filter(id=periodo.id).update(
-                dia_semana=periodo.dia_semana,
-                hora_inicio=periodo.hora_inicio,
-                hora_fin=periodo.hora_fin
-            )
-            return True
+            if periodo.no_tiene_conflicto() and periodo.es_consistente():
+                Periodo.objects.filter(id=periodo.id).update(
+                    dia_semana=periodo.dia_semana,
+                    hora_inicio=periodo.hora_inicio,
+                    hora_fin=periodo.hora_fin
+                )
+                return True
 
         except ValidationError:
             return False
@@ -110,3 +106,40 @@ class Periodo(models.Model):
 
         except Periodo.DoesNotExist:
             return None
+
+    def es_consistente(self):
+        if self.hora_inicio > self.hora_fin:
+            return False
+        return True
+
+    def no_tiene_conflicto(self):
+        periodos = Periodo.obtener_periodos_por_id_horario(self.horario.id)
+        for periodo in periodos:
+            # Comprobar: Si el día de la semana no coincide, continuar
+            if periodo.dia_semana != self.dia_semana:
+                continue
+
+            # Comprobar: Si las horas del periodo chocan con las horas del otro
+            if self.hora_inicio <= periodo.hora_fin and self.hora_fin >= periodo.hora_inicio:
+                return False
+            # Comprobar: Si la hora de inicio está dentro de un periodo existente, continuar
+            if not periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
+                continue
+            # Comprobar: Si la hora de fin está dentro de un periodo existente, continuar
+            if not periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
+                continue
+            return False
+
+        return True
+
+    @staticmethod
+    def str_to_time(string):
+        try:
+            # Retorna la hora si se cumple con:
+            # 1. La hora enviada está entre 00:00 y 23:59
+            # 2. Se cumple con el formato %H:%M
+            return dt.strptime(string, '%H:%M').time(), True
+        except ValueError:
+            # En caso de no cumplir con las condiciones, se envía una hora "dummy" y el valor booleano para no guardar
+            # el periodo relacionado en la base de datos
+            return dt.strptime("00:00", '%H:%M'), False
