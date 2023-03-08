@@ -3,10 +3,11 @@ from behave import *
 use_step_matcher("parse")
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
-from gestion_voluntarios.controller.voluntario_controller import obtener_voluntarios_controller,nombre_voluntario,obtener_voluntario
+from gestion_voluntarios.controller.voluntario_controller import obtener_voluntarios_controller,nombre_voluntario,obtener_voluntario, obtener_voluntarios_controller2
 from gestion_voluntarios.controller.emergencia_controller import solicitar_servicios_voluntarios, \
-    verificar_habilidades_requeridas, obtener_nombres_voluntario, enviar_notificaciones
+    verificar_habilidades_requeridas, obtener_nombres_voluntario, enviar_notificaciones, ordenar_voluntarios,voluntarios_seleccionados
 from gestion_voluntarios.model.habilidad_model import Habilidad
+
 
 
 @step(
@@ -49,14 +50,29 @@ def step_impl(context):
     # Implementar un metodo para poder hacer la comparativa y expandirle
     assert len(context.voluntarios_filtrados) == int(context.emergencia.numero_de_voluntarios_requeridos)
 
+@step(
+    'consiga la "{lista_voluntarios_ordenados}" de mayor a menor segun el número de habilidades del voluntario que cumplen de las "{habilidades_requeridas}"')
+def step_impl(context, lista_voluntarios_ordenados, habilidades_requeridas):
+    context.voluntarios_ordenados = ordenar_voluntarios(obtener_voluntarios_controller2(), habilidades_requeridas.split(","))
+    print("ordenados", obtener_nombres_voluntario(context.voluntarios_ordenados))
+    assert obtener_nombres_voluntario(context.voluntarios_ordenados) == lista_voluntarios_ordenados.split(",")
 
-@step('solicite servicios a cada "{voluntario}" registrado en el sistema')
-def step_impl(context, voluntario):
-    assert nombre_voluntario(obtener_voluntario()) == voluntario
+'''@step(
+    'se enviaran "{numero_de_notificaciones}" notificaciones a "{numero_voluntarios_requeridos}" de la lista de los voluntarios "{lista_voluntarios_ordenados}"')
+def step_impl(context, numero_de_notificaciones, numero_voluntarios_requeridos,
+              lista_voluntarios_ordenados):
+    #complementar con el método que me da la lista de voluntarioa
+    context.voluntarios_filtrados_finales=voluntarios_seleccionados(context.voluntarios_ordenados, int(numero_voluntarios_requeridos))
+    assert enviar_notificaciones(context.voluntarios_filtrados_finales) == int(numero_de_notificaciones)
+'''
+
+@step('si el numero de "{voluntario_seleccionado}" es igual al "{numero_voluntarios_requeridos}"')
+def step_impl(context, voluntario_seleccionado, numero_voluntarios_requeridos):
+    context.voluntarios_seleccionados_final = voluntarios_seleccionados(context.voluntarios_ordenados, int(numero_voluntarios_requeridos))
+    assert len(context.voluntarios_seleccionados_final) == int(numero_voluntarios_requeridos)
 
 
-@step('se selecciona al voluntario y se lo coloca en una {lista_voluntarios_seleccionados}"')
-def step_impl(context, lista_voluntarios_seleccionados):
-
-    raise NotImplementedError(
-        u'STEP: Entonces se selecciona al voluntario y se lo coloca en una <lista_voluntarios_seleccionados>"')
+@step('se enviaran "{numero_de_notificaciones}" notificaciones a la lista de "{voluntarios_seleccionados}"')
+def step_impl(context, numero_de_notificaciones, voluntarios_seleccionados):
+    # complementar con el método que me da la lista de voluntarioa
+    assert enviar_notificaciones(context.voluntarios_seleccionados_final) == int(numero_de_notificaciones)
