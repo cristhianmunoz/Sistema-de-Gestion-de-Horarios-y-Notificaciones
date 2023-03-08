@@ -1,0 +1,28 @@
+{% block content %}
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Estado</th>
+            <th>Es_Asignado</th>
+            <th>Emergencia_ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for voluntario in voluntarios %}
+            <tr>
+                <td>{{ voluntario.id }}</td>
+                <td>{{ voluntario.nombre }}</td>
+                <td>{{ voluntario.apellido }}</td>
+                <td>{{ voluntario.edad }}</td>
+                <td>{{ voluntario.estado }}</td>
+                <td>{{ voluntario.es_asignado }}</td>
+                <td>{{ voluntario.emergencia_id }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

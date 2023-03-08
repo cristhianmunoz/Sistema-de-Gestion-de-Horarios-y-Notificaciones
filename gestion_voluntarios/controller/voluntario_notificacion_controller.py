@@ -1,5 +1,10 @@
 import random
 
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from gestion_voluntarios.model.voluntario_model import Voluntario
+
 
 def obtener_voluntarios_confirmados(lista_voluntarios, num_voluntarios_requeridos):
     lista_confirmados = []
@@ -41,3 +46,21 @@ def obtener_nombres(lista):
         else:
             aux_lista += voluntario.to_string()
     return aux_lista
+
+
+def index(request):
+    print("Dentro del index")
+    context = {}
+    context.update(get_voluntarios(request))
+    return render(request, 'notificacion.html', context)
+
+
+def get_voluntarios(request):
+    voluntarios = Voluntario.objects.all()
+    contexto = {'voluntarios': voluntarios}
+    return render(request, 'notificacion.html', contexto)
+
+
+def listar_voluntarios(request):
+    print("Dentro de notificación")
+
