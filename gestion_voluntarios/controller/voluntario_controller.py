@@ -9,6 +9,12 @@ voluntarios_de_prueba = [
 
 vol = Voluntario("Carlos", "Ramirez", 30, ['Saturacion', 'RCP', 'Respiracion'], 'D')
 
+voluntarios_de_prueba2 = [
+    Voluntario("Carlos", "Ramirez", 30, ['Saturacion', 'RCP', 'Respiracion'], 'D'),
+    Voluntario("Juan", "Ramirez", 30, ['Saturacion', 'RCP', 'Respiracion'], 'D'),
+    Voluntario("Andres", "Ramirez", 30, ['RCP'], 'D'),
+    Voluntario("Kevin", "Ramirez", 30, ['Saturacion', 'RCP'], 'D')
+]
 """def obtener_voluntarios_controller():
     # Se supone que existen ya voluntarios dentro de la base de datos
     # estos son simplemente voluntarios de prueba
@@ -29,3 +35,7 @@ def nombre_voluntario(voluntario):
 
 def obtener_voluntario():
     return vol
+
+def obtener_voluntarios_controller2():
+    # Obtiene los voluntarios registrados dentro de la base de datos
+    return voluntarios_de_prueba2
