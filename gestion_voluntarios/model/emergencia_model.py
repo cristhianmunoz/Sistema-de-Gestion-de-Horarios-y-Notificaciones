@@ -70,6 +70,8 @@ class Emergencia(models.Model):
         voluntarios_sin_habilidad = list(filter(lambda x: x.titulo != self.habilidad_requerida, lista_ordenada))
         self.lista_priorizada = self.ordenar_voluntarios(voluntarios_con_habilidad) + self.ordenar_voluntarios(
             voluntarios_sin_habilidad)[:self.vacantes]
+        print("LISSBHD")
+        print(self.lista_priorizada)
         return self.lista_priorizada
 
     def ordenar_voluntarios(self, lista_filter):
