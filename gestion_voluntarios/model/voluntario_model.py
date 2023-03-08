@@ -3,6 +3,7 @@ from django.db import models
 
 from gestion_voluntarios.model.horario_model import Horario
 from gestion_voluntarios.model.periodo_model import Periodo
+from gestion_voluntarios.model.emergencia_model import Emergencia
 
 django.setup()
 
@@ -12,6 +13,16 @@ class Voluntario(models.Model):
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
+    es_asignado = models.BooleanField(default=False)
+    emergencia = models.ForeignKey(Emergencia,
+                                   on_delete=models.CASCADE,
+                                   null=True,
+                                   blank=True,
+                                   related_name='voluntarios'
+                                   )
+
+    def get_es_asignado(self):
+        return self.es_asignado
 
     def comprobar_disponibilidad(self, periodo_a_comprobar):
         periodos = Periodo.obtener_periodos_por_id_horario(Horario.obtener_horario_por_id_voluntario(self.id).id)
