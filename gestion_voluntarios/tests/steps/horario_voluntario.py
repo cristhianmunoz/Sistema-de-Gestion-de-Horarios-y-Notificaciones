@@ -8,6 +8,7 @@ from gestion_voluntarios.model.periodo_model import Periodo
 from gestion_voluntarios.model.voluntario_model import Voluntario
 
 use_step_matcher("parse")
+fake = Faker('es_ES')
 
 
 @step(
@@ -17,9 +18,9 @@ use_step_matcher("parse")
 def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
     # Voluntario
     context.voluntario = Voluntario(
-        nombre='Francisco',
-        apellido='Encalada',
-        edad=23
+        nombre=fake.first_name(),
+        apellido=fake.last_name(),
+        edad=fake.pyint(min_value=18, max_value=50)
     )
     context.voluntario.save()
 
@@ -67,12 +68,10 @@ def step_impl(context, disponibilidad):
 
 @step("que el voluntario tiene un horario con sus periodos de disponibilidad")
 def step_impl(context):
-    fake = Faker('es_ES')
-
     context.voluntario = Voluntario(
-        nombre='Rafael',
-        apellido='Pozo',
-        edad=23
+        nombre=fake.first_name(),
+        apellido=fake.last_name(),
+        edad=fake.pyint(min_value=18, max_value=50)
     )
     context.voluntario.save()
 
@@ -102,9 +101,7 @@ def step_impl(context):
     "el voluntario quiera registrar su disponibilidad los días “{dia_solicitado}” en el periodo de “{"
     "inicio_solicitado}” a “{final_solicitado}” horas")
 def step_impl(context, dia_solicitado, inicio_solicitado, final_solicitado):
-    context.horario_solicitud = Horario()
-    context.horario_solicitud.save()
-
+    # Se transforman los string y se retorna un booleano si se cumplen con las condiciones indicadas en str_to_time()
     hora_inicio_solicitado, flag_inicio_correcto = Periodo.str_to_time(inicio_solicitado)
     hora_fin_solicitado, flag_fin_correcto = Periodo.str_to_time(final_solicitado)
 
@@ -113,29 +110,32 @@ def step_impl(context, dia_solicitado, inicio_solicitado, final_solicitado):
         dia_semana=dia_solicitado,
         hora_inicio=hora_inicio_solicitado,
         hora_fin=hora_fin_solicitado,
-        horario_id=context.horario_solicitud.id
+        horario_id=context.horario.id
     )
 
     # Variable booleana para determinar si la hora entregada está entre 00:00 y 23:59
     context.flag_se_registra = flag_inicio_correcto and flag_fin_correcto
 
-    if flag_inicio_correcto and flag_fin_correcto:
-        context.periodo_solicitud.save()
-
 
 @step("los datos introducidos son consistentes")
 def step_impl(context):
     if context.flag_se_registra:
+        # Si se procede con el registro, se comprueba la consistencia y se retorna el booleano correspondiente
         context.flag_se_registra = context.periodo_solicitud.es_consistente()
 
 
 @step("el periodo introducido no tiene conflictos con otros periodos")
 def step_impl(context):
     if context.flag_se_registra:
+        # Si se procede con el registro, se comprueba conflictos y se retorna el booleano correspondiente
         context.flag_se_registra = context.periodo_solicitud.no_tiene_conflicto()
 
 
 @step("se registrará el periodo solicitado")
 def step_impl(context):
     if context.flag_se_registra:
+        # Después de haber comprobado las condiciones de registro del periodo se guarda en la base de datos
         context.periodo_solicitud.save()
+
+    periodos_registrados = Periodo.obtener_periodos_por_id_horario(context.horario.id)
+    assert (context.periodo_solicitud in periodos_registrados) == context.flag_se_registra

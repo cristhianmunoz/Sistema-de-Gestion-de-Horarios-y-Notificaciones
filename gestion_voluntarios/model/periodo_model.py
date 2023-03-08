@@ -118,15 +118,28 @@ class Periodo(models.Model):
             # Comprobar: Si el día de la semana no coincide, continuar
             if periodo.dia_semana != self.dia_semana:
                 continue
+
             # Comprobar: Si las horas del periodo chocan con las horas del otro
             if self.hora_inicio <= periodo.hora_fin and self.hora_fin >= periodo.hora_inicio:
                 return False
+            # Comprobar: Si la hora de inicio está dentro de un periodo existente, continuar
+            if not periodo.hora_inicio < self.hora_inicio < periodo.hora_fin:
+                continue
+            # Comprobar: Si la hora de fin está dentro de un periodo existente, continuar
+            if not periodo.hora_inicio < self.hora_fin < periodo.hora_fin:
+                continue
+            return False
 
         return True
 
     @staticmethod
     def str_to_time(string):
         try:
+            # Retorna la hora si se cumple con:
+            # 1. La hora enviada está entre 00:00 y 23:59
+            # 2. Se cumple con el formato %H:%M
             return dt.strptime(string, '%H:%M').time(), True
         except ValueError:
-            return None, False
+            # En caso de no cumplir con las condiciones, se envía una hora "dummy" y el valor booleano para no guardar
+            # el periodo relacionado en la base de datos
+            return dt.strptime("00:00", '%H:%M'), False
