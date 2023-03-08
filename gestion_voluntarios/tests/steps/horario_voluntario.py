@@ -22,6 +22,7 @@ def step_impl(context, dia_disponible, inicio_disponible, final_disponible):
         apellido=fake.last_name(),
         edad=fake.pyint(min_value=18, max_value=50)
     )
+    print(context.voluntario)
     context.voluntario.save()
 
     # Horario del voluntario
