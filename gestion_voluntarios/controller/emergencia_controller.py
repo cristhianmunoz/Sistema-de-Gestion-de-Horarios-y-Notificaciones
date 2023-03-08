@@ -4,27 +4,66 @@ from django.shortcuts import render
 from gestion_voluntarios.model.emergencia_model import Emergencia
 from gestion_voluntarios.model.habilidad_model import Habilidad
 from gestion_voluntarios.model.voluntario_model import Voluntario
+from django.shortcuts import redirect
+
+def index(request):
+    print("Dentro del index")
+    context = {}
+    #context.update(get_emergencia(request))
+    return render(request, 'emergencia_view.html', context)
 
 
 def registrar_emergencia(request):
     print("Dentro de crear emergencia")
+    id_emergencia = ''
     # Obtener Parametros
     if request.method == 'POST':
-        titulo = request.POST.get("name")
-        habilidad_requerida = request.POST.get("select")
-        nume_voluntarios_requeridos = request.POST.get("num_voluntarios")
-        descripcion = request.POST.get("descripcion")
+        if "creacion" == request.POST.get('operacion'):
+            titulo = request.POST.get('name')
+            habilidad_requerida = request.POST.get('select')
+            nume_voluntarios_requeridos = request.POST.get('num_voluntarios')
+            descripcion = request.POST.get('descripcion')
 
-    # Comunicarse con el modelo
-    emergencia = Emergencia(
-        num_voluntarios_necesarios=nume_voluntarios_requeridos,
-        nombre=titulo,
-        asunto=descripcion,
-        habilidad_requerida=habilidad_requerida
-    )
-    emergencia.save()
-    print("Emergencia guardada con exito")
+
+        # Comunicarse con el modelo
+        emergencia = Emergencia(
+            num_voluntarios_necesarios=nume_voluntarios_requeridos,
+            nombre=titulo,
+            asunto=descripcion,
+            habilidad_requerida=habilidad_requerida
+        )
+        Emergencia.imprimir(request.POST.get('name'))
+        emergencia.save()
+        print("Emergencia guardada con exito")
+
+        context = {'emergencia': emergencia}
+    return render(request, 'emergencia_view.html', context)
+    #return redirect(f'/gestion_voluntarios/emergencia?id_emergencia={emergencia.id}')
+
+
     # Solicitar voluntarios
+
+def cargar_emergencia(request):
+    print("Dentro de crear emergencia")
+    emergencia = Emergencia()
+    voluntarios_seleccionados = []
+    # Obtener Parametros
+    if request.method == 'POST':
+        if "solicitar" == request.POST.get('operacion'):
+            id_emergencia = request.POST.get('id_emergencia')
+            print('id: ',id_emergencia)
+            emergencia = Emergencia.obtener_emergencia_por_id(id_emergencia)
+            voluntariosRegistrados = Voluntario.get_voluntarios()
+            voluntarios_seleccionados = solicitar_servicios_voluntarios(voluntariosRegistrados,
+                                                                        emergencia.habilidad_requerida)
+            # si los voluntarios que cumplen con la habilidad requerido son mayores al número de voluntarios requeridos
+            if len(voluntarios_seleccionados) >= emergencia.num_voluntarios_necesarios:
+                enviar_notificaciones(voluntarios_seleccionados)
+            else:
+                enviar_notificaciones_exitosas(voluntarios_seleccionados)
+
+    return redirect(request, 'voluntario_notificacion_controller.py', emergencia, voluntarios_seleccionados)
+
 
 
 def obtener_nombres_voluntario(voluntarios_seleccionados):
@@ -34,13 +73,16 @@ def obtener_nombres_voluntario(voluntarios_seleccionados):
     return nombres_voluntarios_prueba
 
 
-def solicitar_servicios_voluntarios(voluntarios, habilidad_requerida):
+def solicitar_servicios_voluntarios(voluntarios, emergencia):
     voluntario_seleccionado = []
     for voluntario in voluntarios:
         habilidades_voluntario = Habilidad.obtener_habilidades_por_id_voluntario(voluntario.id)
         for habilidad_voluntario in habilidades_voluntario:
-            if habilidad_requerida in habilidad_voluntario.titulo:
+            if emergencia.habilidad_requerida in habilidad_voluntario.titulo:
                 voluntario = Voluntario.obtener_voluntario_por_id(voluntario.id)
+                #Voluntario.objects.get(id=emergencia.id)
+                voluntario.emergencia_id = emergencia.id
+                voluntario.editar_voluntario(voluntario)
                 voluntario_seleccionado.append(voluntario)
                 break
     return voluntario_seleccionado
@@ -89,6 +131,8 @@ def enviar_notificaciones(voluntarios_seleccionados):
     aux = 0
     for voluntario in voluntarios_seleccionados:
         aux += 1
+    print('Numero de notificaciones exitosas enviadas fueron: ', aux)
+
     return aux
 
 
@@ -122,5 +166,5 @@ def enviar_notificaciones_exitosas(voluntarios_seleccionados):
     aux = 0
     for voluntario in voluntarios_seleccionados:
         aux += 1
-    print('Numero de notificaciones exitosas enviadas fueron: ', aux)
+    print('Lo siento no existen voluntarios suficientes. Numero de notificaciones exitosas enviadas fueron: ', aux)
     return aux

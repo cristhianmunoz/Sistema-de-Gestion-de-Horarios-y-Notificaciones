@@ -51,3 +51,4 @@ class NotificacionView(View):
         voluntarios = Voluntario('Juan', 'Pérez', 30, 'Sutura', 'D')
 
         return voluntarios
+

@@ -74,4 +74,15 @@ class Emergencia(models.Model):
                 F'\nConsideraciones a tener en cuenta: \n {self.detalle}'
         return texto
 
+    def imprimir(nombre):
+        print("imprimir: ",nombre)
+        return 0
 
+    @staticmethod
+    def obtener_emergencia_por_id(id_emergencia):
+
+        try:
+            emergencia = Emergencia.objects.get(id=id_emergencia)
+            return emergencia
+        except Emergencia.DoesNotExist:
+            return None

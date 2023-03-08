@@ -35,3 +35,8 @@ def obtener_nombres(lista):
         else:
             aux_lista += voluntario.to_string()
     return aux_lista
+
+def obtener_voluntarios(request):
+    if request.method == "GET":
+        if "ver_notificaciones" == request.POST.get('operacion'):
+

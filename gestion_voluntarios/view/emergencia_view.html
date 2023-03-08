@@ -10,6 +10,7 @@
 </head>
 <body>
 <form method="post" action="{% url 'registrar_emergencia' %}">
+    {% csrf_token %}
     <div class="left-column">
         <div>
             <label for="na">Titulo Emergencia <span>*</span></label>
@@ -38,7 +39,22 @@
         </div>
     </div>
     <input type="submit" value="Registrar emergencia">
+    <input type="hidden" id="operacion" name="operacion" value="creacion">
+</form >
+<form method="post" action="{% url 'cargar_emergencia' %}">
+    {% csrf_token %}
+    <div>
+        <input type="submit" value="Solicitar voluntarios" >
+        <input type="hidden" id="id_emergencia" name="id_emergencia" value={{ emergencia.id }}>
+        <input type="hidden" id="operacion" name="operacion" value="solicitar">
+    </div>
 </form>
-
+    <script>
+        const urlParams= new URLSearchParams(window.location.search);
+        const id=urlParams.getAll('id_emergencia')
+    </script>
 </body>
 </html>
+
+
+emergencia.id
