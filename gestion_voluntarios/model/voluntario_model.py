@@ -37,16 +37,6 @@ class Voluntario(models.Model):
                 continue
             return True
 
-                # comprobar la disponibilidad por etapas
-                for periodo in periodos:
-                    if periodo.diaSemana != periodo_a_comprobar_aux.diaSemana:
-                        continue
-                    if periodo.horaInicio > periodo_a_comprobar_aux.horaInicio:
-                        continue
-                    if periodo.horaFin < periodo_a_comprobar_aux.horaFin:
-                        continue
-                    return True
-
         return False
 
     @staticmethod
