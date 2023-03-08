@@ -16,14 +16,14 @@ Una aplicación web para la planificación eficiente del tiempo de trabajo en or
 
 A continuación, se muestran las historias de usuario asignadas a cada uno de los grupos de trabajo. 
 
-| **Grupo de Trabajo** | **Historia de Usuario**                                                                                                                                                                                      | **Estimación (Story Points)** |
-|:--------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------:|
-|       Grupo 1        | **HU5:** Como administrador del personal medico deseo gestionar los horarios de personal para organizar la atención a pacientes y determinar tiempos críticos.                                               |               8               |
+| **Grupo de Trabajo** | **Historia de Usuario**                                                                                                                                                                                     | **Estimación (Story Points)** |
+|:--------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------:|
+|       Grupo 1        | **HU5:** Como administrador del personal medico deseo gestionar los horarios de personal para organizar la atención a pacientes y determinar tiempos críticos.                                              |               8               |
 |       Grupo 2        | **HU1:** Como voluntario inscrito en el programa de voluntariado quiero que tomen en cuenta mis habilidades y mi disponibilidad para ganar experiencia y adquirir conocimientos prácticos en el área médica. |               3               |
-|       Grupo 3        | **HU4:** Como administrador del personal médico, quiero que se asignen actividades a los voluntarios para atender una emergencia.                                                                            |               5               |
-|       Grupo 4        | **HU2:** Como voluntario quiero confirmar mi asistencia a una emergencia médica para ayudar rápidamente cuando se me necesite.                                                                               |               3               |
-|       Grupo 5        | **HU6:** Como administrador del personal médico deseo solicitar servicios a los voluntarios, para atender las emergencias médicas.                                                                           |               3               |
-|       Grupo 6        | **HU3:** Como administrador quiero priorizar los voluntarios que han confirmado su asistencia para que no se exceda el personal requerido.                                                                   |               5               |
+|       Grupo 3        | **HU4:** Como administrador del personal médico, quiero asignar voluntarios a los actividades para atender una emergencia.                                                                               |               5               |
+|       Grupo 4        | **HU2:** Como voluntario quiero confirmar mi asistencia a una emergencia médica para ayudar rápidamente cuando se me necesite.                                                                              |               3               |
+|       Grupo 5        | **HU6:** Como administrador del personal médico deseo solicitar servicios a los voluntarios, para atender las emergencias médicas.                                                                          |               3               |
+|       Grupo 6        | **HU3:** Como administrador quiero priorizar los voluntarios que han confirmado su asistencia para que no se exceda el personal requerido.                                                                  |               5               |
 
 ## 2. Instrucciones de Inicio
 
