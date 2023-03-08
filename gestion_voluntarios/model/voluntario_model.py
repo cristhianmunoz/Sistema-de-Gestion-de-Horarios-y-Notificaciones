@@ -13,7 +13,6 @@ class Voluntario(models.Model):
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
-    habilidades = models.CharField(max_length=500, default='')
     estado = models.CharField(max_length=1, default="D")
     es_asignado = models.BooleanField(default=False)
     emergencia = models.ForeignKey(Emergencia,
@@ -53,3 +52,6 @@ class Voluntario(models.Model):
 
     def to_string(self):
         return self.nombre + " " + self.apellido
+
+    def confirmar_asistencia(self):
+        return self.estado == 'O'

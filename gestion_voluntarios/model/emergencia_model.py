@@ -3,21 +3,20 @@ import django
 from django.db import models
 from django.db import connection
 
-django.setup()
+from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
+
+# django.setup()
 
 
 class Emergencia(models.Model):
     # id = models.CharField(primary_key=True, max_length=50, default='')
     nombre = models.CharField(max_length=50, default='')
     asunto = models.CharField(max_length=200, default='')
-    tipo_emergencia = models.CharField(max_length=20, default='')
     ubicacion = models.CharField(max_length=300, default='')
     hora_entrada = models.CharField(max_length=20, default='')
-    encargado = models.CharField(max_length=20, default='')
-    dirigido_a = models.CharField(max_length=200, default='')
+    num_voluntarios_necesarios = models.IntegerField(default=0)
+    # habilidad_requerida = models.TextField(choices=HabilidadMedica.choices, default='')
     # debería ser un arreglo de voluntarios
-    actividades = models.CharField(max_length=200, default='')
-    detalle = models.CharField(max_length=500, default='')
     es_atendida = models.BooleanField(default=False)
 
     def verificar_emergencia(self):
