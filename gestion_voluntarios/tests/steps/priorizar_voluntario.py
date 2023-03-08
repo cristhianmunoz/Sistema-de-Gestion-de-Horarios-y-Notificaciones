@@ -52,5 +52,4 @@ def step_impl(context, habilidad_solicitada):
 
 @step('tendré una lista "{lista_voluntarios_priorizada}" priorizada')
 def step_impl(context, lista_voluntarios_priorizada):
-    print(context.emergencia.obtener_lista_nombres())
     assert context.emergencia.obtener_lista_nombres() == eval(lista_voluntarios_priorizada)

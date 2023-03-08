@@ -14,5 +14,4 @@ urlpatterns = [
     path('actividad', asignar_voluntarios_controller.index, name='actividad'),
     path('asignar', asignar_voluntarios_controller.asignar_voluntarios, name='asignar_voluntarios'),
     path('priorizar', priorizar_voluntario_controller.index, name='index'),
-    path('procesar_formulario', priorizar_voluntario_controller.priorizar_voluntarios, name='procesar_formulario')
 ]
