@@ -80,4 +80,6 @@ class Habilidad(models.Model):
         except Habilidad.DoesNotExist:
             return 0
 
-
+    @staticmethod
+    def get_habilidades():
+        return Habilidad.objects.all()

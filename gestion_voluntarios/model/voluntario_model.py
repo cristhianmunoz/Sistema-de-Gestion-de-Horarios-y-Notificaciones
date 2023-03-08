@@ -22,7 +22,6 @@ class Voluntario(models.Model):
                                    related_name='voluntarios'
                                    )
 
-
     def get_es_asignado(self):
         return self.es_asignado
 
@@ -58,5 +57,5 @@ class Voluntario(models.Model):
         return self.estado == 'O'
 
     @staticmethod
-    def get_voluntarios(self):
-        return self.voluntario.all()
+    def get_voluntarios():
+        return Voluntario.objects.all()

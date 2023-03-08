@@ -9,12 +9,16 @@ def obtener_nombres_voluntario(voluntarios_seleccionados):
     return nombres_voluntarios_prueba
 
 
-def solicitar_servicios_voluntarios(voluntarios, habilidades_requeridas):
-    voluntarios_seleccionados = []
+def solicitar_servicios_voluntarios(voluntarios, habilidad_requerida):
+    voluntario_seleccionado = []
     for voluntario in voluntarios:
-        if verificar_habilidades_requeridas(voluntario, habilidades_requeridas):
-            voluntarios_seleccionados.append(voluntario)
-    return voluntarios_seleccionados
+        habilidades_voluntario = Habilidad.obtener_habilidades_por_id_voluntario(voluntario.id)
+        for habilidad_voluntario in habilidades_voluntario:
+            if habilidad_requerida in habilidad_voluntario.titulo:
+                voluntario = Voluntario.obtener_voluntario_por_id(voluntario.id)
+                voluntario_seleccionado.append(voluntario)
+                break
+    return voluntario_seleccionado
 
 
 def voluntarios_seleccionados(voluntarios_ordenados, numero_voluntarios_requeridos):
@@ -71,3 +75,27 @@ def seleccionar_voluntarios(habilidad_requerida):
                 voluntarios_seleccionados.append(voluntario)
                 break
     return voluntarios_seleccionados
+
+
+def verificar_numero_voluntarios_requeridos(tamanio_seleccionados, numero_requeridos):
+    if tamanio_seleccionados == numero_requeridos:
+        return tamanio_seleccionados
+    elif tamanio_seleccionados <= numero_requeridos:
+        return tamanio_seleccionados
+
+
+def obtener_voluntarios_finales(voluntarios_seleccionados, voluntarios_requeridos):
+    voluntarios_finales = []
+    numero_voluntarios_seleccionados = verificar_numero_voluntarios_requeridos(len(voluntarios_seleccionados),
+                                                                               int(voluntarios_requeridos))
+    for voluntario in range(numero_voluntarios_seleccionados):
+        voluntarios_finales.append(voluntarios_seleccionados[voluntario])
+    return voluntarios_finales
+
+
+def enviar_notificaciones_exitosas(voluntarios_seleccionados):
+    aux = 0
+    for voluntario in voluntarios_seleccionados:
+        aux += 1
+    print('Numero de notificaciones exitosas enviadas fueron: ', aux)
+    return aux

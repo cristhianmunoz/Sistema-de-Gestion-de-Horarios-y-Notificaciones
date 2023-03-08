@@ -1,6 +1,3 @@
-import django
-import os
-import datetime
 import random
 
 from faker import Faker
@@ -13,10 +10,8 @@ use_step_matcher("parse")
 faker = Faker("es_ES")
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
-from gestion_voluntarios.controller.voluntario_controller import obtener_voluntarios_controller
 from gestion_voluntarios.controller.emergencia_controller import solicitar_servicios_voluntarios, \
-    verificar_habilidades_requeridas, obtener_nombres_voluntario, enviar_notificaciones, \
-    voluntarios_seleccionados, seleccionar_voluntarios
+    obtener_voluntarios_finales, enviar_notificaciones, obtener_nombres_voluntario, enviar_notificaciones_exitosas
 from gestion_voluntarios.model.habilidad_model import Habilidad
 
 
@@ -35,7 +30,7 @@ def step_impl(context, num_voluntarios_necesarios, nombre, asunto, habilidad_req
 
 @step('solicite servicios a los "{voluntarios}" registrados en el sistema')
 def step_impl(context, voluntarios):
-    # Simular una creacion de voluntarios
+    # Creacion de voluntarios de prueba
     context.numero_voluntarios = len(voluntarios.split(","))
     for i in range(context.numero_voluntarios):
         context.voluntarioTest = Voluntario(
@@ -44,57 +39,70 @@ def step_impl(context, voluntarios):
         )
         context.voluntarioTest.save()
 
-        nueva_habilidad = Habilidad(
+        context.habilidad_pepe = Habilidad(
+            titulo=HabilidadMedica.ANESTESIAR,
+            descripcion=faker.sentence(nb_words=10),
+            horas_experiencia=faker.pyint(min_value=1, max_value=1000),
+            voluntario_id=4
+        )
+    Habilidad.agregar_habilidad(context.habilidad_pepe)
+
+    context.habilidad_juan = Habilidad(
+        titulo=HabilidadMedica.ANESTESIAR,
+        descripcion=faker.sentence(nb_words=10),
+        horas_experiencia=faker.pyint(min_value=1, max_value=1000),
+        voluntario_id=2
+    )
+    Habilidad.agregar_habilidad(context.habilidad_juan)
+    """
+    # Creacion y asignacion de habilidades_prueba en los voluntarios_prueba
+    for i in range(context.numero_voluntarios):
+        context.nueva_habilidad = Habilidad(
             titulo=random.choice(list(HabilidadMedica)),
             descripcion=faker.sentence(nb_words=10),
             horas_experiencia=faker.pyint(min_value=1, max_value=1000),
-            voluntario_id=context.voluntarioTest.id
+            voluntario_id=faker.pyint(min_value=1, max_value=4)
         )
-        Habilidad.agregar_habilidad(nueva_habilidad)
+        Habilidad.agregar_habilidad(context.nueva_habilidad)
+    """
+
+    # Se envia a cada uno de los voluntarios y se realiza el filtrado
+    context.voluntarios_db = Voluntario.get_voluntarios()
+    assert obtener_nombres_voluntario(context.voluntarios_db) == voluntarios.split(",")
+    context.voluntarios_seleccionados = solicitar_servicios_voluntarios(context.voluntarios_db,
+                                                                        context.emergenciaTest.habilidad_requerida)
 
 
-@step('las "{habilidades_voluntario}" "{cumple}" cumplen "{habilidades_requeridas}"')
-def step_impl(context, habilidades_voluntario, cumple, habilidades_requeridas):
-    context.voluntarios_filtrados = solicitar_servicios_voluntarios(obtener_voluntarios_controller(),
-                                                                    context.emergencia.habilidades_requeridas)
-    assert verificar_habilidades_requeridas(habilidades_voluntario, habilidades_requeridas) == cumple
+@step('si el numero de "{voluntario_seleccionado}" es igual al "{num_voluntarios_necesarios}"')
+def step_impl(context, voluntario_seleccionado, num_voluntarios_necesarios):
+    context.voluntarios_finales = obtener_voluntarios_finales(context.voluntarios_seleccionados,
+                                                              int(num_voluntarios_necesarios))
+    assert obtener_nombres_voluntario(context.voluntarios_finales) == voluntario_seleccionado.split(",")
+    assert len(context.voluntarios_finales) == int(num_voluntarios_necesarios)
 
 
-@step('conseguire el filtrado con la {lista_voluntarios_seleccionados}"')
-def step_impl(context, lista_voluntarios_seleccionados):
-    assert obtener_nombres_voluntario(context.voluntarios_filtrados) == lista_voluntarios_seleccionados.split(",")
-
-
-@step('se enviaran "{numero_de_notificaciones}" notificaciones en base a la lista de voluntarios seleccionados')
+@step('se enviaran "{numero_de_notificaciones}" notificaciones a la lista de voluntarios finales')
 def step_impl(context, numero_de_notificaciones):
-    assert enviar_notificaciones(context.voluntarios_filtrados) == int(numero_de_notificaciones)
+    assert enviar_notificaciones(context.voluntarios_finales) == int(numero_de_notificaciones)
+
+    # BORRAR BASE DE DATOS
+    lista_vol = Voluntario.get_voluntarios()
+    for v in lista_vol:
+        v.delete()
+
+    lista_habilidades = Habilidad.get_habilidades()
+    for va in lista_habilidades:
+        va.delete()
+    context.emergenciaTest.delete()
 
 
-@step("la cantidad de voluntarios seleccionados sea igual a la cantidad de voluntarios requeridos")
-def step_impl(context):
-    # Implementar un metodo para poder hacer la comparativa y expandirle
-    assert len(context.voluntarios_filtrados) == int(context.emergencia.numero_de_voluntarios_requeridos)
+@step('si el numero de "{voluntario_seleccionado}" es menor al "{num_voluntarios_necesarios}"')
+def step_impl(context, voluntario_seleccionado, num_voluntarios_necesarios):
+    context.voluntarios_finales = obtener_voluntarios_finales(context.voluntarios_seleccionados,
+                                                              int(num_voluntarios_necesarios))
+    assert len(context.voluntarios_finales) <= int(num_voluntarios_necesarios)
 
 
-@step('si el numero de "{voluntario_seleccionado}" es igual al "{numero_voluntarios_requeridos}"')
-def step_impl(context, voluntario_seleccionado, numero_voluntarios_requeridos):
-    context.voluntarios_seleccionados_final = voluntarios_seleccionados(context.voluntarios_ordenados,
-                                                                        int(numero_voluntarios_requeridos))
-    assert len(context.voluntarios_seleccionados_final) == int(numero_voluntarios_requeridos)
-
-
-@step('se enviaran "{numero_de_notificaciones}" notificaciones a la lista de "{voluntarios_seleccionados}"')
-def step_impl(context, numero_de_notificaciones, voluntarios_seleccionados):
-    # complementar con el método que me da la lista de voluntarioa
-    assert enviar_notificaciones(context.voluntarios_seleccionados_final) == int(numero_de_notificaciones)
-
-
-@step(
-    'consiga la "{lista_voluntarios_ordenados}" de mayor a menor segun el número de habilidades del voluntario que '
-    'cumplen de la habilidad requerida"')
-def step_impl(context, lista_voluntarios_ordenados):
-    # Los voluntarios de la base de datos
-    context.habilidad_requerida_emergencia = Emergencia.habilidad_requerida
-    seleccionar_voluntarios(context.habilidad_requerida_emergencia)
-
-    pass
+@step('se enviara unicamente "{numero_de_notificaciones_exitosas}" a la lista de voluntarios finales')
+def step_impl(context, numero_de_notificaciones_exitosas):
+    assert enviar_notificaciones_exitosas(context.voluntarios_finales) == int(numero_de_notificaciones_exitosas)
