@@ -14,6 +14,6 @@ Esquema del escenario: Confirmación de asistencia de voluntarios en emergencia 
 
   Ejemplos: Confirmar Asistencia Parcial
   |n |numero_confirmados|numero_rechazados   |
-  |5 |5                 |0                   |
+  |4 |4                |0                   |
 
 

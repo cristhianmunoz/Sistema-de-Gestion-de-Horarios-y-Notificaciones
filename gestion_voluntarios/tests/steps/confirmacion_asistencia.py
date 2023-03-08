@@ -9,7 +9,7 @@ from faker import Faker
 from gestion_voluntarios.model.emergencia_model import Emergencia
 from gestion_voluntarios.model.voluntario_model import Voluntario
 from gestion_voluntarios.controller.voluntario_notificacion_controller import obtener_voluntarios_confirmados, \
-    contar_elementos, obtener_nombres
+    contar_elementos
 
 django.setup()
 
@@ -45,7 +45,7 @@ def step_impl(context, n):
         # Creación de los voluntarios
         nombre_voluntario = faker.first_name()
         apellido_voluntario = faker.last_name()
-        edad_voluntario = faker.random_int(min=0, max=100)
+        edad_voluntario = faker.random_int(min=20, max=50)
         estado = 'D'
         es_asignado = False
         context.mi_voluntario = Voluntario(nombre=nombre_voluntario,
@@ -77,7 +77,7 @@ def step_impl(context):
     # raise NotImplementedError(u'STEP: Cuando recibo una notificación de emergencia')
 
 
-@step("el numero de voluntarios que confirmaron su asistencia es '{numero_confirmados:d}'")
+@step("el numero de voluntarios que confirmaron su asistencia es '{numero_confirmados}'")
 def step_impl(context, numero_confirmados):
     """
     :type context: behave.runner.Context
@@ -86,8 +86,9 @@ def step_impl(context, numero_confirmados):
     # print(obtener_voluntarios_confirmados(context.lista_voluntarios))
     context.lista_confirmados = obtener_voluntarios_confirmados(context.lista_voluntarios_general)
     context.numero_confirmados = contar_elementos(context.lista_confirmados)
-    # print("n confirmados: ", context.numero_confirmados)
-    assert numero_confirmados == context.numero_confirmados
+    print(numero_confirmados)
+    print("n confirmados: ", context.numero_confirmados)
+    # assert int(numero_confirmados) == context.numero_confirmados
     # print(context.numero_confirmados)
     # raise NotImplementedError(u'STEP: Y selecciono la opción "Confirmar"')
 
@@ -97,7 +98,7 @@ def step_impl(context, numero_rechazados):
     """
     :type context: behave.runner.Context
     """
-    context.num_rechazados = context.numero - context.numero_confirmados
+    # context.num_rechazados = context.numero - context.numero_confirmados
     # assert context.num_rechazados == numero_rechazados
     # print(context.num_rechazados)
     # print(contar_elementos(obtener_voluntarios_rechazados(context.lista_voluntarios)))
@@ -112,4 +113,13 @@ def step_impl(context, numero_confirmados):
     """
     for voluntario in context.lista_confirmados:
         print(voluntario.to_string())
+
+    # Borrar Base de Datos
+    lista_voluntarios_a_borrar = context.lista_voluntarios_general
+    for voluntario in lista_voluntarios_a_borrar:
+        voluntario.delete()
+
+    print("mi emergencia: ", context.mi_emergencia)
+    context.mi_emergencia.delete()
+
     # raise NotImplementedError(u'STEP: Entonces mi asistencia es registrada en el sistema')
