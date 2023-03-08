@@ -16,24 +16,6 @@ def solicitar_servicios_voluntarios(voluntarios, habilidades_requeridas):
             voluntarios_seleccionados.append(voluntario)
     return voluntarios_seleccionados
 
-def ordenar_voluntarios(voluntarios, habilidades_requeridas):
-    #voluntarios ordenados por el número de habilidades que cumplen
-    voluntarios_ordenados = []
-    lista_diccionarios_voluntarios = []
-    contador_habilidades = 0
-    for voluntario in voluntarios:
-        for habilidad_voluntario in voluntario.habilidades:
-            if habilidad_voluntario in habilidades_requeridas:
-               contador_habilidades += 1
-
-        diccionario_voluntario = {"voluntario":voluntario,"habilidades_cumplidas":contador_habilidades}
-        lista_diccionarios_voluntarios.append(diccionario_voluntario)
-        contador_habilidades = 0
-    #ordenar voluntarios
-    lista_diccionarios_voluntarios.sort(key=lambda voluntario:voluntario["habilidades_cumplidas"], reverse=True)
-    for diccionario_voluntario in lista_diccionarios_voluntarios:
-        voluntarios_ordenados.append(diccionario_voluntario["voluntario"])
-    return voluntarios_ordenados
 
 def voluntarios_seleccionados(voluntarios_ordenados, numero_voluntarios_requeridos):
     voluntarios_seleccionados = []
@@ -79,3 +61,13 @@ def enviar_notificaciones(voluntarios_seleccionados):
     for voluntario in voluntarios_seleccionados:
         aux += 1
     return aux
+
+
+def seleccionar_voluntarios(habilidad_requerida):
+    voluntarios_seleccionados = []
+    for voluntario in Voluntario.get_voluntarios():
+        for habilidad_voluntario in Habilidad.obtener_habilidades_por_id_voluntario(voluntario.id):
+            if habilidad_voluntario.titulo == habilidad_requerida:
+                voluntarios_seleccionados.append(voluntario)
+                break
+    return voluntarios_seleccionados

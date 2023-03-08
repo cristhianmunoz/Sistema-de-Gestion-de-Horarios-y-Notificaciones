@@ -7,10 +7,7 @@ from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
 django.setup()
 
 
-class Habilidad:
-    def __init__(self, descripcion_habilidad):
-        self.descripcion_habilidad = descripcion_habilidad
-
+class Habilidad(models.Model):
     titulo = models.CharField(max_length=20, choices=HabilidadMedica.choices)
     descripcion = models.CharField(max_length=200, default='')
     horas_experiencia = models.PositiveIntegerField(default=0)
@@ -82,3 +79,5 @@ class Habilidad:
 
         except Habilidad.DoesNotExist:
             return 0
+
+

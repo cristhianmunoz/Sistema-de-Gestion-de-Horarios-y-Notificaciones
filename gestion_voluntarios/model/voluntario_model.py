@@ -13,7 +13,6 @@ class Voluntario(models.Model):
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
-    habilidades = models.CharField(max_length=500, default='')
     estado = models.CharField(max_length=1, default="D")
     es_asignado = models.BooleanField(default=False)
     emergencia = models.ForeignKey(Emergencia,
@@ -22,6 +21,7 @@ class Voluntario(models.Model):
                                    blank=True,
                                    related_name='voluntarios'
                                    )
+
 
     def get_es_asignado(self):
         return self.es_asignado
@@ -56,3 +56,7 @@ class Voluntario(models.Model):
 
     def confirmar_asistencia(self):
         return self.estado == 'O'
+
+    @staticmethod
+    def get_voluntarios(self):
+        return self.voluntario.all()
