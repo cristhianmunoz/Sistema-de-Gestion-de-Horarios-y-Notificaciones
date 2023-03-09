@@ -16,6 +16,10 @@ def get_emergencia(request):
     emergencias = Emergencia.objects.all()
     for emergencia in emergencias:
         emergencia.nombre = emergencia.nombre.replace('"', '')
+        emergencia.lista = list(Voluntario.objects.filter(emergencia_id=emergencia.id))
+        emergencia.priorizar_voluntarios()
+        emergencia.lista = []
+        emergencia.lista.append(emergencia.obtener_lista_voluntarios())
     context = {
         'emergencias': emergencias
     }
