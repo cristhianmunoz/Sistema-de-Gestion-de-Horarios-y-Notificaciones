@@ -36,18 +36,21 @@
             <td>{{ emergencia.nombre }}
 
                 <script type="text/javascript">
-                voluntarios_por_emergencia.push({ key: "Emergencia{{emergencia.id}}", value :
-                    [
-                        {% for voluntario in emergencia.voluntarios.all %}
-                            {
-                                id: "{{ voluntario.id }}",
-                                nombre: "{{ voluntario.nombre }}",
-                                apellido: "{{ voluntario.apellido }}",
-                                es_asignado:"{{ voluntario.es_asignado }}"
-                            },
-                        {% endfor %}
-                    ]
-                });
+                    voluntarios_por_emergencia.push({
+                        key: "Emergencia{{emergencia.id}}", value:
+                            [
+                                {% for v in emergencia.lista %}
+                                    {% for voluntario in v  %}
+                                        {
+                                            id: "{{ voluntario.id }}",
+                                            nombre: "{{ voluntario.nombre }}",
+                                            apellido: "{{ voluntario.apellido }}",
+                                            es_asignado: "{{ voluntario.es_asignado }}"
+                                        },
+                                    {% endfor %}
+                                {% endfor %}
+                            ]
+                    });
                 </script>
 
             </td>
@@ -134,19 +137,19 @@
             $('#voluntarios_emergencia').empty();
 
             // Se recorre el diccionario en función del id de la emergencia
-            voluntarios_por_emergencia.forEach(function (item_emergencia){
-                if(item_emergencia.key == "Emergencia"+emergencia_id.toString()){
+            voluntarios_por_emergencia.forEach(function (item_emergencia) {
+                if (item_emergencia.key == "Emergencia" + emergencia_id.toString()) {
                     voluntarios_emergencia_seleccionada = item_emergencia.value;
                 }
             })
 
             // Se agregan los voluntarios para imprimirse en el div de la línea 109
-            voluntarios_emergencia_seleccionada.forEach(function (voluntarioFor){
+            voluntarios_emergencia_seleccionada.forEach(function (voluntarioFor) {
                     $('#voluntarios_emergencia').append(
                         "<input class='form-check-input' type='checkbox' name='ids_voluntarios' " +
-                        "value='"+voluntarioFor.id+"'/>" + "    "+
-                        "<label class='form-check-label' >"+voluntarioFor.nombre+"</label>" + " " +
-                        "<label class='form-check-label' >"+voluntarioFor.apellido+"</label>" +
+                        "value='" + voluntarioFor.id + "'/>" + "    " +
+                        "<label class='form-check-label' >" + voluntarioFor.nombre + "</label>" + " " +
+                        "<label class='form-check-label' >" + voluntarioFor.apellido + "</label>" +
                         "<br/>");
                 }
             );
