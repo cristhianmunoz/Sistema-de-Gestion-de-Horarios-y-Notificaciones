@@ -39,14 +39,11 @@ def registrar_emergencia(request):
 
         context = {'emergencia': emergencia}
     return render(request, 'emergencia_view.html', context)
-    #return redirect(f'/gestion_voluntarios/emergencia?id_emergencia={emergencia.id}')
-
 
     # Solicitar voluntarios
 
 def cargar_emergencia(request):
     print("Dentro de crear emergencia")
-    num_voluntarios_seleccionado = 0
     # Obtener Parametros
     if request.method == 'POST':
         if "solicitar" == request.POST.get('operacion'):
@@ -72,8 +69,6 @@ def obtener_nombres_voluntario(voluntarios_seleccionados):
         nombres_voluntarios_prueba.append(voluntario.nombre)
     return nombres_voluntarios_prueba
 
-
-
 def solicitar_servicios_voluntarios(voluntarios, emergencia):
     voluntario_seleccionado = []
     for voluntario in voluntarios:
@@ -81,13 +76,11 @@ def solicitar_servicios_voluntarios(voluntarios, emergencia):
         for habilidad_voluntario in habilidades_voluntario:
             if emergencia.habilidad_requerida in habilidad_voluntario.titulo:
                 voluntario = Voluntario.obtener_voluntario_por_id(voluntario.id)
-                #Voluntario.objects.get(id=emergencia.id)
                 voluntario.emergencia_id = emergencia.id
                 voluntario.editar_voluntario(voluntario)
                 voluntario_seleccionado.append(voluntario)
                 break
     return voluntario_seleccionado
-
 
 def voluntarios_seleccionados(voluntarios_ordenados, numero_voluntarios_requeridos):
     voluntarios_seleccionados = []
@@ -95,38 +88,6 @@ def voluntarios_seleccionados(voluntarios_ordenados, numero_voluntarios_requerid
         voluntarios_seleccionados.append(voluntarios_ordenados)
 
     return voluntarios_seleccionados
-
-
-def verificar_habilidades_requeridas(voluntario, habilidades_requeridas):
-    # Ampliar más la logica para ver que sucede con las habilidades
-    # Obtener la lista de habilidades requeridas y comparar con las habilidades del voluntario
-    habilidad_requerida_usuario = []
-    # Estas listas son con fines de prueba con base a lo que llegue en el feature
-    habilidades_voluntarios = [Habilidad("Saturacion"), Habilidad("RCP"), Habilidad("Respiracion")]
-    habilidades_requeridas = [Habilidad("Saturacion"), Habilidad("RCP")]
-
-    # Voluntario seleccionados de prueba
-    carlos = Voluntario("Carlos", "Ramirez", 30, ['Saturacion', 'RCP', 'Respiracion'], 'D')
-    juan = Voluntario("Juan", "Ramirez", 30, ['Saturacion', 'RCP', 'Respiracion'], 'D')
-    andres = Voluntario("Andres", "Ramirez", 30, ['Saturacion', 'RCP', 'Respiracion'], 'D')
-    # LINEA IMPORTANTE
-    # habilidades_voluntarios = voluntario.habilidades
-
-    # Caso cuando las habilidades son exactamente las mismas
-    if habilidades_requeridas == habilidades_voluntarios:
-
-        return "si"
-    else:
-        # Caso cuando las habilidades de los voluntarios son mayores
-        # Se compara la lista de habilidades requeridas con base en la lista de habilidades voluntario
-        for habilidad_requerida in habilidades_requeridas:
-            for habilidad_voluntario in habilidades_voluntarios:
-                if habilidad_requerida.descripcion_habilidad == habilidad_voluntario.descripcion_habilidad:
-                    habilidad_requerida_usuario.append(habilidad_requerida)
-                    return "si"
-                else:
-                    return "no"
-
 
 def enviar_notificaciones(voluntarios_seleccionados):
     aux = 0

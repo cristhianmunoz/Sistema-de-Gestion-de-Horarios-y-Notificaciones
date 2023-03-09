@@ -2,8 +2,6 @@ import random
 
 from faker import Faker
 from behave import *
-
-from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
 from gestion_voluntarios.model.voluntario_model import Voluntario
 
 use_step_matcher("parse")
@@ -11,7 +9,7 @@ faker = Faker("es_ES")
 
 from gestion_voluntarios.model.emergencia_model import Emergencia
 from gestion_voluntarios.controller.emergencia_controller import solicitar_servicios_voluntarios, \
-    obtener_voluntarios_finales, enviar_notificaciones, obtener_nombres_voluntario, enviar_notificaciones_exitosas
+    enviar_notificaciones, obtener_nombres_voluntario, enviar_notificaciones_exitosas
 from gestion_voluntarios.model.habilidad_model import Habilidad
 
 
@@ -54,44 +52,6 @@ def step_impl(context, voluntarios):
             habilidad_voluntario.save()
         lista_voluntarios.append(voluntario_creado)
 
-
-
-
-    """
-    for i in range(context.numero_voluntarios):
-        context.voluntarioTest = Voluntario(
-            nombre=voluntarios.split(",")[i],
-            edad=faker.random_int(min=18, max=60)
-        )
-        context.voluntarioTest.save()
-
-        context.habilidad = Habilidad(
-            titulo=HabilidadMedica.ANESTESIAR,
-            descripcion=faker.sentence(nb_words=10),
-            horas_experiencia=faker.pyint(min_value=1, max_value=1000),
-            voluntario_id=context.voluntarioTest.id
-        )
-        Habilidad.agregar_habilidad(context.habilidad)
-        context.habilidad = Habilidad(
-            titulo=HabilidadMedica.SUTURAR,
-            descripcion=faker.sentence(nb_words=10),
-            horas_experiencia=faker.pyint(min_value=1, max_value=1000),
-            voluntario_id=context.voluntarioTest.id
-        )
-        Habilidad.agregar_habilidad(context.habilidad)
-"""
-    """
-    # Creacion y asignacion de habilidades_prueba en los voluntarios_prueba
-    for i in range(context.numero_voluntarios):
-        context.nueva_habilidad = Habilidad(
-            titulo=random.choice(list(HabilidadMedica)),
-            descripcion=faker.sentence(nb_words=10),
-            horas_experiencia=faker.pyint(min_value=1, max_value=1000),
-            voluntario_id=faker.pyint(min_value=1, max_value=4)
-        )
-        Habilidad.agregar_habilidad(context.nueva_habilidad)
-    """
-
     # Se envia a cada uno de los voluntarios y se realiza el filtrado
     context.voluntarios_db = Voluntario.get_voluntarios()
     assert obtener_nombres_voluntario(context.voluntarios_db) == obtener_nombres_voluntario(lista_voluntarios)
@@ -101,9 +61,6 @@ def step_impl(context, voluntarios):
 
 @step('si el numero de "{voluntario_seleccionado}" es mayor o igual al "{num_voluntarios_necesarios}"')
 def step_impl(context, voluntario_seleccionado, num_voluntarios_necesarios):
-    #context.voluntarios_finales = obtener_voluntarios_finales(context.voluntarios_seleccionados,
-    #                                                          int(num_voluntarios_necesarios))
-    #assert obtener_nombres_voluntario(context.voluntarios_finales) == voluntario_seleccionado.split(",")
     assert len(context.voluntarios_seleccionados) >= int(num_voluntarios_necesarios)
 
 
@@ -124,8 +81,6 @@ def step_impl(context, numero_de_notificaciones):
 
 @step('si el numero de "{voluntario_seleccionado}" es menor al "{num_voluntarios_necesarios}"')
 def step_impl(context, voluntario_seleccionado, num_voluntarios_necesarios):
-    #context.voluntarios_finales = obtener_voluntarios_finales(context.voluntarios_seleccionados,
-    #                                                          int(num_voluntarios_necesarios))
     assert len(context.voluntarios_seleccionados) < int(num_voluntarios_necesarios)
 
 
