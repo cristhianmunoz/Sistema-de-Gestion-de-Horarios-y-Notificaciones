@@ -142,3 +142,42 @@ def step_impl(context):
             print("Periodos:" + info.periodos + '\n\n')
     else:
         print('No existen tiempos críticos.')
+
+@step('que el sistema tiene la actividad "{actividad_registrada}" registrada en el sistema')
+def step_impl(context, actividad_registrada):
+    context.actividadTest = Actividad(
+        nombre=actividad_registrada)
+
+    context.actividadTest.save()
+
+
+@step(
+    'el administrador del personal médico asigna un horario los dias "{dia_asignado}" '
+    'en el periodo de "{hora_inicio}" a "{hora_fin}" horas para la actividad')
+def step_impl(context, dia_asignado, hora_inicio, hora_fin):
+
+    # Crear un horario para la actividad
+    context.horario = Horario(
+        actividad_id=context.actividadTest.id
+    )
+    context.horario.save()
+
+    dia_semana_test = random.choice(list(DiaSemana))
+    hora_inicio_test = datetime.time(random.randint(9, 12))
+    hora_fin_test = datetime.time(random.randint(14, 18))
+
+    dia_asignado = dia_semana_test
+    hora_inicio = hora_inicio_test
+    hora_fin = hora_fin_test
+
+    context.periodo = Periodo(
+        dia_semana=dia_asignado,
+        hora_inicio=hora_inicio,
+        hora_fin=hora_fin,
+        horario_id=context.horario.id
+    )
+    context.periodo.save()
+
+@step("se registra la asignación del horario para la actividad")
+def step_impl(context):
+    context.actividadTest.save()
