@@ -17,6 +17,7 @@ class Emergencia(models.Model):
     hora_entrada = models.CharField(max_length=20, default='')
     num_voluntarios_necesarios = models.IntegerField(default=0)
     habilidad_requerida = models.TextField(choices=HabilidadMedica.choices, default='')
+    activada = models.BooleanField(default=False)
     # debería ser un arreglo de voluntarios
     es_atendida = models.BooleanField(default=False)
 
@@ -86,3 +87,10 @@ class Emergencia(models.Model):
             return emergencia
         except Emergencia.DoesNotExist:
             return None
+
+    @staticmethod
+    def obtener_emergencia_activada():
+        emergencias = Emergencia.objects.all()
+        for emergencia in emergencias:
+            if emergencia.activada == True:
+                return emergencia

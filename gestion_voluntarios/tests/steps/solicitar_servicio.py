@@ -23,6 +23,7 @@ def step_impl(context, num_voluntarios_necesarios, nombre, asunto, habilidad_req
         num_voluntarios_necesarios=num_voluntarios_necesarios,
         nombre=nombre,
         asunto=asunto,
+        activada=True,
         habilidad_requerida=habilidad_requerida
     )
     context.emergenciaTest.save()

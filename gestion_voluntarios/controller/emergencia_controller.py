@@ -30,6 +30,7 @@ def registrar_emergencia(request):
             num_voluntarios_necesarios=nume_voluntarios_requeridos,
             nombre=titulo,
             asunto=descripcion,
+            activada=True,
             habilidad_requerida=habilidad_requerida
         )
         Emergencia.imprimir(request.POST.get('name'))
@@ -55,15 +56,14 @@ def cargar_emergencia(request):
             emergencia = Emergencia.obtener_emergencia_por_id(id_emergencia)
             voluntariosRegistrados = Voluntario.get_voluntarios()
             voluntarios_seleccionados = solicitar_servicios_voluntarios(voluntariosRegistrados,
-                                                                        emergencia.habilidad_requerida)
+                                                                        emergencia)
             # si los voluntarios que cumplen con la habilidad requerido son mayores al número de voluntarios requeridos
             if len(voluntarios_seleccionados) >= emergencia.num_voluntarios_necesarios:
                 enviar_notificaciones(voluntarios_seleccionados)
             else:
                 enviar_notificaciones_exitosas(voluntarios_seleccionados)
 
-    return redirect(request, 'voluntario_notificacion_controller.py', emergencia, voluntarios_seleccionados)
-
+    return render(request, 'emergencia_view.html')
 
 
 def obtener_nombres_voluntario(voluntarios_seleccionados):
@@ -71,6 +71,7 @@ def obtener_nombres_voluntario(voluntarios_seleccionados):
     for voluntario in voluntarios_seleccionados:
         nombres_voluntarios_prueba.append(voluntario.nombre)
     return nombres_voluntarios_prueba
+
 
 
 def solicitar_servicios_voluntarios(voluntarios, emergencia):
@@ -160,6 +161,7 @@ def obtener_voluntarios_finales(voluntarios_seleccionados, voluntarios_requerido
     for voluntario in range(numero_voluntarios_seleccionados):
         voluntarios_finales.append(voluntarios_seleccionados[voluntario])
     return voluntarios_finales
+
 
 
 def enviar_notificaciones_exitosas(voluntarios_seleccionados):

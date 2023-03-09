@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="notificacion.css">
+    <link rel="stylesheet" href="../static/templates/gestion_voluntarios/notificacion.css">
     <title>Notificación de emergencia médica</title>
 </head>
 <body>
@@ -14,8 +14,11 @@
             <li>Edad: {{ paciente.edad }}</li>
             <li>Síntomas: {{ paciente.sintomas }}</li>
         </ul-->
-        <h>{{ emergencia.nombre }}</h>
+        <h1>Emergencia: {{ emergencia.nombre }} </h1>
+        <h1>Habilidad requerida: {{ emergencia.habilidad_requerida}} </h1>
+        <h1>Asunto: {{ emergencia.asunto }}</h1>
         <p>SELECCIONE UNA OPCIÓN</p>
+
         <form method="post">
             <!--{% csrf_token %}-->
             <button type="submit" name="opcion" class="conf" value="confirmar">Confirmar</button>
