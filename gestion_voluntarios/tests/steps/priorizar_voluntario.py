@@ -12,6 +12,7 @@ faker = Faker('es_ES')
 @step('que tengo una emergencia que necesita de "{vacantes:n}" voluntarios con la habilidad "{habilidad_solicitada}"')
 def step_impl(context, vacantes, habilidad_solicitada):
     context.emergencia = Emergencia(
+        nombre='Choque trágico',
         vacantes=int(vacantes),
         habilidad_requerida=habilidad_solicitada
     )
@@ -27,7 +28,8 @@ def step_impl(context, lista_voluntarios_confirmados):
         voluntario_creado = Voluntario(
             nombre=voluntario["nombre"],
             apellido=voluntario["apellido"],
-            edad=faker.random_int(min=18, max=60)
+            edad=faker.random_int(min=18, max=60),
+            emergencia=context.emergencia
         )
         voluntario_creado.save()
 

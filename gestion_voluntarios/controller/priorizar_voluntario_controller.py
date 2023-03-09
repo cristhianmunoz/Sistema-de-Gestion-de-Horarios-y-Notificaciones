@@ -13,8 +13,10 @@ def index(request):
 
 def traer_voluntarios(request):
     voluntarios_priorizada = []
+    habilidad = []
     emergencias = list(Emergencia.objects.all())
     for emergencia in emergencias:
         emergencia.lista = list(Voluntario.objects.filter(emergencia_id=emergencia.id))
-        voluntarios_priorizada.append(emergencia.priorizar_voluntarios())
-    return {'voluntarios': voluntarios_priorizada, 'emergencias': emergencias}
+        habilidad.append(emergencia.priorizar_voluntarios())
+        voluntarios_priorizada.append(emergencia.obtener_lista_voluntarios())
+    return {'voluntarios': voluntarios_priorizada, 'emergencias': emergencias, 'habilidades': habilidad}
