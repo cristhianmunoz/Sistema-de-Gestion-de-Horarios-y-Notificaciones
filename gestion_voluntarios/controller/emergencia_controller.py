@@ -62,7 +62,7 @@ def cargar_emergencia(request):
             else:
                 num_voluntarios_seleccionado = enviar_notificaciones_exitosas(voluntarios_seleccionados)
 
-            context={"num_voluntarios_seleccionados":num_voluntarios_seleccionado, "mensaje":"Solicitud existosa: el número de notificaciones enviadas es de "}
+            context={"num_voluntarios_seleccionados":num_voluntarios_seleccionado, "mensaje":"Solicitud existosa: el número de notificaciones enviadas es de ", "emergencia":emergencia}
     return render(request, 'emergencia_view.html', context)
 
 

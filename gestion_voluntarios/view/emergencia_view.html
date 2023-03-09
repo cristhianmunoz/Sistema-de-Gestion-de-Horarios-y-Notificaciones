@@ -46,6 +46,14 @@
         <input class="bg-primary" type="submit" value="Registrar emergencia">
         <input type="hidden" id="operacion" name="operacion" value="creacion">
     </form >
+    </br>
+    <div>
+        <label for="pa">{{ emergencia.nombre }}</label>
+        <label for="pa">Num. Voluntarios necesarios: {{ emergencia.num_voluntarios_necesarios }}</label>
+        <label for="pa">Asunto: {{ emergencia.asunto }}</label>
+    </div>
+
+    </br>
     <form method="post" action="{% url 'cargar_emergencia' %}" >
         {% csrf_token %}
         <div class="" style="width: 72%" >
@@ -54,6 +62,7 @@
             <input type="hidden" id="operacion" name="operacion" value="solicitar">
         </div>
     </form>
+    </br>
     <label for="pa">{{ mensaje }} {{ num_voluntarios_seleccionados }}  <span>*</span></label>
 </body>
 </html>
