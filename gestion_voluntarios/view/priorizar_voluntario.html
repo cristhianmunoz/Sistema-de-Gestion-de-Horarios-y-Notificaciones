@@ -20,7 +20,7 @@
         <h2 class="m-4 text-white">Listado de emergencias</h2>
         <input class="btn rounded btn-primary m-4" type="button" value="Asignar actividades">
     </div>
-    <table class="table table-light container">
+    <table class="table table-light table-bordered table-hover container table-striped">
         <thead class="table-dark">
         <tr>
             <th>ID</th>
@@ -38,7 +38,7 @@
                 <td>{{ emergencia.habilidad_requerida }}</td>
                 <td>{{ emergencia.vacantes }}</td>
                 <td>
-                    <table class="table">
+                    <table class="table table-bordered table-striped">
                         <thead class="table-active">
                         <tr>
                             <th class="col-2">Voluntario</th>
