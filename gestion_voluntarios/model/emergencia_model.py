@@ -9,6 +9,13 @@ class Emergencia(models.Model):
 
     # id = models.CharField(primary_key=True, max_length=50, default='')
     nombre = models.CharField(max_length=50, default='')
+    asunto = models.CharField(max_length=200, default='')
+    ubicacion = models.CharField(max_length=300, default='')
+    hora_entrada = models.CharField(max_length=20, default='')
+    num_voluntarios_necesarios = models.IntegerField(default=0)
+    habilidad_requerida = models.TextField(choices=HabilidadMedica.choices, default='')
+    activada = models.BooleanField(default=False)
+    # debería ser un arreglo de voluntarios
     es_atendida = models.BooleanField(default=False)
 
     id = models.AutoField(primary_key=True)
@@ -64,6 +71,32 @@ class Emergencia(models.Model):
     def get_actividades(self):
         return self.actividades.all()
 
+    def notificar(self):
+        texto = F'{self.asunto} \nEstimado {self.dirigido_a} el doctor {self.encargado} solicita su presencia en ' \
+                F'{self.ubicacion} a las {self.hora_entrada} para atender un(a) {self.tipo_emergencia} ' \
+                F'\nLas actividades a realizar son: \n {self.actividades} ' \
+                F'\nConsideraciones a tener en cuenta: \n {self.detalle}'
+        return texto
+
+    def imprimir(nombre):
+        print("imprimir: ",nombre)
+        return 0
+
+    @staticmethod
+    def obtener_emergencia_por_id(id_emergencia):
+
+        try:
+            emergencia = Emergencia.objects.get(id=id_emergencia)
+            return emergencia
+        except Emergencia.DoesNotExist:
+            return None
+
+    @staticmethod
+    def obtener_emergencia_activada():
+        emergencias = Emergencia.objects.all()
+        for emergencia in emergencias:
+            if emergencia.activada == True:
+                return emergencia
     def priorizar_voluntarios(self):
         lista_ordenada = [voluntario.horas_experiencia_habilidad(self.habilidad_requerida) for voluntario in self.lista]
         voluntarios_con_habilidad = list(filter(lambda x: x.titulo == self.habilidad_requerida, lista_ordenada))

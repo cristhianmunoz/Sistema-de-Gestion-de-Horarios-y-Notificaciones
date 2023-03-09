@@ -154,7 +154,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <span class="mb-3">Seleccione una o varias habilidades nuevas:</span><br>
+                    <span class="mb-3">Seleccione una habilidad:</span><br>
                     <div class="cs-form">
                         <label for="titulo_habilidad" class="form-label">Habilidad:</label>
                         <select id="titulo_habilidad" name="titulo_habilidad" class="form-select" aria-label="Habilidad" style="margin: 0 5px">
@@ -259,7 +259,15 @@
         </div>
       </div>
     </div>
+    <form method="POST" action="/gestion_voluntarios/notificacion">
+        {% csrf_token %}
+        <div class="modal-footer">
+            <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+            <input type="hidden" id="operacion" name="operacion" value="ver_notificaciones">
+            <button type="submit" class="btn btn-primary">Ver notificaciones</button>
 
+        </div>
+    </form>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

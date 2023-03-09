@@ -4,7 +4,7 @@ from django.db import models
 from gestion_voluntarios.model.horario_model import Horario
 from gestion_voluntarios.model.periodo_model import Periodo
 from gestion_voluntarios.model.emergencia_model import Emergencia
-
+from django.core.exceptions import ValidationError
 django.setup()
 
 
@@ -13,6 +13,7 @@ class Voluntario(models.Model):
     nombre = models.CharField(max_length=50, default='')
     apellido = models.CharField(max_length=50, default='')
     edad = models.IntegerField(default=0)
+    estado = models.CharField(max_length=1, default="D")
     es_asignado = models.BooleanField(default=False)
     emergencia = models.ForeignKey(Emergencia,
                                    on_delete=models.CASCADE,
@@ -42,11 +43,38 @@ class Voluntario(models.Model):
 
     @staticmethod
     def obtener_voluntario_por_id(id_voluntario):
+
         try:
             voluntario = Voluntario.objects.get(id=id_voluntario)
             return voluntario
         except Voluntario.DoesNotExist:
             return None
+
+    def to_string(self):
+        return self.nombre + " " + self.apellido
+
+    def confirmar_asistencia(self):
+        return self.estado == 'O'
+
+    @staticmethod
+    def get_voluntarios():
+        return Voluntario.objects.all()
+
+    @staticmethod
+    def editar_voluntario(voluntario):
+        try:
+            Voluntario.objects.filter(id=voluntario.id).update(
+                nombre=voluntario.nombre,
+                apellido = voluntario.apellido,
+                edad = voluntario.edad,
+                estado = voluntario.estado,
+                es_asignado = voluntario.es_asignado,
+                emergencia_id = voluntario.emergencia_id
+            )
+            return True
+
+        except ValidationError:
+            return False
 
     def horas_experiencia_habilidad(self, habilidad_requerida):
         from gestion_voluntarios.model.habilidad_model import Habilidad

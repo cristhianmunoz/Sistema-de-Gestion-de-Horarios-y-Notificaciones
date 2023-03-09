@@ -1,10 +1,14 @@
 function obtenerFormatoHora(horaDB){
+    let valorExtra = 0;
+    if (horaDB.endsWith('p.m.')) {
+        valorExtra = 12
+    }
     const partesHora = horaDB.split(' ')[0].split(':')
     partesHora[0] = partesHora[0].length === 1 ? `0${partesHora[0]}` : partesHora[0]
     if(partesHora.length === 1){
-        return `${partesHora[0]}:00`
+        return `${parseInt(partesHora[0]) + valorExtra}:00`
     }
-    return `${partesHora[0]}:${partesHora[1]}`
+    return `${parseInt(partesHora[0]) + valorExtra}:${partesHora[1]}`
 }
 
 $('#horarioModal').on('show.bs.modal', function(event) {
@@ -43,6 +47,7 @@ $('#habilidadesModal').on('show.bs.modal', function(event) {
         const parts = recipient.split('-')
         modal.find('#tituloModalHabilidad').text('Actualización de habilidad')
         modal.find('#titulo_habilidad').val(parts[0])
+        modal.find('#titulo_habilidad').prop('disabled', true)
         modal.find('#descripcion_habilidad').val(parts[1])
         modal.find('#horas_experiencia_habilidad').val(parts[2])
         modal.find('#id_habilidad').val(parts[3])
@@ -51,6 +56,7 @@ $('#habilidadesModal').on('show.bs.modal', function(event) {
     }else{
         modal.find('#tituloModalHabilidad').text('Nueva habilidad')
         modal.find('#titulo_habilidad').val('')
+        modal.find('#titulo_habilidad').prop('disabled', false)
         modal.find('#descripcion_habilidad').val('')
         modal.find('#horas_experiencia_habilidad').val('')
         modal.find('#operacion').val('creacion')

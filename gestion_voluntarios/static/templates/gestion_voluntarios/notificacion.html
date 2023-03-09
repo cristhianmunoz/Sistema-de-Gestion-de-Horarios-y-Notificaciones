@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="notificacion.css">
+    <title>Notificación de emergencia médica</title>
+</head>
+<body>
+    <div class="notification">
+        <h1>{{ Emergencia }}</h1>
+        <!--p>Se ha detectado una emergencia médica en el siguiente paciente:</p-->
+        <!--ul>
+            <li>Nombre: {{ paciente.nombre }}</li>
+            <li>Edad: {{ paciente.edad }}</li>
+            <li>Síntomas: {{ paciente.sintomas }}</li>
+        </ul-->
+        <h>{{ emergencia.nombre }}</h>
+        <p>SELECCIONE UNA OPCIÓN</p>
+        <form method="post">
+            <!--{% csrf_token %}-->
+            <button type="submit" name="opcion" class="conf" value="confirmar">Confirmar</button>
+            <button type="submit" name="opcion" class="rech" value="rechazar">Rechazar</button>
+        </form>
+    </div>
+</body>
+</html>
