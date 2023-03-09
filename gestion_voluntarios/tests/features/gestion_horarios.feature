@@ -8,7 +8,7 @@ Característica: Gestión de horarios del personal
 
    Escenario: Identificar tiempos críticos de las actividades de una emergencia
     Dado que existe una emergencia registrada en el sistema con el nombre "Emergencia X"
-    Y que tengo un grupo de "5" voluntarios con sus horarios de disponibilidad
+    Y que tengo un grupo de "2" voluntarios con sus horarios de disponibilidad
     Y la emergencia tiene registradas "2" actividades con horarios definidos
     Cuando al comparar los horarios de disponibilidad de cada voluntario con los horarios de cada actividad
     Entonces debería poder identificar los períodos en los que no hay ningún voluntario disponible para cada actividad de la emergencia

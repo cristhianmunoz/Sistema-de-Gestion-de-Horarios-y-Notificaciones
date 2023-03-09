@@ -42,6 +42,8 @@ def step_impl(context, cantidad_voluntarios):
                                             apellido=faker.last_name(),
                                             edad=faker.random_int(min=18, max=80),
                                             emergencia=context.emergencia)
+        context.voluntario.save()
+
         # Creación del horario del voluntario
         context.horario = Horario(
             voluntario_id=context.voluntario.id
@@ -62,7 +64,11 @@ def step_impl(context, cantidad_voluntarios):
         )
         context.periodo.save()
 
-        context.voluntario.save()
+        time1 = context.periodo.hora_inicio.strftime("%H:%M:%S")
+        time2 = context.periodo.hora_fin.strftime("%H:%M:%S")
+
+        print("Voluntario:" + context.periodo.dia_semana + "  " + time1 + " -> " + time2)
+
         context.emergencia.add_voluntarios(context.voluntario)
 
 
@@ -76,8 +82,10 @@ def step_impl(context, cantidad_actividades):
         context.actividad = Actividad(nombre=faker.name(),
                                         emergencia=context.emergencia)
 
+        context.actividad.save()
+
         context.horarioAct = Horario(
-            voluntario_id=context.actividad.id
+            actividad_id=context.actividad.id
         )
 
         context.horarioAct.save()
@@ -95,7 +103,11 @@ def step_impl(context, cantidad_actividades):
         )
 
         context.periodoAct.save()
-        context.actividad.save()
+        time1 = context.periodoAct.hora_inicio.strftime("%H:%M:%S")
+        time2 = context.periodoAct.hora_fin.strftime("%H:%M:%S")
+
+        print("Actividad:" + context.periodoAct.dia_semana + "  " + time1 + " -> " + time2)
+
         context.emergencia.add_actividades(context.actividad)
 
 
@@ -103,27 +115,30 @@ def step_impl(context, cantidad_actividades):
 def step_impl(context):
     lista_actividades = context.emergencia.get_actividades()
     lista_voluntarios = context.emergencia.get_voluntarios()
-    actividades_sin_match = []
-
-    for actividad in lista_actividades:
-        horario = context.horario.obtener_horario_por_id_actividad(actividad.id)
-        periodos = context.periodo.obtener_periodos_por_id_horario(horario.id)
-        for voluntario in lista_voluntarios:
-            for indice, periodo in enumerate(periodos):
-                if not voluntario.comprobar_disponibilidad(periodo):
-                    actividades_sin_match.append(actividad)
+    actividades_sin_match = context.actividad.obtenerActividadesCriticas(lista_actividades, lista_voluntarios)
 
     context.actividades_sin_match = actividades_sin_match
 
 @step(
     "debería poder identificar los períodos en los que no hay ningún voluntario disponible para cada actividad de la emergencia")
 def step_impl(context):
-    print(context.actividades_sin_match)
+    periodos_criticos = []
+
+    for actividad in context.actividades_sin_match:
+        periodo = actividad.get_periodos()
+        periodos_criticos.append(periodo)
+
+    context.periodos_criticos = periodos_criticos
+
 
 @step('debería poder visualizar los tiempos críticos de la emergencia "Emergencia X" de manera clara y detallada')
 def step_impl(context):
-    print('TIEMPOS CRÍTICOS:')
-    for actividad in context.actividades_sin_match:
-        print('Nombre de actividad:' + actividad.nombre)
-        print('Emergencia:' + actividad.emergencia)
-        print('Horario:' + actividad.horario)
+    if context.actividades_sin_match:
+        print('TIEMPOS CRÍTICOS:')
+        for actividad in context.actividades_sin_match:
+            info = actividad.get_actividad_str()
+            print("Emergencia:" + info.emergencia)
+            print("Actividad:" + info.nombre)
+            print("Periodos:" + info.periodos + '\n\n')
+    else:
+        print('No existen tiempos críticos.')

@@ -10,14 +10,14 @@ class Horario(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name='horario'
+        related_name='horario_voluntario'
     )
     actividad = models.ForeignKey(
         'Actividad',
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name='horario'
+        related_name='horario_actividad'
     )
 
     @staticmethod
