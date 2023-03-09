@@ -3,6 +3,7 @@ import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+from gestion_voluntarios.model.emergencia_model import Emergencia
 from gestion_voluntarios.model.voluntario_model import Voluntario
 
 
@@ -20,13 +21,6 @@ def contar_elementos(lista):
         contador += 1
 
     return contador
-
-
-def notificar(emergencia, lista_voluntarios):
-    for voluntario in lista_voluntarios:
-        texto = F'{emergencia.nombre} \n{emergencia.asunto} \nEstimado {voluntario.nombre}, se solicita su presencia en ' \
-                F'{emergencia.ubicacion} a las {emergencia.hora_entrada}\n'
-        print(texto)
 
 
 def letra_random():
@@ -51,16 +45,25 @@ def obtener_nombres(lista):
 def index(request):
     print("Dentro del index")
     context = {}
-    context.update(get_voluntarios(request))
+    context.update(get_contexto(request))
     return render(request, 'notificacion.html', context)
 
 
-def get_voluntarios(request):
+def get_contexto(request):
     voluntarios = Voluntario.objects.all()
-    contexto = {'voluntarios': voluntarios}
+    emergencia = Emergencia.objects.all()
+    contexto = {
+        'voluntarios': voluntarios,
+        'emergencia': emergencia}
     return render(request, 'notificacion.html', contexto)
+
+
+def notificar(emergencia, lista_voluntarios):
+    for voluntario in lista_voluntarios:
+        texto = F'{emergencia.nombre} \n{emergencia.asunto} \nEstimado {voluntario.nombre}, se solicita su presencia en ' \
+                F'{emergencia.ubicacion} a las {emergencia.hora_entrada}\n'
+        print(texto)
 
 
 def listar_voluntarios(request):
     print("Dentro de notificación")
-
