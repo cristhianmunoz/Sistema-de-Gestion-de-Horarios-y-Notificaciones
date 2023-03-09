@@ -53,8 +53,8 @@ class Voluntario(models.Model):
     def to_string(self):
         return self.nombre + " " + self.apellido
 
-    def confirmar_asistencia(self):
-        return self.estado == 'O'
+    def confirmar_asistencia(self, letra):
+        self.estado = letra
 
     @staticmethod
     def get_voluntarios():
