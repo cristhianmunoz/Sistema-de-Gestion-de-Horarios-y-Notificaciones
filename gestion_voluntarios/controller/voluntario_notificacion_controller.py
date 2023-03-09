@@ -82,3 +82,16 @@ def ver_notificacion(request):
     return render(request,'notificacion.html', context)
 
 
+def enviar_confirmados(request):
+    # print("id_voluntario",request.POST.get('id_voluntario'))
+    context = {}
+    if request.method == "POST":
+        if "confirmar" == request.POST.get('confirmacion'):
+            id_voluntario = request.POST.get('id_voluntario')
+            voluntario = Voluntario.obtener_voluntario_por_id(id_voluntario)
+            emergencia = Emergencia.obtener_emergencia_por_id(voluntario.emergencia_id)
+            if emergencia.activada == True:
+                emergencia_activada = emergencia
+                voluntarios_seleccionados = solicitar_servicios_voluntarios(Voluntario.get_voluntarios(), emergencia)
+                context = {'emergencia': emergencia_activada, 'voluntarios':voluntarios_seleccionados}
+    return render(request,'notificacion.html', context)
