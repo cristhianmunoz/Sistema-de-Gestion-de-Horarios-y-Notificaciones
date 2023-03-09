@@ -4,7 +4,10 @@ from gestion_voluntarios.controller import voluntario_home_controller
 from gestion_voluntarios.controller import voluntario_habilidad_controller
 from gestion_voluntarios.controller import voluntario_horario_controller
 from gestion_voluntarios.controller import asignar_voluntarios_controller
+from gestion_voluntarios.controller import emergencia_controller
 from gestion_voluntarios.controller import voluntario_notificacion_controller
+
+
 
 urlpatterns = [
     # path('', voluntario_view.index, name='index'),
@@ -13,7 +16,10 @@ urlpatterns = [
     path('horario', voluntario_horario_controller.index, name='horario'),
     path('actividad', asignar_voluntarios_controller.index, name='actividad'),
     path('asignar', asignar_voluntarios_controller.asignar_voluntarios, name='asignar_voluntarios'),
-    path('notificacion', voluntario_notificacion_controller.get_contexto, name='listar_voluntarios'),
-    #path('lista_voluntarios', get_voluntarios, name='notificacion2'),
+    path('emergencia', emergencia_controller.index, name='emergencia'),
+    path('registrar_emergencia', emergencia_controller.registrar_emergencia, name='registrar_emergencia'),
+    path('cargar_emergencia', emergencia_controller.cargar_emergencia, name='cargar_emergencia'),
+    path('enviar_notificacion', voluntario_notificacion_controller.ver_notificacion, name='enviar_notificacion'),
+    path('notificacion', voluntario_notificacion_controller.ver_notificacion, name='notificacion')
 
 ]

@@ -46,8 +46,3 @@ class NotificacionView(View):
 
         return voluntarios"""
 
-
-def my_view(request):
-    voluntarios = Voluntario.objects.all()
-    contexto = {'voluntarios': voluntarios}
-    return render(request, 'notificacion.html', contexto)

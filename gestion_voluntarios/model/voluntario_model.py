@@ -4,7 +4,7 @@ from django.db import models
 from gestion_voluntarios.model.horario_model import Horario
 from gestion_voluntarios.model.periodo_model import Periodo
 from gestion_voluntarios.model.emergencia_model import Emergencia
-
+from django.core.exceptions import ValidationError
 django.setup()
 
 
@@ -55,3 +55,23 @@ class Voluntario(models.Model):
 
     def confirmar_asistencia(self, letra):
         self.estado = letra
+
+    @staticmethod
+    def get_voluntarios():
+        return Voluntario.objects.all()
+
+    @staticmethod
+    def editar_voluntario(voluntario):
+        try:
+            Voluntario.objects.filter(id=voluntario.id).update(
+                nombre=voluntario.nombre,
+                apellido = voluntario.apellido,
+                edad = voluntario.edad,
+                estado = voluntario.estado,
+                es_asignado = voluntario.es_asignado,
+                emergencia_id = voluntario.emergencia_id
+            )
+            return True
+
+        except ValidationError:
+            return False

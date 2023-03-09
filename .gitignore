@@ -131,6 +131,8 @@ dmypy.json
 
 # PyCharm IDLE
 .idea/
+
+Test Results - solicitar_servicio_feature_Solicitar_servicios_cuando_el_voluntario_tiene_las_habilidades_requeridas_para_atender_la_emergencia.html
 
 # Gherkin features executions
 *feature.html

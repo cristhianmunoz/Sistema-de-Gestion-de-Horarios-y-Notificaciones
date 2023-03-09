@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/emergencia_style.css">
+    <title>Document</title>
+</head>
+<body>
+<form method="post" action="{% url 'registrar_emergencia' %}">
+    {% csrf_token %}
+    <div class="left-column">
+        <div>
+            <label for="na">Titulo Emergencia <span>*</span></label>
+            <input type="text" id="na" name="name" placeholder="Titulo emergencia">
+        </div>
+        <div>
+            <label for="em">Habilidad requerida <span>*</span></label>
+            <!-- The second value will be selected initially -->
+            <select name="select">
+                <option value="Suturar">Suturar</option>
+                <option value="Vacunar" selected>Vacunar</option>
+                <option value="Anestesiar">Anestesiar</option>
+            </select>
+        </div>
+        <div>
+            <label for="pa">Voluntarios requeridos <span>*</span></label>
+            <input type="number" id="pa" name="num_voluntarios" placeholder="Voluntarios requeridos" min="0">
+
+        </div>
+
+    </div>
+    <div class="right-column">
+        <div>
+            <label for="br">Descripcion de la emergencia</label>
+            <textarea name="descripcion" id="br" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <input type="submit" value="Registrar emergencia">
+    <input type="hidden" id="operacion" name="operacion" value="creacion">
+</form >
+<form method="post" action="{% url 'cargar_emergencia' %}">
+    {% csrf_token %}
+    <div>
+        <input type="submit" value="Solicitar voluntarios" >
+        <input type="hidden" id="id_emergencia" name="id_emergencia" value={{ emergencia.id }}>
+        <input type="hidden" id="operacion" name="operacion" value="solicitar">
+    </div>
+</form>
+</body>
+</html>
+
+
+emergencia.id
