@@ -46,8 +46,7 @@ def registrar_emergencia(request):
 
 def cargar_emergencia(request):
     print("Dentro de crear emergencia")
-    emergencia = Emergencia()
-    voluntarios_seleccionados = []
+    num_voluntarios_seleccionado = 0
     # Obtener Parametros
     if request.method == 'POST':
         if "solicitar" == request.POST.get('operacion'):
@@ -59,11 +58,12 @@ def cargar_emergencia(request):
                                                                         emergencia)
             # si los voluntarios que cumplen con la habilidad requerido son mayores al número de voluntarios requeridos
             if len(voluntarios_seleccionados) >= emergencia.num_voluntarios_necesarios:
-                enviar_notificaciones(voluntarios_seleccionados)
+                num_voluntarios_seleccionado = enviar_notificaciones(voluntarios_seleccionados)
             else:
-                enviar_notificaciones_exitosas(voluntarios_seleccionados)
+                num_voluntarios_seleccionado = enviar_notificaciones_exitosas(voluntarios_seleccionados)
 
-    return render(request, 'emergencia_view.html')
+            context={"num_voluntarios_seleccionados":num_voluntarios_seleccionado, "mensaje":"Solicitud existosa: el número de notificaciones enviadas es de "}
+    return render(request, 'emergencia_view.html', context)
 
 
 def obtener_nombres_voluntario(voluntarios_seleccionados):
@@ -168,5 +168,5 @@ def enviar_notificaciones_exitosas(voluntarios_seleccionados):
     aux = 0
     for voluntario in voluntarios_seleccionados:
         aux += 1
-    print('Lo siento no existen voluntarios suficientes. Numero de notificaciones exitosas enviadas fueron: ', aux)
+    print('No hay sufiecientes voluntarios. Numero de notificaciones exitosas enviadas fueron: ', aux)
     return aux
