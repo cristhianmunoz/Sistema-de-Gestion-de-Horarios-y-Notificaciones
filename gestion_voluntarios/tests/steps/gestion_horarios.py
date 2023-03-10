@@ -110,6 +110,8 @@ def step_impl(context, cantidad_actividades):
 
         context.emergencia.add_actividades(context.actividad)
 
+    assert len(context.emergencia.get_actividades()) == cantidad_actividades_int
+
 
 @step("al comparar los horarios de disponibilidad de cada voluntario con los horarios de cada actividad")
 def step_impl(context):
@@ -118,6 +120,8 @@ def step_impl(context):
     actividades_sin_match = context.actividad.obtenerActividadesCriticas(lista_actividades, lista_voluntarios)
 
     context.actividades_sin_match = actividades_sin_match
+
+    assert len(context.actividades_sin_match) == 0, f"Se encontraron {len(context.actividades_sin_match)} actividades sin match de voluntarios disponibles."
 
 @step(
     "debería poder identificar los períodos en los que no hay ningún voluntario disponible para cada actividad de la emergencia")
@@ -129,6 +133,7 @@ def step_impl(context):
         periodos_criticos.append(periodo)
 
     context.periodos_criticos = periodos_criticos
+    assert len(context.periodos_criticos) is not None
 
 
 @step('debería poder visualizar los tiempos críticos de la emergencia "Emergencia X" de manera clara y detallada')
@@ -143,12 +148,16 @@ def step_impl(context):
     else:
         print('No existen tiempos críticos.')
 
+    assert context.actividades_sin_match is not None
+
 @step('que el sistema tiene la actividad "{actividad_registrada}" registrada en el sistema')
 def step_impl(context, actividad_registrada):
     context.actividadTest = Actividad(
         nombre=actividad_registrada)
 
     context.actividadTest.save()
+    actividad_encontrada = Actividad.objects.filter(nombre=actividad_registrada).first()
+    assert actividad_encontrada is not None, f"La actividad {actividad_registrada} no se ha guardado correctamente."
 
 
 @step(
