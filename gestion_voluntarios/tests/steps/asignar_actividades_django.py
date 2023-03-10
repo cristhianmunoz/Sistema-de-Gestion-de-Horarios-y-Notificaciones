@@ -72,31 +72,25 @@ def step_impl(context):
 
 @step('el estado de voluntario sera"{es_asignado}"')
 def step_impl(context, es_asignado):
-    # Se realiza la conversión de str a boolean del test
-    aux = bool(es_asignado)
     # Se verifica los valores dentro de emergencia
     lista_vol = context.emergenciaTest.get_voluntarios()
     for voluntario in lista_vol:
-        resultado = voluntario.get_es_asignado()
-        assert resultado == aux, "No pasa el step"
+        resultado = str(voluntario.get_es_asignado())
+        assert resultado == es_asignado, "No pasa el step"
 
 
 @step('el estado de la actividad sera"{tiene_voluntario}"')
 def step_impl(context, tiene_voluntario):
-    # Se realiza la conversión de str a boolean del test
-    tiene_voluntario_boolean = bool(tiene_voluntario)
-    resultado = context.actividadTest.get_tiene_voluntario()
-    assert resultado == tiene_voluntario_boolean, "No pasa el step"
+    resultado = str(context.actividadTest.get_tiene_voluntario())
+    assert resultado == tiene_voluntario, "No pasa el step"
 
 
 @step('el estado de la emergencia sera"{estado_emergencia}"')
 def step_impl(context, estado_emergencia):
-    # Se realiza la conversión de str a boolean del test
-    estado_emergencia_boolean = bool(estado_emergencia)
-    resultado = context.emergenciaTest.get_es_atendida()
-    assert resultado == estado_emergencia_boolean, "No pasa el step"
+    resultado = str(context.emergenciaTest.get_es_atendida())
+    assert resultado == estado_emergencia, "No pasa el step"
 
-    # BORRAR BASE DE DATOS
+    # Borrar registros creados dentro de la base de datos
     lista_vol = context.emergenciaTest.get_voluntarios()
     for v in lista_vol:
         v.delete()
