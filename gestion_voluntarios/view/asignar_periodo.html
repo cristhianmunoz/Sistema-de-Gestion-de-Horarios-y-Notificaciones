@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Horarios de la actividad "{{ actividad.nombre }}"</h1>
+    {% if horarios %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Hora inicio</th>
+                    <th>Hora fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for horario in horarios %}
+                    <tr>
+                        <td>{{ horario.dia_semana }}</td>
+                        <td>{{ horario.hora_inicio|time:"H:i" }}</td>
+                        <td>{{ horario.hora_fin|time:"H:i" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay horarios asignados para esta actividad.</p>
+    {% endif %}
+{% endblock %}
