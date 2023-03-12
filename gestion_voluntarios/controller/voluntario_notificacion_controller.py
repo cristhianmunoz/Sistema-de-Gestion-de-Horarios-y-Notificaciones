@@ -1,13 +1,15 @@
 from gestion_voluntarios.model.emergencia_model import Emergencia
 from gestion_voluntarios.model.voluntario_model import Voluntario
 from django.shortcuts import render
-from gestion_voluntarios.controller.emergencia_controller import  solicitar_servicios_voluntarios
+from gestion_voluntarios.controller.emergencia_controller import solicitar_servicios_voluntarios
+
 
 def index(request):
     print("Dentro del index")
     context = {}
-    #context.update(get_emergencia(request))
+    # context.update(get_emergencia(request))
     return render(request, 'notificacion.html', context)
+
 
 def obtener_voluntarios_confirmados(lista_voluntarios, num_voluntarios_requeridos):
     lista_confirmados = []
@@ -68,17 +70,15 @@ def notificar(emergencia, lista_voluntarios):
 
 
 def ver_notificacion(request):
-    print("id_voluntario",request.POST.get('id_voluntario'))
+    print("id_voluntario", request.POST.get('id_voluntario'))
     context = {}
     if request.method == "POST":
         if "ver_notificaciones" == request.POST.get('operacion'):
             id_voluntario = request.POST.get('id_voluntario')
             voluntario = Voluntario.obtener_voluntario_por_id(id_voluntario)
-            emergencia = Emergencia.obtener_emergencia_por_id(voluntario.emergencia_id)
-            if emergencia.activada == True:
-                emergencia_activada = emergencia
-                voluntarios_seleccionados = solicitar_servicios_voluntarios(Voluntario.get_voluntarios(), emergencia)
-                context = {'emergencia': emergencia_activada, 'voluntarios': voluntarios_seleccionados}
+            emergencias = voluntario.get_emergencias()
+            context = {'emergencias': emergencias, 'voluntario': voluntario}
+
     return render(request, 'notificacion.html', context)
 
 
@@ -93,5 +93,5 @@ def enviar_confirmados(request):
             if emergencia.activada == True:
                 emergencia_activada = emergencia
                 voluntarios_seleccionados = solicitar_servicios_voluntarios(Voluntario.get_voluntarios(), emergencia)
-                context = {'emergencia': emergencia_activada, 'voluntarios':voluntarios_seleccionados}
-    return render(request,'notificacion.html', context)
+                context = {'emergencia': emergencia_activada, 'voluntarios': voluntarios_seleccionados}
+    return render(request, 'notificacion.html', context)

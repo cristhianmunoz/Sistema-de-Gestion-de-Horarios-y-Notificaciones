@@ -62,7 +62,6 @@ class Voluntario(models.Model):
 
     @staticmethod
     def obtener_voluntario_por_id(id_voluntario):
-
         try:
             voluntario = Voluntario.objects.get(id=id_voluntario)
             return voluntario
@@ -72,8 +71,8 @@ class Voluntario(models.Model):
     def to_string(self):
         return self.nombre + " " + self.apellido
 
-    def confirmar_asistencia(self, letra):
-        self.estado = letra
+    def confirmar_asistencia(self):
+        self.estado = 'O'
 
     @staticmethod
     def get_voluntarios():
