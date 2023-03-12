@@ -17,21 +17,22 @@
     </head>
     <body>
     <div class="notification">
-        <h1>EMERGENCIA MÉDICA</h1>
-        <b>{{ emergencia.nombre }}</b>
-        <br>
-        Asunto: {{ emergencia.asunto}}
-        <br>
-        Dirección: {{ emergencia.ubicacion }}
-        <form method="post" action="{% url 'voluntario' %}?id_voluntario=4">
-            {% csrf_token %}
-            <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
-            <input type="hidden" id="confirmacion" name="confirmacion" value="confirmar">
-            <button type="submit" name="confirmacion" class="conf" value="confirmar">Confirmar</button>
-            <input type="hidden" id="rechazo" name="rechazo" value="rechazar">
-            <button type="submit" name="rexhazo" class="rech" value="rechazar">Rechazar</button>
-        </form>
-
+        {% for em in emergencia %}
+            <h1>EMERGENCIA MÉDICA</h1>
+            <b>{{ em.nombre }}</b>
+            <br>
+            Asunto: {{ em.asunto }}
+            <br>
+            Dirección: {{ em.ubicacion }}
+            <form method="post" action="{% url 'voluntario' %}?id_voluntario=4">
+                {% csrf_token %}
+                <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+                <input type="hidden" id="confirmacion" name="confirmacion" value="confirmar">
+                <button type="submit" name="confirmacion" class="conf" value="confirmar">Confirmar</button>
+                <input type="hidden" id="rechazo" name="rechazo" value="rechazar">
+                <button type="submit" name="rexhazo" class="rech" value="rechazar">Rechazar</button>
+            </form>
+        {% endfor %}
     </div>
     </body>
     </html>

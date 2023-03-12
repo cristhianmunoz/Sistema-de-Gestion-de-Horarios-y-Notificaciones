@@ -9,7 +9,7 @@ def index(request):
     #context.update(get_emergencia(request))
     return render(request, 'notificacion.html', context)
 
-def obtener_voluntarios_confirmados(lista_voluntarios):
+def obtener_voluntarios_confirmados(lista_voluntarios, num_voluntarios_requeridos):
     lista_confirmados = []
     for i in range(num_voluntarios_requeridos):
         lista_confirmados.append(lista_voluntarios[i])
@@ -78,8 +78,8 @@ def ver_notificacion(request):
             if emergencia.activada == True:
                 emergencia_activada = emergencia
                 voluntarios_seleccionados = solicitar_servicios_voluntarios(Voluntario.get_voluntarios(), emergencia)
-                context = {'emergencia': emergencia_activada, 'voluntarios':voluntarios_seleccionados}
-    return render(request,'notificacion.html', context)
+                context = {'emergencia': emergencia_activada, 'voluntarios': voluntarios_seleccionados}
+    return render(request, 'notificacion.html', context)
 
 
 def enviar_confirmados(request):
