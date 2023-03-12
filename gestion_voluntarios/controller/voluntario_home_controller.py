@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 from gestion_voluntarios.model.dia_semana_model import DiaSemana
 from gestion_voluntarios.model.habilidad_medica_model import HabilidadMedica
@@ -50,3 +52,13 @@ def obtener_contexto(id_voluntario):
         'dias_semana': dias_semana,
         'id_horario': horario.id
     }
+
+
+def cambiar_estado(request):
+    print("id_voluntario2", request.POST.get('id_voluntario'))
+    print("opción: ", request.POST.get('confirmacion'))
+    if request.POST.get('confirmacion') == 'confirmar':
+        id_voluntario = request.POST.get('id_voluntario')
+        Voluntario.objects.filter(id=id_voluntario).update(estado='O')
+        contexto = {'voluntario': Voluntario.obtener_voluntario_por_id(id_voluntario)}
+        return render(request, 'confirmacion.html', contexto)
