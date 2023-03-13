@@ -25,6 +25,7 @@ urlpatterns = [
     path('notificacion', voluntario_notificacion_controller.ver_notificacion, name='notificacion'),
     path('confirmar_emergencia', voluntario_home_controller.cambiar_estado, name='confirmar_emergencia'),
     path('notificacion2', voluntario_confirmacion_controller.regresar_notificaciones, name='notificacion2'),
+    path('notificacion3', voluntario_home_controller.eliminar_emergencia, name='notificacion3'),
 
     path('voluntario_login', voluntario_login_controller.index, name='voluntario_login'),
     path('priorizar', priorizar_voluntario_controller.index, name='index'),

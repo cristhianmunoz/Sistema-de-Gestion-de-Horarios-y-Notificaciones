@@ -34,8 +34,14 @@
                     <input type="hidden" id="confirmacion" name="confirmacion" value="confirmar">
                     <button type="submit" class="accept-button" value="confirmar">Confirmar</button>
                 </form>
-                <input type="hidden" id="confirma" name="confirma" value="rechazar">
-                <button type="submit" class="reject-button" value="rechazar">Rechazar</button>
+                <form method="post" name="" action="{% url 'notificacion3' %}">
+                    {% csrf_token %}
+                    <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+                    <input type="hidden" id="id_emergencia" name="id_emergencia" value="{{ emergencia.id }}">
+                    <input type="hidden" id="rechazo" name="rechazo" value="rechazar">
+                    <button type="submit" class="reject-button" value="rechazar">Rechazar</button>
+                </form>
+
             </div>
 
 
